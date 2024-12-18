@@ -1,12 +1,11 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import "../styles/global.css";
 
 const { pageTitle } = Astro.props;
 ---
 
-<html lang="en">
+<html class="dark:bg-black dark:text-white" lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,7 +13,7 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <body class="mx-auto w-full max-w-[80ch] leading-5 font-sans">
     <Header />
     <h1>{pageTitle}</h1>
     <slot />
