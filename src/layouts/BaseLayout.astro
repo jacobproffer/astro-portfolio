@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 const { pageTitle } = Astro.props;
 ---
 
-<html class="dark:bg-black dark:text-white" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,7 +13,7 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body class="mx-auto w-full max-w-[80ch] leading-5 font-sans">
+  <body class="mx-auto w-full max-w-[80ch] leading-5 font-sans bg-white text-black dark:bg-black dark:text-white">
     <Header />
     <h1>{pageTitle}</h1>
     <slot />
