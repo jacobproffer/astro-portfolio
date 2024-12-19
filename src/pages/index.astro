@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Section from "../components/Section.astro";
+import Projects from "./projects.astro";
 const pageTitle = "Jacob Proffer";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <h2>Front-End Developer Focused on Inclusive Web Experiences</h2>
-  <Section headline="Projects">
-	This is a test.
-  </Section>
+  <div class="grid gap-8 pt-8">
+    <Projects />
+  </div>
 </BaseLayout>

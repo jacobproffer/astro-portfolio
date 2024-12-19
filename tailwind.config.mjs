@@ -6,10 +6,12 @@ export default {
 	theme: {
 		extend: {
 			screens: {
-				sm: '767px',
+				xs: '767px',
+				sm: '820px',
 				md: '1080px',
-				lg: '1260px',
-				xl: '1620px',
+				lg: '1280px',
+				xl: '1440px',
+				'2xl': '1620px',
 			},
 			colors: {
 				orange: '#ff683f',
