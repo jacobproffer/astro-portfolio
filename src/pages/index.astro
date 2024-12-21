@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
 import Projects from "./projects.astro";
 const pageTitle = "Jacob Proffer";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h2>Front-End Developer Focused on Inclusive Web Experiences</h2>
+  <Hero headline={pageTitle}>
+    <h2 class="text-orange">Front-End Developer Focused on Inclusive Web Experiences</h2>
+  </Hero>
   <div class="grid gap-8 pt-8">
     <Projects />
   </div>

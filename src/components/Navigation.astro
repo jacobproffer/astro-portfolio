@@ -1,19 +1,21 @@
+---
+import Hamburger from "./Hamburger.astro"
+---
 <nav aria-label="primary">
+  <Hamburger />
   <ul
-    class="hidden md:flex p-0 gap-5 list-none nav-links w-full m-0"
+    class="hidden absolute top-[100px] left-0 md:relative md:flex md:top-0 p-0 gap-5 list-none nav-links w-full m-0"
     data-nav-links
   >
     <li>
       <a
         class="block text-black dark:text-white text-center py-1 decoration-0"
-        href="/">Home</a
-      >
+        href="/">Home</a>
     </li>
     <li>
       <a
         class="block text-black dark:text-white text-center py-1 decoration-0"
-        href="/blog/">Blog</a
-      >
+        href="/blog/">Blog</a>
     </li>
   </ul>
 </nav>
