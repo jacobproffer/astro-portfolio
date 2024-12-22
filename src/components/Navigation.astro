@@ -1,5 +1,6 @@
 ---
 import Hamburger from "./Hamburger.astro"
+import NavLink from "./NavLink.astro"
 ---
 <nav aria-label="primary">
   <Hamburger />
@@ -8,14 +9,10 @@ import Hamburger from "./Hamburger.astro"
     data-nav-links
   >
     <li>
-      <a
-        class="block text-black dark:text-white text-center py-1 decoration-0"
-        href="/">Home</a>
+      <NavLink href="/">Home</NavLink>
     </li>
     <li>
-      <a
-        class="block text-black dark:text-white text-center py-1 decoration-0"
-        href="/blog/">Blog</a>
+      <NavLink href="/projects/">Projects</NavLink>
     </li>
   </ul>
 </nav>
