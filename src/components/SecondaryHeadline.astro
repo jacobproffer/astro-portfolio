@@ -1,0 +1,11 @@
+---
+const { text } = Astro.props;
+---
+
+{
+  text && (
+    <h2 class="text-orange text-lg leading-8 text-balance max-w-[30ch]">
+      {text}
+    </h2>
+  )
+}

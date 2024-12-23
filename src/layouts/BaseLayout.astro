@@ -16,9 +16,11 @@ const { pageTitle } = Astro.props;
     <ClientRouter />
   </head>
   <body class="mx-auto w-full leading-5 font-sans bg-white text-black dark:bg-black dark:text-white">
-    <Header />
-    <slot />
-    <Footer />
+    <main id="content">
+      <Header />
+      <slot />
+      <Footer />
+    </main>
     <script>
       import "../scripts/menu.js";
     </script>

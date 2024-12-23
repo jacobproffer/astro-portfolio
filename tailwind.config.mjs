@@ -1,6 +1,7 @@
 import { createFluidValue } from './src/styles/createFluidValue';
 
 /** @type {import('tailwindcss').Config} */
+
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
@@ -29,6 +30,12 @@ export default {
 				9: createFluidValue(75, 150),
 				10: createFluidValue(125, 175),
 				11: createFluidValue(125, 200),
+			},
+			fontSize: {
+				base: ['1rem', '1.3'],
+				md: createFluidValue(16, 28),
+				lg: createFluidValue(21, 32),
+				xl: createFluidValue(32, 40),
 			},
 		},
 	},

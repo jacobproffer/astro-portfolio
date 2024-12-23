@@ -1,5 +1,5 @@
 ---
-const { platform, username } = Astro.props;
+const { platform } = Astro.props;
 ---
 
-<a class="py-2 px-4 no-underline text-white bg-orange" href={`https://www.${platform}.com/${username}`}>{platform}</a>
+<a {...Astro.props} target="_blank">{platform}</a>
