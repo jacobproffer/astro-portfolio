@@ -5,6 +5,10 @@ import { createFluidValue } from './src/styles/createFluidValue';
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
+		fontFamily: {
+			'display': ['Raleway', 'sans-serif'],
+			'body': ['PT Serif', 'serif'],
+		},
 		extend: {
 			screens: {
 				xs: '767px',
@@ -36,6 +40,7 @@ export default {
 				md: createFluidValue(16, 28),
 				lg: createFluidValue(21, 32),
 				xl: createFluidValue(32, 40),
+				'2xl': createFluidValue(16, 48),
 			},
 		},
 	},
