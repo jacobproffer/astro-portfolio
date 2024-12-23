@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greeting";
-const pageTitle = "Home Page";
+import Hero from "../components/Hero.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+const pageTitle = "Jacob Proffer";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<h2>Subtitle nested in BaseLayout</h2>
-	<Greeting client:load messages={["Hi", "Hello", "Howdy", "Hey there"]} />
+  <Hero headline={pageTitle} secondaryHeadline="Front-End Developer Focused on Inclusive Web Experiences" />
+  <div class="grid gap-8 pt-8">
+    <SocialLinks />
+  </div>
 </BaseLayout>

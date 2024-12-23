@@ -1,0 +1,17 @@
+---
+import Container from './Container.astro';
+import SecondaryHeadline from './SecondaryHeadline.astro';
+const { headline } = Astro.props;
+---
+
+<section class="relative">
+    <Container>
+        <div class="flex items-center justify-between relative">
+            <div>
+                <SecondaryHeadline text={headline} />
+            </div>
+            <div class="hidden w-1 h-1 bg-white rounded sm:block"></div>
+        </div>
+        <slot />
+    </Container>
+</section>
