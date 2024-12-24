@@ -1,16 +1,15 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Container from "../components/Container.astro";
 const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-  <p>Written by {frontmatter.author}</p>
-  <slot />
-  <h2>Tags</h2>
-  <div class="tags">
-    {frontmatter.tags.map((tag: string) => (
-      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-    ))}
-  </div>
+  <article>
+    <Container>
+      <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
+      <p>Written by {frontmatter.author}</p>
+      <slot />
+    </Container>
+  </article>
 </BaseLayout>
