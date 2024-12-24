@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import Projects from "../components/Projects.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 const pageTitle = "Jacob Proffer";
 ---
@@ -8,6 +9,7 @@ const pageTitle = "Jacob Proffer";
 <BaseLayout pageTitle={pageTitle}>
   <Hero headline={pageTitle} secondaryHeadline="Front-End Developer Focused on Inclusive Web Experiences" />
   <div class="grid gap-8 pt-8">
+    <Projects />
     <SocialLinks />
   </div>
 </BaseLayout>
