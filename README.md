@@ -2,10 +2,6 @@
 
 Made with Astro and Tailwind.
 
-## 🚀 Project Structure
-
-Any static assets, like images, can be placed in the `public/` directory.
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:

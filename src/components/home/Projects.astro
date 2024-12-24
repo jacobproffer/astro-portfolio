@@ -1,0 +1,11 @@
+---
+import Section from "../Section.astro";
+import Link from "../Link.astro";
+const allProjects = Object.values(import.meta.glob('../../pages/projects/*.md', { eager: true }));
+---
+
+<Section headline="Projects">
+    <ol class="grid gap-2 mt-8">
+        {allProjects.map((post: any) => <li><Link href={post.url} innerText={post.frontmatter.title} /></li>)}
+    </ol>
+</Section>

@@ -1,0 +1,17 @@
+---
+import Circle from "../Circle.astro";
+const { headline } = Astro.props;
+---
+
+<div
+  class="grid gap-5 items-start md:grid-cols-[1fr_2fr]"
+  role="group"
+  aria-label="experience"
+>
+  <Circle />
+
+  <div class="grid gap-3">
+    <h3 class="text-md text-orange text-balance">{headline}</h3>
+    <slot />
+  </div>
+</div>
