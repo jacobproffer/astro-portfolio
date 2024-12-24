@@ -1,8 +1,13 @@
+---
+import { Picture } from "astro:assets";
+import footerImage from "../../public/images/jacob-proffer-2.svg";
+---
+
 <footer>
-  <img
-    class="block object-cover"
-    src="/images/jacob-proffer-2.svg"
+  <Picture
+    src={footerImage}
     alt=""
-    loading="lazy"
+    layout="full-width"
+    formats={["avif", "webp", "jpeg"]}
   />
 </footer>
