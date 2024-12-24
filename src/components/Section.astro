@@ -1,6 +1,7 @@
 ---
 import Container from './Container.astro';
 import SecondaryHeadline from './SecondaryHeadline.astro';
+import Circle from './Circle.astro';
 const { headline } = Astro.props;
 ---
 
@@ -10,7 +11,7 @@ const { headline } = Astro.props;
             <div>
                 <SecondaryHeadline text={headline} />
             </div>
-            <div class="hidden w-1 h-1 bg-white rounded sm:block"></div>
+            <Circle />
         </div>
         <slot />
     </Container>

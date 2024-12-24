@@ -1,7 +1,7 @@
 ---
-import Section from "./Section.astro";
-import Link from "./Link.astro";
-const allProjects = Object.values(import.meta.glob('../pages/projects/*.md', { eager: true }));
+import Section from "../Section.astro";
+import Link from "../Link.astro";
+const allProjects = Object.values(import.meta.glob('../../pages/projects/*.md', { eager: true }));
 ---
 
 <Section headline="Projects">
