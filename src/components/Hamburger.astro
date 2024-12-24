@@ -8,24 +8,52 @@
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const burger = document.querySelector("[data-hamburger]") as HTMLElement | null;
-    const navigation = document.querySelector("[data-navigation]") as HTMLElement | null;
-    const navLinks = document.querySelector("[data-nav-links]") as HTMLElement | null;
+    const burger = document.querySelector(
+      "[data-hamburger]"
+    ) as HTMLElement | null;
+    const navigation = document.querySelector(
+      "[data-navigation]"
+    ) as HTMLElement | null;
+    const navLinks = document.querySelector(
+      "[data-nav-links]"
+    ) as HTMLElement | null;
 
     // Navigation focus trapping
     function navigationFocus() {
-      const focusableElements = navigation?.querySelectorAll('a[href], button');
+      const focusableElements = navigation?.querySelectorAll("a[href], button");
       if (!focusableElements) return;
       const firstFocusableElement = focusableElements[0] as HTMLElement | null;
-      const lastFocusableElement = focusableElements?.[focusableElements.length - 1] as HTMLElement | null;
+      const lastFocusableElement = focusableElements?.[
+        focusableElements.length - 1
+      ] as HTMLElement | null;
 
-      navigation?.addEventListener('keydown', function (e: KeyboardEvent) {
-        if (e.target === firstFocusableElement && e.key === 'Tab' && e.shiftKey) {
+      navigation?.addEventListener("keydown", function (e: KeyboardEvent) {
+        if (
+          e.target === firstFocusableElement &&
+          e.key === "Tab" &&
+          e.shiftKey
+        ) {
           e.preventDefault();
           lastFocusableElement?.focus();
-        } else if (e.target === lastFocusableElement && e.key === 'Tab' && !e.shiftKey) {
+        } else if (
+          e.target === lastFocusableElement &&
+          e.key === "Tab" &&
+          !e.shiftKey
+        ) {
           e.preventDefault();
           firstFocusableElement?.focus();
+        }
+      });
+    }
+
+    // Handle escape key to close navigation
+    function handleEscape() {
+      document.addEventListener("keyup", function (e) {
+        if (burger && e.key === "Escape" && !navLinks?.classList.contains("hidden")) {
+          burger?.setAttribute("aria-expanded", "false");
+          burger?.focus();
+          navLinks?.classList.add("hidden");
+          burger.innerHTML = "Open Menu";
         }
       });
     }
@@ -34,6 +62,7 @@
       burger.addEventListener("click", () => {
         navLinks.classList.toggle("hidden");
         navigationFocus();
+        handleEscape();
 
         if (navLinks.classList.contains("hidden")) {
           burger.setAttribute("aria-expanded", "false");

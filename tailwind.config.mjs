@@ -37,7 +37,7 @@ export default {
 			},
 			fontSize: {
 				base: ['1rem', '1.3'],
-				md: createFluidValue(16, 28),
+				md: createFluidValue(16, 24),
 				lg: createFluidValue(21, 32),
 				xl: createFluidValue(32, 40),
 				'2xl': createFluidValue(16, 48),
