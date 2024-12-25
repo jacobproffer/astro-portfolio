@@ -1,0 +1,12 @@
+---
+import Section from "./Section.astro";
+import Project from "./Project.astro";
+const allProjects = Object.values(import.meta.glob('../pages/projects/*.md', { eager: true }));
+const { headline, topSpacing } = Astro.props;
+---
+
+<Section headline={headline}>
+    <ol class={`grid gap-4 md:grid-cols-2 ${topSpacing ? 'mt-8' : ''}`}>
+        {allProjects.map((post: any) => <li><Project url={post.url} headline={post.frontmatter.title} description={post.frontmatter.description} /></li>)}
+    </ol>
+</Section>

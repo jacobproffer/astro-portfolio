@@ -1,0 +1,25 @@
+---
+// import { Picture } from "astro:assets";
+const { thumbnail, headline, description, url } = Astro.props;
+---
+
+<div class="relative grid gap-3">
+  <div class="bg-orange aspect-4/3 rounded-lg overflow-hidden">
+    <!-- <Picture
+      src={thumbnail}
+      alt=""
+      layout="full-width"
+      formats={["avif", "webp", "jpeg"]}
+    /> -->
+  </div>
+  <div class="grid gap-1">
+    {
+      headline && (
+        <a class="focus:outline-none focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10" href={url}>
+          <h3 class="text-md">{headline}</h3>
+        </a>
+      )
+    }
+    {description && <p class="text-gray">{description}</p>}
+  </div>
+</div>

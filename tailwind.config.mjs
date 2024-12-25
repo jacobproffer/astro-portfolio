@@ -42,6 +42,9 @@ export default {
 				xl: createFluidValue(32, 40),
 				'2xl': createFluidValue(16, 48),
 			},
+			aspectRatio: {
+				'4/3': '4 / 3',
+			},
 		},
 	},
 	plugins: [],

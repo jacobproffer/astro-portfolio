@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import Projects from "../components/Projects.astro";
+import ProjectGrid from "../components/ProjectGrid.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 const pageTitle = "Jacob Proffer";
 ---
@@ -9,7 +9,7 @@ const pageTitle = "Jacob Proffer";
 <BaseLayout pageTitle={pageTitle}>
   <Hero headline={pageTitle} secondaryHeadline="Front-End Developer Focused on Inclusive Web Experiences" />
   <div class="grid gap-8">
-    <Projects />
+    <ProjectGrid headline="Recent Projects" topSpacing />
     <SocialLinks />
   </div>
 </BaseLayout>
