@@ -1,3 +1,4 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
 import { createFluidValue } from './src/styles/createFluidValue';
 
 /** @type {import('tailwindcss').Config} */
@@ -5,11 +6,10 @@ import { createFluidValue } from './src/styles/createFluidValue';
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-		fontFamily: {
-			'display': ['Raleway', 'sans-serif'],
-			'body': ['PT Serif', 'serif'],
-		},
 		extend: {
+			fontFamily: {
+				sans: ['Raleway Variable', ...defaultTheme.fontFamily.sans],
+			},
 			screens: {
 				xs: '767px',
 				sm: '820px',

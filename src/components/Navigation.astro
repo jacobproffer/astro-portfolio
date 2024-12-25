@@ -1,18 +1,28 @@
 ---
-import Hamburger from "./Hamburger.astro"
-import NavLink from "./NavLink.astro"
+import Hamburger from "./Hamburger.astro";
+import NavLink from "./NavLink.astro";
+
+const routes = [
+  { href: "/", label: "Home" },
+  { href: "/about/", label: "About" },
+  { href: "/projects/", label: "Projects" },
+];
 ---
+
 <nav aria-label="primary" data-navigation>
   <Hamburger />
-  <ul
-    class="hidden absolute top-[100px] left-0 md:relative md:flex md:top-0 p-0 gap-5 list-none nav-links w-full m-0"
-    data-nav-links
-  >
-    <li>
-      <NavLink href="/">Home</NavLink>
-    </li>
-    <li>
-      <NavLink href="/projects/">Projects</NavLink>
-    </li>
-  </ul>
+  {
+    routes?.length && (
+      <ul
+        class="hidden absolute top-[100px] left-0 bg-black pb-4 list-none nav-links w-full m-0 md:gap-5 md:top-0 md:p-0 md:bg-transparent md:relative md:flex"
+        data-nav-links
+      >
+        {routes.map((route) => (
+          <li class="[&:not(:last-of-type)]:mb-4 md:[&:not(:last-of-type)]:mb-0">
+            <NavLink href={route.href}>{route.label}</NavLink>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </nav>
