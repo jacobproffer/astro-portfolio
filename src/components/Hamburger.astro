@@ -1,5 +1,5 @@
 <button
-  class="md:hidden grid gap-y-1 cursor-pointer"
+  class="md:hidden relative grid gap-y-1 p-2 cursor-pointer focus:outline-dashed focus:outline-orange focus:outline-1"
   data-hamburger
   aria-expanded="false"
 >
@@ -8,13 +8,61 @@
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const burger = document.querySelector("[data-hamburger]");
-    const navLinks = document.querySelector("[data-nav-links]");
+    const burger = document.querySelector(
+      "[data-hamburger]"
+    ) as HTMLElement | null;
+    const navigation = document.querySelector(
+      "[data-navigation]"
+    ) as HTMLElement | null;
+    const navLinks = document.querySelector(
+      "[data-nav-links]"
+    ) as HTMLElement | null;
+
+    // Navigation focus trapping
+    function navigationFocus() {
+      const focusableElements = navigation?.querySelectorAll("a[href], button");
+      if (!focusableElements) return;
+      const firstFocusableElement = focusableElements[0] as HTMLElement | null;
+      const lastFocusableElement = focusableElements?.[
+        focusableElements.length - 1
+      ] as HTMLElement | null;
+
+      navigation?.addEventListener("keydown", function (e: KeyboardEvent) {
+        if (
+          e.target === firstFocusableElement &&
+          e.key === "Tab" &&
+          e.shiftKey
+        ) {
+          e.preventDefault();
+          lastFocusableElement?.focus();
+        } else if (
+          e.target === lastFocusableElement &&
+          e.key === "Tab" &&
+          !e.shiftKey
+        ) {
+          e.preventDefault();
+          firstFocusableElement?.focus();
+        }
+      });
+    }
+
+    // Handle escape key to close navigation
+    function handleEscape() {
+      document.addEventListener("keyup", function (e) {
+        if (burger && e.key === "Escape" && !navLinks?.classList.contains("hidden")) {
+          burger?.setAttribute("aria-expanded", "false");
+          burger?.focus();
+          navLinks?.classList.add("hidden");
+          burger.innerHTML = "Open Menu";
+        }
+      });
+    }
 
     if (burger && navLinks) {
       burger.addEventListener("click", () => {
         navLinks.classList.toggle("hidden");
-        console.log("Click");
+        navigationFocus();
+        handleEscape();
 
         if (navLinks.classList.contains("hidden")) {
           burger.setAttribute("aria-expanded", "false");

@@ -1,18 +1,22 @@
 ---
-import Container from './Container.astro';
-import SecondaryHeadline from './SecondaryHeadline.astro';
-import Circle from './Circle.astro';
+import Container from "./Container.astro";
+import SecondaryHeadline from "./SecondaryHeadline.astro";
+import Circle from "./Circle.astro";
 const { headline } = Astro.props;
 ---
 
 <section class="relative">
-    <Container>
+  <Container>
+    {
+      headline && (
         <div class="flex items-center justify-between relative">
-            <div>
-                <SecondaryHeadline text={headline} />
-            </div>
-            <Circle />
+          <div>
+            <SecondaryHeadline text={headline} />
+          </div>
+          <Circle />
         </div>
-        <slot />
-    </Container>
+      )
+    }
+    <slot />
+  </Container>
 </section>

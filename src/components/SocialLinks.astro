@@ -1,15 +1,25 @@
 ---
 import Section from "./Section.astro";
-import Link from "./Link.astro";
+import NavLink from "./NavLink.astro";
+
+const links = [
+  { href: "https://www.github.com/jacobproffer/", label: "GitHub" },
+  { href: "https://www.linkedin.com/in/jacob-proffer-a829a892/", label: "LinkedIn", },
+  { href: "https://codepen.io/jacobproffer/", label: "CodePen" },
+  { href: "https://www.dribbble.com/jacobproffer/", label: "Dribbble" },
+];
 ---
 
-<Section headline="Elsewhere">
-    <ul class="grid gap-2 mt-8 mb-11">
-        <li>
-            <Link href="https://www.codepen.io/jacobproffer/" innerText="CodePen" />
-        </li>
-        <li>
-            <Link href="https://www.dribbble.com/jacobproffer/" innerText="Dribbble" />
-        </li>
-    </ul>
-</Section>
+{
+  links?.length && (
+    <Section headline="Elsewhere">
+      <ul class="flex gap-2 mt-8">
+        {links.map((link) => (
+          <li>
+            <NavLink href={link.href}>{link.label}</NavLink>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  )
+}
