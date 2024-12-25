@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/raleway';
+import ralewayWoff2 from '@fontsource-variable/raleway/files/raleway-latin-wght-normal.woff2';
 import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -40,6 +41,7 @@ const { pageTitle } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <link rel="preload" as="font" type="font/woff2" href={ralewayWoff2} crossorigin="anonymous" />
     <ClientRouter />
   </head>
   <body
