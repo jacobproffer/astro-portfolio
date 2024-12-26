@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: Weyland Yutani
 secondaryTitle: Hugo Theme
-description: "Hugo theme built with Sass, JavaScript, and Greensock Animation Platform."
+description: "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform."
 image:
     url: "https://docs.astro.build/assets/rays.webp"
     alt: "The Astro logo on a dark background with rainbow rays."
