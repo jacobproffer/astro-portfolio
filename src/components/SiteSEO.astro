@@ -16,6 +16,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   title={seo?.title}
   description={seo?.description ?? "Jacob Proffer is a Senior Front-End Developer based in Marquette, Michigan. Currently working at Elegant Seagulls."}
   canonical={canonicalURL}
+  noindex
+  nofollow
   openGraph={{
     basic: {
       url: canonicalURL,
