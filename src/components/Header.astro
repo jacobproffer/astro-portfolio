@@ -5,7 +5,7 @@ import Navigation from "./Navigation.astro";
 import Container from "./Container.astro";
 ---
 
-<div class="fixed z-20 top-0 w-full h-auto py-1 bg-black md:py-5 md:bg-transparent" data-header>
+<div class="fixed z-20 top-0 w-full h-auto py-1 bg-black md:py-2" data-header>
   <Container>
     <div
       class="relative grid grid-cols-[max-content_max-content] items-center justify-between py-2 md:py-0"
@@ -15,9 +15,7 @@ import Container from "./Container.astro";
           class="fixed -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out delay-150 focus:top-0 focus:outline-dashed focus:outline-orange focus:outline-1"
           href="#content">Skip to main content</a
         >
-        <div class="w-[50px] h-[50px] block aspect-square">
-          <Logo />
-        </div>
+        <Logo />
       </header>
       <Navigation />
     </div>

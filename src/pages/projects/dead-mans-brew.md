@@ -7,7 +7,7 @@ description: 'Hugo theme built with Sass, JavaScript, and Greensock Animation Pl
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: 'The Astro logo on a dark background with a pink glow.'
-tags: ["hugo", "sass", "javascript"]
+tags: ["hugo", "scss", "javascript"]
 ---
 
 Irure deserunt id qui aliquip fugiat laborum velit labore.

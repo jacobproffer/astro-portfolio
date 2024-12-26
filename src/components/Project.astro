@@ -1,6 +1,6 @@
 ---
 // import { Picture } from "astro:assets";
-const { thumbnail, headline, description, url } = Astro.props;
+const { thumbnail, headline, description, url, tags } = Astro.props;
 ---
 
 <div class="relative grid gap-3">
@@ -21,5 +21,16 @@ const { thumbnail, headline, description, url } = Astro.props;
       )
     }
     {description && <p class="text-gray">{description}</p>}
+    {tags && (
+      <ul class="flex gap-2">
+        {
+          tags.map((tag: string) => (
+            <li class="px-1 rounded-md border-gray border">
+              {tag}
+            </li>
+          ))
+        }
+      </ul>
+    )}
   </div>
 </div>
