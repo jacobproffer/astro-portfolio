@@ -6,7 +6,7 @@ const { headline, topSpacing } = Astro.props;
 ---
 
 <Section headline={headline}>
-    <ol class={`grid gap-4 md:grid-cols-2 ${topSpacing ? 'mt-8' : ''}`}>
-        {allProjects.map((post: any) => <li><Project url={post.url} headline={post.frontmatter.title} description={post.frontmatter.description} /></li>)}
+    <ol class={`grid gap-x-4 gap-y-7 md:grid-cols-2 ${topSpacing ? 'mt-8' : ''}`}>
+        {allProjects.map((post: any) => <li><Project url={post.url} headline={post.frontmatter.title} description={post.frontmatter.description} tags={post.frontmatter.tags} /></li>)}
     </ol>
 </Section>

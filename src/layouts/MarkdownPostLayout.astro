@@ -5,7 +5,7 @@ import Container from "../components/Container.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout pageTitle={frontmatter.title} pageDescription={frontmatter.description}>
   <article>
     <Hero headline={frontmatter.title} secondaryHeadline={frontmatter.secondaryTitle} />
     <Container>

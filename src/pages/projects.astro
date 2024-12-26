@@ -3,9 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
 const pageTitle = "All Projects";
+const pageDescription = "Personal web development projects built by Jacob Proffer."
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
     <Hero headline={pageTitle} secondaryHeadline="Front-End Development" />
     <ProjectGrid />
 </BaseLayout>
