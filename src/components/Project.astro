@@ -1,36 +1,42 @@
 ---
-// import { Picture } from "astro:assets";
-const { thumbnail, headline, description, url, tags } = Astro.props;
+import { Image } from "astro:assets";
+const { thumbnail, thumbnailAlt, headline, description, url, tags } = Astro.props;
 ---
 
 <div class="relative grid gap-3">
-  <div class="bg-orange aspect-4/3 rounded-lg overflow-hidden">
-    <!-- <Picture
-      src={thumbnail}
-      alt=""
-      layout="full-width"
-      formats={["avif", "webp", "jpeg"]}
-    /> -->
-  </div>
+  {
+    thumbnail && (
+      <div class="bg-orange aspect-project pt-2 px-2 rounded-lg overflow-hidden">
+        <Image
+          class="w-full h-full object-contain"
+          src={thumbnail}
+          alt={thumbnailAlt}
+          width={1200}
+          height={623}
+        />
+      </div>
+    )
+  }
   <div class="grid gap-1">
     {
       headline && (
-        <a class="focus:outline-none focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10" href={url}>
+        <a
+          class="focus:outline-none focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10"
+          href={url}
+        >
           <h3 class="text-md">{headline}</h3>
         </a>
       )
     }
     {description && <p class="text-gray">{description}</p>}
-    {tags && (
-      <ul class="flex gap-2">
-        {
-          tags.map((tag: string) => (
-            <li class="px-1 rounded-md border-gray border">
-              {tag}
-            </li>
-          ))
-        }
-      </ul>
-    )}
+    {
+      tags && (
+        <ul class="flex gap-2">
+          {tags.map((tag: string) => (
+            <li class="px-1 rounded-md border-gray border">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </div>

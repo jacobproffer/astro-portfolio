@@ -2,14 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
-import SocialLinks from "../components/SocialLinks.astro";
 const pageTitle = "Jacob Proffer";
+const secondaryHeadline = "Senior Front-End Developer at Elegant Seagulls"
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <Hero headline={pageTitle} secondaryHeadline="Front-End Developer Focused on Inclusive Web Experiences" />
+  <Hero headline={pageTitle} secondaryHeadline={secondaryHeadline} />
   <div class="grid gap-8">
     <ProjectGrid headline="Recent Projects" topSpacing />
-    <SocialLinks />
   </div>
 </BaseLayout>

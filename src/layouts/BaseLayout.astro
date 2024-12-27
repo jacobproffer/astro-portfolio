@@ -4,6 +4,7 @@ import ralewayWoff2 from "@fontsource-variable/raleway/files/raleway-latin-wght-
 import { ClientRouter } from "astro:transitions";
 import SiteSEO from "../components/SiteSEO.astro";
 import Header from "../components/Header.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 import Footer from "../components/Footer.astro";
 
 const { pageTitle, pageDescription } = Astro.props;
@@ -12,6 +13,7 @@ const { pageTitle, pageDescription } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -40,7 +42,6 @@ const { pageTitle, pageDescription } = Astro.props;
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <SiteSEO seo={{ title: pageTitle, description: pageDescription }} />
     <link
@@ -56,6 +57,7 @@ const { pageTitle, pageDescription } = Astro.props;
     <Header />
     <main id="content" transition:name="root" transition:animate="fade">
       <slot />
+      <SocialLinks topSpacing />
     </main>
     <Footer />
   </body>

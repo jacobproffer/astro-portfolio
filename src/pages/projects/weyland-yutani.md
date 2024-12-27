@@ -4,7 +4,7 @@ title: Weyland Yutani
 secondaryTitle: Hugo Theme
 description: "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform."
 image:
-    url: "https://docs.astro.build/assets/rays.webp"
+    url: "/images/weyland-yutani.jpg"
     alt: "The Astro logo on a dark background with rainbow rays."
 pubDate: 2022-07-15
 tags: ["hugo", "scss", "javascript"]
