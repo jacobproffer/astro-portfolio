@@ -9,7 +9,6 @@ const { frontmatter } = Astro.props;
   <article>
     <Hero headline={frontmatter.title} secondaryHeadline={frontmatter.secondaryTitle} />
     <Container>
-      <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
       <slot />
     </Container>
   </article>
