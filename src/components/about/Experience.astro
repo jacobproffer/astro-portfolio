@@ -1,6 +1,6 @@
 ---
-import Section from "../Section.astro";
-import ExperienceItem from "./ExperienceItem.astro";
+import AboutSection from "./AboutSection.astro";
+import DateItem from "./DateItem.astro";
 
 const experienceItems = [
   { position: "Senior Front-End Developer", startDate: "2021-10" },
@@ -9,19 +9,21 @@ const experienceItems = [
 ];
 ---
 
-<Section headline="Experience">
-  <div class="grid gap-4 mt-8">
-    <h3 class="font-medium text-md leading-8 text-balance text-orange">
-      Elegant Seagulls
-    </h3>
-    {
-      experienceItems?.length && (
-        <ol class="grid gap-2">
-          {experienceItems.map((item) => (
-            <ExperienceItem position={item.position} startDate={item.startDate} endDate={item.endDate} />
-          ))}
-        </ol>
-      )
-    }
-  </div>
-</Section>
+<AboutSection headline="Experience" secondaryHeadline="Elegant Seagulls">
+  {
+    experienceItems?.length && (
+      <ol class="grid gap-2">
+        {experienceItems.map((item) => (
+          <li>
+            <DateItem
+              type="experience"
+              title={item.position}
+              startDate={item.startDate}
+              endDate={item.endDate}
+            />
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</AboutSection>

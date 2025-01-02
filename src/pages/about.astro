@@ -1,11 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Experience from "../components/about/Experience.astro";
+import Education from "../components/about/Education.astro";
 import Hero from "../components/Hero.astro";
 const pageTitle = "About";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
     <Hero headline={pageTitle} />
-    <Experience />
+    <div class="grid gap-8">
+        <Experience />
+        <Education />
+    </div>
 </BaseLayout>

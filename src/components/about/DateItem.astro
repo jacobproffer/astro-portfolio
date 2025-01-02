@@ -1,5 +1,5 @@
 ---
-const { position, startDate, endDate } = Astro.props;
+const { type, title, startDate, endDate } = Astro.props;
 
 const formatDate = (dateString: string | null | undefined): string | null => {
   if (!dateString) return null;
@@ -12,16 +12,16 @@ const formatDate = (dateString: string | null | undefined): string | null => {
 };
 ---
 
-<li
+<div
   class="grid grid-cols-1 gap-2 items-center justify-between sm:grid-cols-[max-content_1fr_max-content]"
   role="group"
-  aria-label="experience"
+  aria-label={type}
 >
-  {position}
+  {title}
   <div class="hidden w-full h-[2px] bg-gray sm:block" />
   <div class="flex items-center gap-1">
     {startDate && <time datetime={startDate}>{formatDate(startDate)}</time>}
     <div class="text-orange">-</div>
     {endDate ? <time datetime={endDate}>{formatDate(endDate)}</time> : 'Present'}
   </div>
-</li>
+</div>
