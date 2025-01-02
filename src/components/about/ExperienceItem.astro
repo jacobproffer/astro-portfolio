@@ -1,17 +1,27 @@
 ---
-import Circle from "../Circle.astro";
-const { headline } = Astro.props;
+const { position, startDate, endDate } = Astro.props;
+
+const formatDate = (dateString: string | null | undefined): string | null => {
+  if (!dateString) return null;
+
+  const [year, month] = dateString.split("-");
+  if (!year || !month) return null; // Validate inputs
+
+  const date = new Date(Number(year), Number(month) - 1); // Month is 0-indexed
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long" }).format(date);
+};
 ---
 
-<div
-  class="grid gap-5 items-start md:grid-cols-[1fr_2fr]"
+<li
+  class="grid grid-cols-1 gap-2 items-center justify-between sm:grid-cols-[max-content_1fr_max-content]"
   role="group"
   aria-label="experience"
 >
-  <Circle />
-
-  <div class="grid gap-2">
-    <h3 class="text-md text-orange text-balance font-medium">{headline}</h3>
-    <slot />
+  {position}
+  <div class="hidden w-full h-[1px] bg-gray sm:block" />
+  <div class="flex items-center gap-1">
+    {startDate && <time datetime={startDate}>{formatDate(startDate)}</time>}
+    <div class="text-orange">-</div>
+    {endDate ? <time datetime={endDate}>{formatDate(endDate)}</time> : 'Present'}
   </div>
-</div>
+</li>
