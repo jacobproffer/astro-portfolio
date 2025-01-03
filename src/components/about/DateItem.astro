@@ -20,8 +20,10 @@ const formatDate = (dateString: string | null | undefined): string | null => {
   {title}
   <div class="hidden w-full h-[2px] bg-gray sm:block" />
   <div class="flex items-center gap-1">
-    {startDate && <time datetime={startDate}>{formatDate(startDate)}</time>}
-    <div class="text-orange">-</div>
+    {startDate && (
+      <time datetime={startDate}>{formatDate(startDate)}</time>
+      <div class="text-orange">-</div>
+    )}
     {endDate ? <time datetime={endDate}>{formatDate(endDate)}</time> : 'Present'}
   </div>
 </div>
