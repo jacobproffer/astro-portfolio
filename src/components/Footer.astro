@@ -1,13 +1,13 @@
 ---
-import { Picture } from "astro:assets";
-import footerImage from "../../public/images/jacob-proffer-2.svg";
+import { Image } from "astro:assets";
+import footerImage from "../../src/assets/images/jacob-proffer-2.svg";
 ---
 
 <footer class="mt-11">
-  <Picture
+  <Image
     src={footerImage}
     alt=""
+    loading="lazy"
     layout="full-width"
-    formats={["avif", "webp", "jpeg"]}
   />
 </footer>
