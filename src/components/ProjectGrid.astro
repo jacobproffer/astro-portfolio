@@ -1,6 +1,10 @@
 ---
 import Section from "./Section.astro";
 import Project from "./Project.astro";
+import personalBlogImage from '../../src/assets/images/personal_blog.jpg'
+import deadMansBrewImage from '../../src/assets/images/tickets.jpg';
+import weylandYutaniImage from '../../src/assets/images/weyland-yutani.jpg';
+import whatisJacobPlayingImage from '../../src/assets/images/what_is_jacob_playing.jpg';
 const { headline, topSpacing } = Astro.props;
 
 const projects = [
@@ -10,7 +14,7 @@ const projects = [
     description:
       "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
     tags: ["hugo", "scss", "javascript"],
-    thumbnail: "/images/personal_blog.jpg",
+    thumbnail: personalBlogImage,
     thumbnailAlt: "",
   },
   {
@@ -19,7 +23,7 @@ const projects = [
     description:
       "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
     tags: ["hugo", "scss", "javascript"],
-    thumbnail: "/images/tickets.jpg",
+    thumbnail: deadMansBrewImage,
     thumbnailAlt: "",
   },
   {
@@ -28,7 +32,7 @@ const projects = [
     description:
       "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
     tags: ["hugo", "scss", "javascript"],
-    thumbnail: "/images/weyland-yutani.jpg",
+    thumbnail: weylandYutaniImage,
     thumbnailAlt: "",
   },
   {
@@ -37,7 +41,7 @@ const projects = [
     description:
       "Single page website built with Next.js and the Steam Web API to track user data.",
     tags: ["next.js", "styled-components"],
-    thumbnail: "/images/what_is_jacob_playing.jpg",
+    thumbnail: whatisJacobPlayingImage,
     thumbnailAlt: "",
   },
 ];
