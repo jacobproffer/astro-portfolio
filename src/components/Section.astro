@@ -2,10 +2,10 @@
 import Container from "./Container.astro";
 import SecondaryHeadline from "./SecondaryHeadline.astro";
 import Circle from "./Circle.astro";
-const { headline } = Astro.props;
+const { headline, topSpacing } = Astro.props;
 ---
 
-<section class="relative">
+<section class=`relative ${topSpacing ? 'mt-8' : ''}`>
   <Container>
     {
       headline && (

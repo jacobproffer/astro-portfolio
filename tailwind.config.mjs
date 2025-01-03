@@ -44,6 +44,7 @@ export default {
 			},
 			aspectRatio: {
 				'4/3': '4 / 3',
+				'project': '1200 / 621'
 			},
 		},
 	},

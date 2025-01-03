@@ -1,0 +1,23 @@
+---
+import AboutSection from "./AboutSection.astro";
+import DateItem from "./DateItem.astro";
+
+const certifications = [
+    { title: "Webflow 101" },
+    { title: "CMS Certification" },
+    { title: "Layouts Certification 1" },
+    { title: "Layouts Certification 2" },
+];
+---
+
+<AboutSection headline="Certifications" secondaryHeadline="Webflow">
+    {
+        certifications?.length && (
+            <ol class="grid gap-2">
+                {certifications.map((certificate) => (
+                    <DateItem type="certificate" title={certificate.title} endDate="2024-08" />
+                ))}
+            </ol>
+        )
+    }
+</AboutSection>

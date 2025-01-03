@@ -1,49 +1,29 @@
 ---
-import Section from "../Section.astro";
-import ExperienceItem from "./ExperienceItem.astro";
-import ExperienceCopy from "./ExperienceCopy.astro"
+import AboutSection from "./AboutSection.astro";
+import DateItem from "./DateItem.astro";
+
+const experienceItems = [
+  { position: "Senior Front-End Developer", startDate: "2021-10" },
+  { position: "Front-End Developer", startDate: "2015-12", endDate: "2021-10" },
+  { position: "Intern", startDate: "2015-08", endDate: "2015-12" },
+];
 ---
 
-<Section headline="Experience">
-  <ol class="grid gap-8 mt-8">
-    <li>
-      <ExperienceItem headline="Senior Front-End Developer at Elegant Seagulls">
-        <ExperienceCopy>
-          Since October 2021, in my role as a senior front-end developer at
-          Elegant Seagulls, I develop custom WordPress themes using Advanced
-          Custom Fields (ACF) and PHP, enhancing website functionality and user
-          experience. I build landing pages with Next.js and Contentful,
-          optimizing site performance and engagement. I also lead accessibility
-          remediation projects for major SaaS companies, improving compliance
-          with WCAG standards.
-        </ExperienceCopy>
-      </ExperienceItem>
-    </li>
-
-    <li>
-      <ExperienceItem headline="Front-End Developer at Elegant Seagulls">
-        <ExperienceCopy>
-          From December 2015 until October 2021, in my role as front-end
-          developer at Elegant Seagulls, I collaborated with the design and
-          development team to create custom WordPress themes, contributing to
-          successful client projects. Built and maintained websites for SaaS
-          companies using Jamstack site generators, ensuring performance and
-          scalability. Worked with the design team to ensure pixel-perfect
-          implementation of design files into functional web pages.
-        </ExperienceCopy>
-      </ExperienceItem>
-    </li>
-
-    <li>
-      <ExperienceItem headline="Intern at Elegant Seagulls">
-        <ExperienceCopy>
-          From September 2015 until December 2015, as an intern at Elegant
-          Seagulls, I assisted in building custom WordPress themes, gaining
-          hands-on experience in front-end development. Contributed to the
-          design and development of logos and web pages, supporting the overall
-          creative process.
-        </ExperienceCopy>
-      </ExperienceItem>
-    </li>
-  </ol>
-</Section>
+<AboutSection headline="Experience" secondaryHeadline="Elegant Seagulls">
+  {
+    experienceItems?.length && (
+      <ol class="grid gap-2">
+        {experienceItems.map((item) => (
+          <li>
+            <DateItem
+              type="experience"
+              title={item.position}
+              startDate={item.startDate}
+              endDate={item.endDate}
+            />
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</AboutSection>

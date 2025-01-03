@@ -1,18 +1,17 @@
 ---
 import Logo from "./Logo.astro";
-import NavLink from "./NavLink.astro";
 import Navigation from "./Navigation.astro";
 import Container from "./Container.astro";
 ---
 
-<div class="fixed z-20 top-0 w-full h-auto py-1 bg-black md:py-2" data-header>
+<div class="fixed z-20 top-0 w-full h-auto bg-black md:py-2" data-header>
   <Container>
     <div
       class="relative grid grid-cols-[max-content_max-content] items-center justify-between py-2 md:py-0"
     >
       <header>
         <a
-          class="fixed -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out delay-150 focus:top-0 focus:outline-dashed focus:outline-orange focus:outline-1"
+          class="fixed -top-full left-1/2 py-1 px-4 -translate-x-1/2 transition-top ease-in-out delay-150 focus:top-0 focus:outline-dashed focus:outline-orange focus:outline-1"
           href="#content">Skip to main content</a
         >
         <Logo />
