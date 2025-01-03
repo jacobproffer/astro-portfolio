@@ -1,24 +1,64 @@
 ---
 import Section from "./Section.astro";
 import Project from "./Project.astro";
-const allProjects = Object.values(
-  import.meta.glob("../pages/projects/*.md", { eager: true })
-);
+import personalBlogImage from '../../src/assets/images/personal_blog.jpg'
+import deadMansBrewImage from '../../src/assets/images/tickets.jpg';
+import weylandYutaniImage from '../../src/assets/images/weyland-yutani.jpg';
+import whatisJacobPlayingImage from '../../src/assets/images/what_is_jacob_playing.jpg';
 const { headline, topSpacing } = Astro.props;
+
+const projects = [
+  {
+    url: "https://jacobproffer.com/",
+    title: "Personal Blog",
+    description:
+      "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
+    tags: ["hugo", "scss", "javascript"],
+    thumbnail: personalBlogImage,
+    thumbnailAlt: "",
+  },
+  {
+    url: "https://tickets.proffer.dev/",
+    title: "Dead Man\'s Brew",
+    description:
+      "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
+    tags: ["hugo", "scss", "javascript"],
+    thumbnail: deadMansBrewImage,
+    thumbnailAlt: "",
+  },
+  {
+    url: "https://weyland-yutani.proffer.dev/",
+    title: "Weyland Yutani",
+    description:
+      "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
+    tags: ["hugo", "scss", "javascript"],
+    thumbnail: weylandYutaniImage,
+    thumbnailAlt: "",
+  },
+  {
+    url: "https://whatisjacobplaying.com/",
+    title: "What is Jacob Playing",
+    description:
+      "Single page website built with Next.js and the Steam Web API to track user data.",
+    tags: ["next.js", "styled-components"],
+    thumbnail: whatisJacobPlayingImage,
+    thumbnailAlt: "",
+  },
+];
 ---
 
 <Section headline={headline}>
   <ol class=`grid gap-x-4 gap-y-7 ${topSpacing ? 'pt-8' : ''}`>
     {
-      allProjects.map((post: any) => (
+      projects.map((post: any) => (
         <li>
           <Project
             url={post.url}
-            headline={post.frontmatter.title}
-            description={post.frontmatter.description}
-            tags={post.frontmatter.tags}
-            thumbnail={post.frontmatter.image.url}
-            thumbnailAlt={post.frontmatter.image.alt ?? ""}
+            headline={post.title}
+            description={post.description}
+            tags={post.tags}
+            thumbnail={post.thumbnail}
+            thumbnailAlt={post.thumbnailAlt ?? ""}
           />
         </li>
       ))

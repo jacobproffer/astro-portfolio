@@ -1,3 +1,19 @@
-<a class="text-gray underline underline-offset-2 decoration-white focus:outline-orange focus:outline-1 focus:outline-dashed hover:text-orange hover:no-underline transition-colors" target="_blank" {...Astro.props}>
-    <slot />
+<a
+  class="text-gray underline underline-offset-2 decoration-white focus:outline-orange focus:outline-1 focus:outline-dashed hover:text-orange hover:no-underline transition-colors inline-flex items-center space-x-0"
+  target="_blank"
+  {...Astro.props}
+>
+  <span><slot /></span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 30 30"
+    aria-hidden="true"
+  >
+    <path
+      fill="currentColor"
+      d="M25.98 2.99a1 1 0 0 0-.11.01H20a1 1 0 1 0 0 2h3.586L13.293 15.293a1 1 0 1 0 1.414 1.414L25 6.414V10a1 1 0 1 0 2 0V4.127a1 1 0 0 0-1.02-1.137zM6 7c-1.093 0-2 .907-2 2v15c0 1.093.907 2 2 2h15c1.093 0 2-.907 2-2V11.422l-2 2V24H6V9h10.578l2-2H6z"
+    ></path>
+  </svg>
 </a>
