@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://proffer-portfolio.netlify.app/",
+  site: "https://proffer.dev/",
   integrations: [tailwind(), sitemap()],
   experimental: {
     responsiveImages: true,
