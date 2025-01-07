@@ -2,6 +2,12 @@
 import Container from "./Container.astro";
 import SecondaryHeadline from "./SecondaryHeadline.astro";
 import Circle from "./Circle.astro";
+
+interface Props {
+  headline: string;
+  topSpacing?: boolean;
+}
+
 const { headline, topSpacing } = Astro.props;
 ---
 

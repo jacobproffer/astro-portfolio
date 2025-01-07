@@ -5,6 +5,12 @@ import personalBlogImage from '../../src/assets/images/personal_blog.jpg'
 import deadMansBrewImage from '../../src/assets/images/tickets.jpg';
 import weylandYutaniImage from '../../src/assets/images/weyland-yutani.jpg';
 import whatisJacobPlayingImage from '../../src/assets/images/what_is_jacob_playing.jpg';
+
+interface Props {
+  headline: string;
+  topSpacing: boolean;
+}
+
 const { headline, topSpacing } = Astro.props;
 
 const projects = [
