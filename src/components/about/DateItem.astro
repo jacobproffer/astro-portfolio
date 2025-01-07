@@ -1,4 +1,11 @@
 ---
+interface Props {
+  type: string;
+  title: string;
+  startDate?: string;
+  endDate?: string;
+}
+
 const { type, title, startDate, endDate } = Astro.props;
 
 const formatDate = (dateString: string | null | undefined): string | null => {

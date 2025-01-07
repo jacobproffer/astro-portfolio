@@ -1,6 +1,11 @@
 ---
 import Section from "../Section.astro";
 
+interface Props {
+  headline: string;
+  secondaryHeadline?: string;
+}
+
 const { headline, secondaryHeadline } = Astro.props;
 ---
 
