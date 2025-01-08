@@ -11,5 +11,8 @@ export default defineConfig({
   integrations: [tailwind(), sitemap()],
   experimental: {
     responsiveImages: true,
+    svg: {
+      mode: 'sprite',
+    },
   },
 });
