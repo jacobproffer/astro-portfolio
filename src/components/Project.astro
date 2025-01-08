@@ -4,13 +4,14 @@ import { Image } from "astro:assets";
 interface Props {
   thumbnail: ImageMetadata;
   thumbnailAlt: string;
+  lazyLoaded: boolean;
   headline: string;
   description?: string;
   url: string;
   tags?: Array<string>;
 }
 
-const { thumbnail, thumbnailAlt, headline, description, url, tags } = Astro.props;
+const { thumbnail, thumbnailAlt, lazyLoaded, headline, description, url, tags } = Astro.props;
 ---
 
 <div class="relative grid gap-3">
@@ -20,7 +21,7 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } = Astro.prop
         class="dynamic-loading-image w-full h-full object-contain"
         src={thumbnail}
         alt={thumbnailAlt}
-        loading="lazy"
+        loading={lazyLoaded ? 'lazy' : 'eager'}
         data-image
       />
     </div>
@@ -45,26 +46,3 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } = Astro.prop
     )}
   </div>
 </div>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const dynamicImages = document.querySelectorAll("[data-image]");
-
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          const image = entry.target;
-
-          if (entry.isIntersecting) {
-            // Switch to eager loading for images in the viewport
-            image.setAttribute("loading", "eager");
-            observer.unobserve(image);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    dynamicImages.forEach((image) => observer.observe(image));
-  });
-</script>
