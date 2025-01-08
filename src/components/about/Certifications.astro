@@ -15,7 +15,9 @@ const certifications = [
         certifications?.length && (
             <ol class="grid gap-2">
                 {certifications.map((certificate) => (
-                    <DateItem type="certificate" title={certificate.title} endDate="2024-08" />
+                    <li>
+                        <DateItem type="certificate" title={certificate.title} endDate="2024-08" />
+                    </li>
                 ))}
             </ol>
         )
