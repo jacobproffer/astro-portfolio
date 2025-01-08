@@ -29,14 +29,14 @@ const { thumbnail, thumbnailAlt, lazyLoaded, headline, description, url, tags } 
   <div class="grid gap-1">
     {headline && (
       <a
-        class="focus:outline-none focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10"
+        class="text-gray outline-none transition-color duration-300 hover:text-white focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10"
         href={url}
         target="_blank"
       >
         <h3 class="text-md">{headline}</h3>
       </a>
     )}
-    {description && <p class="text-gray">{description}</p>}
+    {description && <p>{description}</p>}
     {tags && (
       <ul class="flex gap-2">
         {tags.map((tag: string) => (
