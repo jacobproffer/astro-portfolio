@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+const pageTitle = "404";
+const secondaryHeadline = "Page Not Found";
+---
+
+<BaseLayout pageTitle="404">
+    <Hero headline={pageTitle} secondaryHeadline={secondaryHeadline} />
+</BaseLayout>
