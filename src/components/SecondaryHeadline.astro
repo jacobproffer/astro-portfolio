@@ -9,7 +9,7 @@ const { text, isOrange } = Astro.props;
 
 {
   text && (
-    <h2 class={`font-medium text-lg leading-8 text-balance max-w-[44ch] ${isOrange ? 'text-orange' : ''}`}>
+    <h2 class={`font-medium text-lg leading-8 text-balance max-w-[44ch] ${isOrange ? 'dark:text-orange' : ''}`}>
       {text}
     </h2>
   )

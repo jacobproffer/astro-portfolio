@@ -58,9 +58,9 @@ const { pageTitle, pageDescription } = Astro.props;
     />
     <ClientRouter />
   </head>
-  <body class="mx-auto w-full leading-8 font-normal bg-black text-white">
+  <body class="mx-auto w-full leading-8 font-normal bg-gray dark:bg-black dark:text-white">
     <Header />
-    <main id="content" transition:name="root" transition:animate="fade">
+    <main id="content" transition:name="root" transition:animate="none">
       <slot />
       <SocialLinks topSpacing />
     </main>
