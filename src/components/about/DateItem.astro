@@ -8,6 +8,11 @@ interface Props {
 
 const { type, title, startDate, endDate } = Astro.props;
 
+/**
+ * Format a date string as a human-readable date.
+ * @param {string} dateString - The date string to format.
+ * @returns {string} The formatted date string.
+ */
 const formatDate = (dateString: string | null | undefined): string | null => {
   if (!dateString) return null;
 
