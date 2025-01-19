@@ -4,27 +4,57 @@ import DateItem from "@components/about/DateItem.astro";
 
 const experienceItems = [
   {
-    position: "Senior Front-End Developer",
-    startDate: "2021-10",
-    endDate: "2025-01",
+    company: "Sullivan",
+    positions: [
+      {
+        position: "Front-End Developer",
+        startDate: "2025-01",
+        endDate: "",
+      },
+    ],
   },
-  { position: "Front-End Developer", startDate: "2015-12", endDate: "2021-10" },
-  { position: "Intern", startDate: "2015-09", endDate: "2015-12" },
+  {
+    company: "Elegant Seagulls",
+    positions: [
+      {
+        position: "Senior Front-End Developer",
+        startDate: "2021-10",
+        endDate: "2025-01",
+      },
+      {
+        position: "Front-End Developer",
+        startDate: "2015-12",
+        endDate: "2021-10",
+      },
+      { position: "Intern", startDate: "2015-09", endDate: "2015-12" },
+    ],
+  },
 ];
 ---
 
-<AboutSection headline="Experience" secondaryHeadline="Elegant Seagulls">
+<AboutSection headline="Experience">
   {
     experienceItems?.length && (
-      <ol class="grid gap-2">
+      <ol class="grid gap-5">
         {experienceItems.map((item) => (
           <li>
-            <DateItem
-              type="experience"
-              title={item.position}
-              startDate={item.startDate}
-              endDate={item.endDate}
-            />
+            <h3 class="front-medium text-md leading-8 text-balance dark:text-orange">
+              {item.company}
+            </h3>
+            {item.positions?.length && (
+              <ol class="grid gap-2 mt-2">
+                {item.positions.map((position) => (
+                  <li>
+                    <DateItem
+                      type="Experience"
+                      title={position.position}
+                      startDate={position.startDate}
+                      endDate={position.endDate}
+                    />
+                  </li>
+                ))}
+              </ol>
+            )}
           </li>
         ))}
       </ol>
