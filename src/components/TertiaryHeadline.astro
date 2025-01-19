@@ -1,0 +1,15 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+{
+  text && (
+    <h3 class="font-medium text-md leading-8 text-balance dark:text-orange">
+      {text}
+    </h3>
+  )
+}
