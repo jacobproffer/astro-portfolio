@@ -1,5 +1,6 @@
 ---
 import Section from "@components/Section.astro";
+import TertiaryHeadline from "@components/TertiaryHeadline.astro";
 
 interface Props {
   headline: string;
@@ -11,13 +12,7 @@ const { headline, secondaryHeadline } = Astro.props;
 
 <Section headline={headline}>
   <div class="grid gap-4 mt-8">
-    {
-      secondaryHeadline && (
-        <h3 class="font-medium text-md leading-8 text-balance dark:text-orange">
-          {secondaryHeadline}
-        </h3>
-      )
-    }
+    {secondaryHeadline && <TertiaryHeadline text={secondaryHeadline} />}
     <slot />
   </div>
 </Section>
