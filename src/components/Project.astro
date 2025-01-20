@@ -11,38 +11,54 @@ interface Props {
   tags?: Array<string>;
 }
 
-const { thumbnail, thumbnailAlt, lazyLoaded, headline, description, url, tags } = Astro.props;
+const {
+  thumbnail,
+  thumbnailAlt,
+  lazyLoaded,
+  headline,
+  description,
+  url,
+  tags,
+} = Astro.props;
 ---
 
 <div class="relative grid gap-3">
-  {thumbnail && (
-    <div class="bg-orange aspect-project pt-2 px-2 rounded-lg overflow-hidden">
-      <Image
-        class="dynamic-loading-image w-full h-full object-contain"
-        src={thumbnail}
-        alt={thumbnailAlt}
-        loading={lazyLoaded ? 'lazy' : 'eager'}
-        data-image
-      />
-    </div>
-  )}
+  {
+    thumbnail && (
+      <div class="bg-orange aspect-project pt-2 px-2 rounded-lg overflow-hidden">
+        <Image
+          class="dynamic-loading-image w-full h-full object-contain"
+          src={thumbnail}
+          alt={thumbnailAlt}
+          loading={lazyLoaded ? "lazy" : "eager"}
+          data-image
+        />
+      </div>
+    )
+  }
   <div class="grid gap-1">
-    {headline && (
-      <a
-        class="dark:text-gray outline-none transition-color duration-300 dark:hover:text-white focus:before:outline-black dark:focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10"
-        href={url}
-        target="_blank"
-      >
-        <h3 class="text-md">{headline}</h3>
-      </a>
-    )}
+    {
+      headline && (
+        <a
+          class="dark:text-gray outline-none transition-color duration-300 dark:hover:text-white focus:before:outline-black dark:focus:before:outline-orange focus:before:outline-dashed focus:before:outline-offset-1 focus:before:outline-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full z-10"
+          href={url}
+          target="_blank"
+        >
+          <h3 class="text-md">{headline}</h3>
+        </a>
+      )
+    }
     {description && <p>{description}</p>}
-    {tags && (
-      <ul class="flex gap-2">
-        {tags.map((tag: string) => (
-          <li class="px-1 rounded-md border-black dark:border-gray border">{tag}</li>
-        ))}
-      </ul>
-    )}
+    {
+      tags && (
+        <ul class="flex gap-2">
+          {tags.map((tag: string) => (
+            <li class="px-1 rounded-md border-black dark:border-gray border">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </div>
