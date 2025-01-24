@@ -20,11 +20,13 @@ const links = [
   links?.length && (
     <Section headline="Elsewhere" topSpacing>
       <ul class="flex gap-2 mt-8">
-        {links.map((link) => (
-          <li>
-            <NavLink href={link.href}>{link.label}</NavLink>
-          </li>
-        ))}
+        {links
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((link) => (
+            <li>
+              <NavLink href={link.href}>{link.label}</NavLink>
+            </li>
+          ))}
       </ul>
     </Section>
   )
