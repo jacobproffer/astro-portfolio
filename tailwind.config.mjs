@@ -19,8 +19,12 @@ export default {
 				'2xl': '1620px',
 			},
 			colors: {
-				orange: '#ff683f',
-				gray: '#b9b9b9',
+				dark: '#181a1c',
+				light: '#2d2d2d',
+				yellow: '#ffd800',
+				lightBlue: '#6cb1e1',
+				midBlue: '#132b38',
+				darkBlue: '#162128',
 			},
 			spacing: {
 				0: '0',

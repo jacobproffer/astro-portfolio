@@ -1,7 +1,5 @@
 ---
-import Container from "@components/Container.astro";
 import SecondaryHeadline from "@components/SecondaryHeadline.astro";
-import Circle from "@components/Circle.astro";
 
 interface Props {
   headline: string;
@@ -12,17 +10,14 @@ const { headline, topSpacing } = Astro.props;
 ---
 
 <section class=`relative ${topSpacing ? 'mt-8' : ''}`>
-  <Container>
-    {
-      headline && (
-        <div class="flex items-center justify-between relative">
-          <div>
-            <SecondaryHeadline text={headline} />
-          </div>
-          <Circle />
+  {
+    headline && (
+      <div class="flex items-center justify-between relative">
+        <div>
+          <SecondaryHeadline text={headline} />
         </div>
-      )
-    }
-    <slot />
-  </Container>
+      </div>
+    )
+  }
+  <slot />
 </section>
