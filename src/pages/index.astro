@@ -1,18 +1,21 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-// import Hero from "@components/Hero.astro";
+import Avatar from "@components/Avatar.astro";
+import Hero from "@components/Hero.astro";
 import ProjectGrid from "@components/ProjectGrid.astro";
 import Experience from "@components/Experience.astro";
 import Education from "@components/Education.astro";
 const pageTitle = "Jacob Proffer";
-const secondaryHeadline = "Front-End Developer and Accessibility Advocate";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <!-- <Hero headline={pageTitle} secondaryHeadline={secondaryHeadline} /> -->
   <div class="grid gap-6">
+    <div class="grid gap-6 md:grid-cols-[1fr_2fr]">
+      <Avatar />
+      <Hero headline={pageTitle} />
+    </div>
     <ProjectGrid headline="Side Projects" />
-    <div class="grid grid-cols-2 gap-3 items-start">
+    <div class="grid gap-6 items-start md:grid-cols-2">
       <Experience />
       <Education />
     </div>
