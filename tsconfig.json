@@ -7,6 +7,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"],
       "@images/*": ["src/assets/images/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"]

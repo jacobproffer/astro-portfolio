@@ -3,21 +3,12 @@ import SecondaryHeadline from "@components/SecondaryHeadline.astro";
 
 interface Props {
   headline: string;
-  topSpacing?: boolean;
 }
 
-const { headline, topSpacing } = Astro.props;
+const { headline } = Astro.props;
 ---
 
-<section class=`relative ${topSpacing ? 'mt-8' : ''}`>
-  {
-    headline && (
-      <div class="flex items-center justify-between relative">
-        <div>
-          <SecondaryHeadline text={headline} />
-        </div>
-      </div>
-    )
-  }
+<section class="relative">
+  {headline && <SecondaryHeadline text={headline} />}
   <slot />
 </section>

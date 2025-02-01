@@ -1,0 +1,29 @@
+---
+import NavLink from "@components/NavLink.astro";
+
+const links = [
+  { href: "https://www.github.com/jacobproffer/", label: "GitHub" },
+  {
+    href: "https://www.linkedin.com/in/jacob-proffer-a829a892/",
+    label: "LinkedIn",
+  },
+  {
+    href: "https://monkeytype.com/profile/jproffer",
+    label: "Monkeytype",
+  },
+];
+---
+
+<footer class="pt-1 pb-3 px-3 bg-dark-blue border border-black">
+  <ul class="flex gap-3">
+    {
+      links
+        .sort((a, b) => a.label.localeCompare(b.label))
+        .map((link) => (
+          <li>
+            <NavLink href={link.href}>{link.label}</NavLink>
+          </li>
+        ))
+    }
+  </ul>
+</footer>

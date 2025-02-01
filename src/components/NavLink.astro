@@ -5,7 +5,7 @@ const isCurrent = url.href === Astro.url.href;
 ---
 
 <a
-  class="relative block pb-1 dark:text-gray transition-color ease-in-out duration-300 dark:hover:text-white before:absolute before:bottom-0 before:left-0 before:w-[1ch] before:h-[2px] before:bg-black dark:before:bg-white before:transition-width before:duration-300 before:ease-in-out hover:before:w-full dark:hover:before:bg-orange focus:outline-dashed focus:outline-black dark:focus:outline-orange focus:outline-1 dark:aria-[current='page']:text-white aria-[current='page']:before:w-full aria-[current='page']:before:bg-black dark:aria-[current='page']:before:bg-orange"
+  class="relative block pb-0 text-yellow transition-color ease-in-out duration-300 hover:text-white before:absolute before:bottom-0 before:left-0 before:w-[1ch] before:h-[2px] before:bg-white before:transition-width before:duration-300 before:ease-in-out hover:before:w-full focus:outline-dashed focus:outline-light-blue focus:outline-1 aria-[current='page']:text-light-blue aria-[current='page']:before:w-full aria-[current='page']:before:bg-light-blue"
   aria-current={isCurrent ? "page" : null}
   target={isExternal ? "_blank" : "_self"}
   {...Astro.props}

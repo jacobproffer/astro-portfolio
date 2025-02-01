@@ -17,11 +17,11 @@ const { type, title, startDate, endDate } = Astro.props;
   aria-label={type}
 >
   {title}
-  <div class="hidden w-full h-[2px] bg-black dark:bg-gray sm:block" />
+  <div class="hidden w-full h-[2px] bg-black sm:block" />
   <div class="flex items-center gap-1">
     {startDate && (
       <time datetime={startDate}>{formatDate(startDate)}</time>
-      <div class="dark:text-orange">-</div>
+      <div class="text-yellow">-</div>
     )}
     {endDate ? <time datetime={endDate}>{formatDate(endDate)}</time> : 'Present'}
   </div>

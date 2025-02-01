@@ -1,16 +1,15 @@
 ---
 interface Props {
-  text: string,
-  isOrange?: boolean,
+  text: string;
 }
 
-const { text, isOrange } = Astro.props;
+const { text } = Astro.props;
 ---
 
 {
   text && (
-    <h2 class={`font-medium text-lg leading-8 text-balance max-w-[44ch] ${isOrange ? 'dark:text-orange' : ''}`}>
-      {text}
-    </h2>
+    <div class="py-1 px-3 bg-dark-blue w-full border-t-1 border-r-1 border-l-1 border-black">
+      <h2 class="font-medium text-lg leading-8 text-balance">{text}</h2>
+    </div>
   )
 }

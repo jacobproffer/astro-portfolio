@@ -24,13 +24,13 @@ const {
 ---
 
 <a
-  class="relative grid gap-3 outline-none dark:hover:text-white focus:outline-black dark:focus:outline-orange focus:outline-dashed focus:outline-offset-1 focus:outline-1"
+  class="relative grid gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-solid focus:outline-1 hover:bg-dark-blue transition-colors duration-300"
   href={url}
   target="_blank"
 >
   {
     thumbnail && (
-      <div class="aspect-project overflow-hidden">
+      <div class="aspect-project border border-black overflow-hidden">
         <Image
           class="dynamic-loading-image w-full h-full object-contain"
           src={thumbnail}
@@ -48,7 +48,7 @@ const {
       tags && (
         <ul class="flex gap-2">
           {tags.map((tag: string) => (
-            <li class="px-1 rounded-md border-black dark:border-gray border">
+            <li class="px-3 text-light-blue bg-dark-blue border-black border">
               {tag}
             </li>
           ))}
