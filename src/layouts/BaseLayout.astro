@@ -61,7 +61,9 @@ const { pageTitle, pageDescription } = Astro.props;
   </head>
   <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
     <Container>
-      <div class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6">
+      <div
+        class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
+      >
         <Header />
         <main id="content" transition:name="root" transition:animate="none">
           <slot />
