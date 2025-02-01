@@ -16,11 +16,7 @@ const { headline, secondaryHeadline } = Astro.props;
         <h1 class="font-medium text-xl leading-8 text-balance">{headline}</h1>
       )
     }
-    {
-      secondaryHeadline && (
-        <SecondaryHeadline text={secondaryHeadline} isOrange />
-      )
-    }
+    {secondaryHeadline && <SecondaryHeadline text={secondaryHeadline} />}
     <slot />
   </div>
 </section>

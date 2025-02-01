@@ -1,6 +1,6 @@
 ---
-import AboutSection from "@components/about/AboutSection.astro";
-import DateItem from "@components/about/DateItem.astro";
+import AboutSection from "@components/AboutSection.astro";
+import DateItem from "@components/DateItem.astro";
 import TertiaryHeadline from "@components/TertiaryHeadline.astro";
 
 const experienceItems = [
@@ -41,7 +41,7 @@ const experienceItems = [
           <li>
             <TertiaryHeadline text={item.company} />
             {item.positions?.length && (
-              <ol class="grid gap-2 mt-2">
+              <ol class="border-black border-t-1 mt-3">
                 {item.positions.map((position) => (
                   <li>
                     <DateItem

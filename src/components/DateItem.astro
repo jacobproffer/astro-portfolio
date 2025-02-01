@@ -12,16 +12,15 @@ const { type, title, startDate, endDate } = Astro.props;
 ---
 
 <div
-  class="grid grid-cols-1 gap-0 items-center justify-between sm:grid-cols-[max-content_1fr_max-content] sm:gap-2"
+  class="grid gap-1 items-center justify-between p-3 bg-dark-blue border-black border-r-1 border-b-1 border-l-1"
   role="group"
   aria-label={type}
 >
-  {title}
-  <div class="hidden w-full h-[2px] bg-black sm:block" />
+  <h4 class="text-light-blue text-balance leading-6">{title}</h4>
   <div class="flex items-center gap-1">
     {startDate && (
       <time datetime={startDate}>{formatDate(startDate)}</time>
-      <div class="text-yellow">-</div>
+      <div class="text-light-blue">-</div>
     )}
     {endDate ? <time datetime={endDate}>{formatDate(endDate)}</time> : 'Present'}
   </div>
