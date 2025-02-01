@@ -10,9 +10,15 @@ const pageTitle = "Jacob Proffer";
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="grid gap-3 md:gap-6">
-    <div class="grid gap-3 md:grid-cols-[1fr_3fr] md:gap-6">
+    <div class="grid gap-3 md:grid-cols-[1fr_3fr] items-start md:gap-6">
       <Avatar />
-      <Hero headline={pageTitle} />
+      <Hero headline={pageTitle}>
+        <p class="leading-6">
+          I'm a front-end developer based in Marquette, Michigan with over nine
+          years of experience. I specialize in crafting accessible and
+          performant solutions for the web.
+        </p>
+      </Hero>
     </div>
     <ProjectGrid headline="Side Projects" />
     <div class="grid gap-3 items-start md:grid-cols-2 md:gap-6">

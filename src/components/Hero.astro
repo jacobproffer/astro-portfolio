@@ -9,13 +9,17 @@ const { headline } = Astro.props;
 ---
 
 <Section>
-  <div class="h-full p-3">
-    <div class="h-full p-3 bg-mid-blue border border-black">
-      {
-        headline && (
-          <h1 class="font-medium text-xl leading-8 text-balance">{headline}</h1>
-        )
-      }
+  <div
+    class="p-3 bg-linear-to-t from-dark-blue to-mid-blue border-black border-b-1"
+  >
+    {
+      headline && (
+        <h1 class="font-medium text-xl leading-8 text-balance">{headline}</h1>
+      )
+    }
+  </div>
+  <div class="p-3">
+    <div class="p-3 bg-mid-blue border border-black">
       <slot />
     </div>
   </div>
