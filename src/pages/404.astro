@@ -1,9 +1,18 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Hero from "@components/Hero.astro";
+import InlineLink from "@components/InlineLink.astro";
 const pageTitle = "404";
 ---
 
 <BaseLayout pageTitle="404">
-  <Hero headline={pageTitle} />
+  <Hero headline={pageTitle}>
+    <p>
+      Sorry, the page you are looking for does not exist. If you think this is
+      an error, please file a <InlineLink
+        href="https://github.com/jacobproffer/astro-portfolio/issues"
+        >GitHub issue</InlineLink
+      >.
+    </p>
+  </Hero>
 </BaseLayout>

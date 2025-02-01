@@ -1,1 +1,31 @@
-<footer class="pt-1 pb-3 px-3 bg-dark-blue border border-black"></footer>
+---
+import NavLink from "@components/NavLink.astro";
+
+const links = [
+  { href: "https://monkeytype.com/profile/jproffer", label: "Monkeytype" },
+  {
+    href: "https://dribbble.com/jacobproffer/",
+    label: "Dribbble",
+  },
+  {
+    href: "https://www.wanikani.com/users/chongo",
+    label: "WaniKani",
+  },
+];
+---
+
+<footer class="pt-1 pb-3 px-3 bg-dark-blue border border-black">
+  <nav aria-label="social">
+    <ul class="flex gap-4">
+      {
+        links
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((link) => (
+            <li>
+              <NavLink href={link.href}>{link.label}</NavLink>
+            </li>
+          ))
+      }
+    </ul>
+  </nav>
+</footer>
