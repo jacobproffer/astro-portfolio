@@ -1,5 +1,6 @@
 ---
 import Section from "@components/Section.astro";
+import SecondaryHeadline from "@components/SecondaryHeadline.astro";
 import Project from "@components/Project.astro";
 import personalBlogImage from "@images/personal_blog.jpg";
 import deadMansBrewImage from "@images/tickets.jpg";
@@ -24,7 +25,7 @@ const projects = [
   },
   {
     url: "https://tickets.proffer.dev/",
-    title: "Dead Man\'s Brew",
+    title: "Dead Man's Brew",
     description:
       "Hugo theme built with SCSS, JavaScript, and Greensock Animation Platform.",
     tags: ["hugo", "scss", "javascript"],
@@ -52,11 +53,12 @@ const projects = [
 ];
 ---
 
-<Section headline={headline}>
-  <ol class="grid gap-x-4 gap-y-7 pt-8">
+<Section>
+  <SecondaryHeadline text={headline} />
+  <ol class="m-3 border border-black">
     {
       projects.map((post: any, index: number) => (
-        <li>
+        <li class={index > 0 ? "border-t-1 border-black" : ""}>
           <Project
             url={post.url}
             headline={post.title}

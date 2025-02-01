@@ -1,7 +1,25 @@
 ---
 import NavLink from "@components/NavLink.astro";
+
+const links = [
+  { href: "https://www.github.com/jacobproffer/", label: "GitHub" },
+  {
+    href: "https://www.linkedin.com/in/jacob-proffer-a829a892/",
+    label: "LinkedIn",
+  },
+];
 ---
 
-<nav aria-label="primary">
-  <NavLink href="/about/">About</NavLink>
+<nav aria-label="social">
+  <ul class="flex gap-4">
+    {
+      links
+        .sort((a, b) => a.label.localeCompare(b.label))
+        .map((link) => (
+          <li>
+            <NavLink href={link.href}>{link.label}</NavLink>
+          </li>
+        ))
+    }
+  </ul>
 </nav>

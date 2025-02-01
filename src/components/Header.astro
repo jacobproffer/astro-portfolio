@@ -1,25 +1,17 @@
 ---
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
-import Container from "@components/Container.astro";
 ---
 
 <div
-  class="fixed z-20 top-0 w-full h-auto bg-gray dark:bg-black md:py-2"
-  data-header
+  class="relative grid grid-cols-[max-content_max-content] items-center justify-between py-1 px-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black"
 >
-  <Container>
-    <div
-      class="relative grid grid-cols-[max-content_max-content] items-center justify-between py-2 md:py-0"
+  <header>
+    <a
+      class="fixed -top-full left-1/2 py-1 px-4 -translate-x-1/2 transition-top ease-in-out delay-150 focus:top-0 focus:outline-dashed focus:outline-black focus:outline-1"
+      href="#content">Skip to main content</a
     >
-      <header>
-        <a
-          class="fixed -top-full left-1/2 py-1 px-4 -translate-x-1/2 transition-top ease-in-out delay-150 focus:top-0 focus:outline-dashed focus:outline-black dark:focus:outline-orange focus:outline-1"
-          href="#content">Skip to main content</a
-        >
-        <Logo />
-      </header>
-      <Navigation />
-    </div>
-  </Container>
+    <Logo />
+  </header>
+  <Navigation />
 </div>

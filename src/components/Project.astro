@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import TertiaryHeadline from "./TertiaryHeadline.astro";
 
 interface Props {
   thumbnail: ImageMetadata;
@@ -23,13 +24,13 @@ const {
 ---
 
 <a
-  class="relative grid gap-3 outline-none transition-transform duration-300 transform hover:scale-105 dark:hover:text-white focus:outline-black dark:focus:outline-orange focus:outline-dashed focus:outline-offset-1 focus:outline-1"
+  class="relative grid gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-solid focus:outline-1 hover:bg-dark-blue transition-colors duration-300"
   href={url}
   target="_blank"
 >
   {
     thumbnail && (
-      <div class="bg-orange aspect-project pt-2 px-2 rounded-lg overflow-hidden">
+      <div class="aspect-project border border-black overflow-hidden">
         <Image
           class="dynamic-loading-image w-full h-full object-contain"
           src={thumbnail}
@@ -41,13 +42,13 @@ const {
     )
   }
   <div class="grid gap-1">
-    {headline && <h3 class="text-md">{headline}</h3>}
+    {headline && <TertiaryHeadline text={headline} />}
     {description && <p>{description}</p>}
     {
       tags && (
         <ul class="flex gap-2">
           {tags.map((tag: string) => (
-            <li class="px-1 rounded-md border-black dark:border-gray border">
+            <li class="px-3 text-light-blue bg-dark-blue border-black border">
               {tag}
             </li>
           ))}

@@ -1,7 +1,33 @@
 ---
-import FooterGraphic from "@images/jacob-proffer-2.svg";
+import NavLink from "@components/NavLink.astro";
+
+const links = [
+  { href: "https://monkeytype.com/profile/jproffer", label: "Monkeytype" },
+  {
+    href: "https://dribbble.com/jacobproffer/",
+    label: "Dribbble",
+  },
+  {
+    href: "https://www.wanikani.com/users/chongo",
+    label: "WaniKani",
+  },
+];
 ---
 
-<footer class="mt-11 overflow-hidden">
-  <FooterGraphic mode="inline" />
+<footer
+  class="p-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black"
+>
+  <nav aria-label="social">
+    <ul class="flex gap-4">
+      {
+        links
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((link) => (
+            <li>
+              <NavLink href={link.href}>{link.label}</NavLink>
+            </li>
+          ))
+      }
+    </ul>
+  </nav>
 </footer>

@@ -1,0 +1,17 @@
+---
+import AboutSection from "@components/AboutSection.astro";
+import DateItem from "@components/DateItem.astro";
+import TertiaryHeadline from "./TertiaryHeadline.astro";
+---
+
+<AboutSection secondaryHeadline="Education">
+  <div class="grid gap-3">
+    <TertiaryHeadline text="Northern Michigan University" />
+    <DateItem
+      type="education"
+      title="Bachelor of Fine Arts in Computer Art"
+      startDate="2010-08"
+      endDate="2014-05"
+    />
+  </div>
+</AboutSection>
