@@ -12,9 +12,7 @@ const { secondaryHeadline } = Astro.props;
 
 <Section>
   {secondaryHeadline && <SecondaryHeadline text={secondaryHeadline} />}
-  <div
-    class="grid gap-3 m-3 bg-mid-blue border border-black border-l-highlight border-t-highlight"
-  >
+  <div class="grid gap-3 bg-mid-blue">
     <div class="p-3">
       <slot />
     </div>
