@@ -1,11 +1,21 @@
 ---
+interface Props {
+  class?: string;
+  [key: string]: any;
+}
+
 const url = new URL(Astro.props.href, Astro.url);
 const isExternal = url.host !== Astro.url.host;
 const isCurrent = url.href === Astro.url.href;
+
+const { class: className } = Astro.props;
 ---
 
 <a
-  class="py-1 px-2 text-white bg-linear-to-t from-dark-blue to-mid-blue border border-black border-t-highlight border-l-highlight focus:outline-1 focus:outline-offset-1 focus:outline-dashed focus:outline-light-blue hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors"
+  class:list={[
+    "py-1 px-2 text-white bg-linear-to-t from-dark-blue to-mid-blue border border-black border-t-highlight border-l-highlight focus:outline-1 focus:outline-offset-1 focus:outline-dashed focus:outline-light-blue hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors",
+    className,
+  ]}
   aria-current={isCurrent ? "page" : null}
   target={isExternal ? "_blank" : "_self"}
   {...Astro.props}
