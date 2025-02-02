@@ -6,13 +6,14 @@ interface Props {
   title: string;
   startDate?: string;
   endDate?: string;
+  border?: boolean;
 }
 
-const { type, title, startDate, endDate } = Astro.props;
+const { type, title, startDate, endDate, border } = Astro.props;
 ---
 
 <div
-  class="grid gap-1 items-center justify-between p-3 bg-dark-blue border-black border-r-1 border-b-1 border-l-1"
+  class={`grid gap-1 items-center justify-between p-3 bg-dark-blue border-black border-r-1 border-b-1 ${border ? 'border-t-1 border-t-highlight border-l-1 border-l-highlight' : ''}`}
   role="group"
   aria-label={type}
 >
