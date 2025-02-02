@@ -41,7 +41,7 @@ const experienceItems = [
           <li>
             <TertiaryHeadline text={item.company} />
             {item.positions?.length && (
-              <ol class="border-black border-t-1 mt-3">
+              <ol class="border-black border-t-1 mt-3 border-l-1 border-l-highlight border-t-highlight">
                 {item.positions.map((position) => (
                   <li>
                     <DateItem
