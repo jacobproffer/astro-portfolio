@@ -1,15 +1,16 @@
 ---
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
+import NavLink from "./NavLink.astro";
 ---
 
 <div
-  class="relative grid grid-cols-[max-content_max-content] items-center justify-between py-1 px-3 bg-gradient-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
+  class="grid grid-cols-[max-content_max-content] items-center justify-between py-1 px-3 bg-gradient-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
 >
   <header>
-    <a
-      class="fixed -top-full left-1/2 py-1 px-4 -translate-x-1/2 transition-top ease-in-out duration-150 focus:top-0 focus:outline-dashed focus:outline-black focus:outline-1"
-      href="#content">Skip to main content</a
+    <NavLink
+      class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-6 md:focus:top-12"
+      href="#content">Skip to main content</NavLink
     >
     <Logo />
   </header>
