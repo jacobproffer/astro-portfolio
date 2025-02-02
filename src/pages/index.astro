@@ -5,14 +5,15 @@ import Hero from "@components/Hero.astro";
 import ProjectGrid from "@components/ProjectGrid.astro";
 import Experience from "@components/Experience.astro";
 import Education from "@components/Education.astro";
-const pageTitle = "Jacob Proffer";
+const pageTitle = "Jacob Proffer – Front-End Developer";
+const heroHeadline = "Jacob Proffer";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="grid gap-3 md:gap-6">
     <div class="grid gap-3 md:grid-cols-[1fr_3fr] items-start md:gap-6">
       <Avatar />
-      <Hero headline={pageTitle}>
+      <Hero headline={heroHeadline}>
         <p class="leading-6">
           I'm a front-end developer based in Marquette, Michigan with over nine
           years of experience. I specialize in crafting accessible and

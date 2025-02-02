@@ -24,7 +24,7 @@ const {
 ---
 
 <a
-  class="relative grid gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-solid focus:outline-1 hover:bg-dark-blue transition-colors duration-300"
+  class="relative grid gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-dashed focus:outline-1 hover:bg-dark-blue transition-colors duration-300"
   href={url}
   target="_blank"
 >
@@ -46,7 +46,7 @@ const {
     {description && <p>{description}</p>}
     {
       tags && (
-        <ul class="flex gap-2">
+        <ul class="flex gap-2 mt-3">
           {tags.map((tag: string) => (
             <li class="px-3 text-light-blue bg-dark-blue border-black border border-t-highlight border-l-highlight">
               {tag}
