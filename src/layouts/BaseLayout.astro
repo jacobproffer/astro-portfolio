@@ -1,6 +1,6 @@
 ---
-import "@fontsource-variable/raleway";
-import ralewayWoff2 from "@fontsource-variable/raleway/files/raleway-latin-wght-normal.woff2";
+import "@fontsource-variable/fira-code";
+import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
 import { ClientRouter } from "astro:transitions";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
@@ -54,7 +54,7 @@ const { pageTitle, pageDescription } = Astro.props;
       rel="preload"
       as="font"
       type="font/woff2"
-      href={ralewayWoff2}
+      href={firaCode}
       crossorigin="anonymous"
     />
     <ClientRouter />

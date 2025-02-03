@@ -183,10 +183,10 @@
   resolved "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.24.2.tgz"
   integrity sha512-kj3AnYWc+CekmZnS5IPu9D+HWtUI49hbnyqk0FLEJDbzCIQt7hg7ucF1SQAilhtYpIujfaHr6O0UHlzzSPdOeA==
 
-"@fontsource-variable/raleway@^5.1.0":
+"@fontsource-variable/fira-code@^5.1.1":
   version "5.1.1"
-  resolved "https://registry.npmjs.org/@fontsource-variable/raleway/-/raleway-5.1.1.tgz"
-  integrity sha512-PWApLoy2/nmrU+1KjtbEAB3kZFbb/kevzkAS57Pt9TAf3OybfCPpdevlT2hQI9lQEclYHMWXEHBL6vP7MNmjMg==
+  resolved "https://registry.npmjs.org/@fontsource-variable/fira-code/-/fira-code-5.1.1.tgz"
+  integrity sha512-+X0eaJHfG/igcrVS2jvYCymFUFtcChUpk3obRXLt8ZPYIE+sfZqhtidCEaCgkCQxR6zJbYmvMd6M+rjrya6KyQ==
 
 "@img/sharp-darwin-arm64@0.33.5":
   version "0.33.5"
