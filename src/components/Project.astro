@@ -24,7 +24,7 @@ const {
 ---
 
 <a
-  class="relative grid gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-dashed focus:outline-1 hover:bg-dark-blue transition-colors duration-300"
+  class="relative grid items-start gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-dashed focus:outline-1 hover:bg-dark-blue transition-colors duration-300 md:grid-cols-[1fr_2fr]"
   href={url}
   target="_blank"
 >
@@ -35,8 +35,8 @@ const {
           class="dynamic-loading-image w-full h-full object-contain"
           src={thumbnail}
           alt={thumbnailAlt}
-          widths={[297, 686, 898, thumbnail.width]}
-          sizes={`(max-width: 375px) 297px, (max-width: 768px) 686px, (max-width: 1440px) 898px, ${thumbnail.width}px`}
+          widths={[297, 222, 294]}
+          sizes="(max-width: 376px) 297px, (min-width: 376px) and (max-width: 768px) 222px, (min-width: 768px) 294px"
           loading={lazyLoaded ? "lazy" : "eager"}
           data-image
         />
