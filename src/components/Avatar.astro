@@ -7,15 +7,17 @@ import thumbnail from "@images/proffer_jacob.jpg";
   <div
     class="h-full bg-mid-blue p-3 border-black border border-t-highlight border-l-highlight"
   >
-    <div class="relative border-black border max-md:aspect-square">
+    <div class="relative border-black border aspect-square">
       <div
         class="absolute h-full w-full animate-pulse outline-4 outline-light-blue -outline-offset-4 opacity-75"
       >
       </div>
       <Image
-        class="w-full h-full object-cover"
+        class="w-full h-full object-contain"
         src={thumbnail}
         alt=""
+        widths={[144, 197, thumbnail.width]}
+        sizes={`(max-width: 767px) 144px, (min-width: 768px) 197px, ${thumbnail.width}px`}
         loading="eager"
       />
     </div>
