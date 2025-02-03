@@ -37,8 +37,8 @@ const experienceItems = [
   {
     experienceItems?.length && (
       <ol class="grid gap-5">
-        {experienceItems.map((item) => (
-          <li>
+        {experienceItems.map((item, index) => (
+          <li class={`p-3 ${index !== 0 ? "border-black border-t-1" : ""}`}>
             <TertiaryHeadline text={item.company} />
             {item.positions?.length && (
               <ol class="border-black border-t-1 mt-3 border-l-1 border-l-highlight border-t-highlight">
