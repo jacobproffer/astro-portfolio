@@ -5,22 +5,14 @@ import TertiaryHeadline from "./TertiaryHeadline.astro";
 interface Props {
   thumbnail: ImageMetadata;
   thumbnailAlt: string;
-  lazyLoaded: boolean;
   headline: string;
   description?: string;
   url: string;
   tags?: Array<string>;
 }
 
-const {
-  thumbnail,
-  thumbnailAlt,
-  lazyLoaded,
-  headline,
-  description,
-  url,
-  tags,
-} = Astro.props;
+const { thumbnail, thumbnailAlt, headline, description, url, tags } =
+  Astro.props;
 ---
 
 <a
@@ -37,7 +29,8 @@ const {
           alt={thumbnailAlt}
           widths={[297, 689, 294]}
           sizes="(max-width: 376px) 297px, (min-width: 376px) and (max-width: 767px) 689px, (min-width: 768px) 294px"
-          loading={lazyLoaded ? "lazy" : "eager"}
+          loading="lazy"
+          quality="mid"
           data-image
         />
       </div>
@@ -59,3 +52,21 @@ const {
     }
   </div>
 </a>
+
+<script>
+  const dynamicImages = document.querySelectorAll("[data-image]");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      const image = entry.target;
+
+      if (entry.isIntersecting) {
+        // Switch to eager loading for images in the viewport
+        image.setAttribute("loading", "eager");
+        observer.unobserve(image);
+      }
+    });
+  });
+
+  dynamicImages.forEach((image) => observer.observe(image));
+</script>
