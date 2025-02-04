@@ -4,25 +4,12 @@ import SecondaryHeadline from "./SecondaryHeadline.astro";
 
 interface Props {
   secondaryHeadline?: string;
-  withPadding?: boolean;
 }
 
-const { secondaryHeadline, withPadding } = Astro.props;
+const { secondaryHeadline } = Astro.props;
 ---
 
 <Section>
   {secondaryHeadline && <SecondaryHeadline text={secondaryHeadline} />}
-  <div
-    class="grid gap-3 bg-mid-blue m-3 border-1 border-black border-t-highlight border-l-highlight"
-  >
-    {
-      withPadding ? (
-        <div class="p-3">
-          <slot />
-        </div>
-      ) : (
-        <slot />
-      )
-    }
-  </div>
+  <slot />
 </Section>
