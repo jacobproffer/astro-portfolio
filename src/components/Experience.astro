@@ -36,22 +36,20 @@ const experienceItems = [
 <AboutSection secondaryHeadline="Experience">
   {
     experienceItems?.length && (
-      <ol>
-        {experienceItems.map((item, index) => (
-          <li class={`p-3 ${index !== 0 ? "border-black border-t-1" : ""}`}>
+      <ol class="grid gap-3 m-3">
+        {experienceItems.map((item) => (
+          <li class="grid gap-3 p-3 bg-mid-blue  border-1 border-black border-t-highlight border-l-highlight">
             <TertiaryHeadline text={item.company} />
             {item.positions?.length &&
               (item.positions.length === 1 ? (
-                <div class="border-black border-t-1 mt-3 border-l-1 border-l-highlight border-t-highlight">
-                  <DateItem
-                    type="Experience"
-                    title={item.positions[0].position}
-                    startDate={item.positions[0].startDate}
-                    endDate={item.positions[0].endDate}
-                  />
-                </div>
+                <DateItem
+                  type="Experience"
+                  title={item.positions[0].position}
+                  startDate={item.positions[0].startDate}
+                  endDate={item.positions[0].endDate}
+                />
               ) : (
-                <ol class="border-black border-t-1 mt-3 border-l-1 border-l-highlight border-t-highlight">
+                <ol class="grid gap-3">
                   {item.positions.map((position) => (
                     <li>
                       <DateItem

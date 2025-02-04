@@ -16,7 +16,7 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
 ---
 
 <a
-  class="relative grid items-start gap-3 p-3 bg-mid-blue outline-none focus:outline-light-blue focus:outline-dashed focus:outline-1 hover:bg-dark-blue transition-colors duration-300 md:grid-cols-[1fr_2fr]"
+  class="relative grid items-start gap-3 p-3 bg-mid-blue border-1 border-black border-t-highlight border-l-highlight outline-none focus:outline-light-blue focus:outline-dashed focus:outline-1 hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors md:grid-cols-[1fr_2fr]"
   href={url}
   target="_blank"
 >
@@ -27,8 +27,8 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
           class="dynamic-loading-image w-full h-full object-contain"
           src={thumbnail}
           alt={thumbnailAlt}
-          widths={[297, 689, 294]}
-          sizes="(max-width: 376px) 297px, (min-width: 376px) and (max-width: 767px) 689px, (min-width: 768px) 294px"
+          widths={[271, 663, 285]}
+          sizes="(max-width: 376px) 297px, (min-width: 376px) and (max-width: 767px) 663px, (min-width: 768px) 285px"
           loading="lazy"
           quality="mid"
           data-image
@@ -38,7 +38,7 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
   }
   <div class="grid gap-1">
     {headline && <TertiaryHeadline text={headline} />}
-    {description && <p>{description}</p>}
+    {description && <p class="text-white">{description}</p>}
     {
       tags && (
         <ul class="flex gap-2 mt-3">
