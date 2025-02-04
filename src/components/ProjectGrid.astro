@@ -66,7 +66,7 @@ const projects = [
             tags={post.tags}
             thumbnail={post.thumbnail}
             thumbnailAlt={post.thumbnailAlt ?? ""}
-            lazyLoaded={index === 0 ? false : true}
+            lazyLoaded={index === 0 || index === 1 ? false : true}
           />
         </li>
       ))
