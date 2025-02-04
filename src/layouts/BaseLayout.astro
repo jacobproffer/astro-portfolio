@@ -1,7 +1,6 @@
 ---
 import "@fontsource-variable/fira-code";
 import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
-import { ClientRouter } from "astro:transitions";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
 import Container from "@components/Container.astro";
@@ -57,7 +56,6 @@ const { pageTitle, pageDescription } = Astro.props;
       href={firaCode}
       crossorigin="anonymous"
     />
-    <ClientRouter />
   </head>
   <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
     <Container>
@@ -65,7 +63,7 @@ const { pageTitle, pageDescription } = Astro.props;
         class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
       >
         <Header />
-        <main id="content" transition:name="root" transition:animate="fade">
+        <main id="content">
           <slot />
         </main>
         <Footer />
