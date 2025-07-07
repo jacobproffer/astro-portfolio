@@ -38,7 +38,7 @@ const experienceItems = [
     experienceItems?.length && (
       <ol class="grid gap-3 m-3">
         {experienceItems.map((item) => (
-          <li class="grid gap-3 p-3 bg-mid-blue  border-1 border-black border-t-highlight border-l-highlight">
+          <li class="grid gap-3 p-3 bg-mid-blue  border border-black border-t-highlight border-l-highlight">
             <TertiaryHeadline text={item.company} />
             {item.positions?.length &&
               (item.positions.length === 1 ? (
