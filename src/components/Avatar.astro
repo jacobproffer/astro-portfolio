@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import thumbnail from "@images/proffer_jacob.jpg";
 ---
 
-<figure class="max-md:max-w-max">
+<figure>
   <div
     class="h-full bg-linear-to-t from-dark-blue to-mid-blue p-3 border-black border border-t-highlight border-l-highlight"
   >
@@ -17,7 +17,7 @@ import thumbnail from "@images/proffer_jacob.jpg";
         src={thumbnail}
         alt=""
         widths={[144, 197, thumbnail.width]}
-        sizes={`(max-width: 767px) 144px, (min-width: 768px) 197px, ${thumbnail.width}px`}
+        sizes={`(max-width: 767px) 300px, (min-width: 768px) 197px, ${thumbnail.width}px`}
         quality="mid"
         loading="eager"
       />
