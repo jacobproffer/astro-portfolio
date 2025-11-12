@@ -26,7 +26,7 @@ const projects = await getCollection("projects");
             description={entry.data.description ?? ""}
             tags={entry.data.tags ?? []}
             thumbnail={entry.data.thumbnail}
-            thumbnailAlt={entry.data.title}
+            thumbnailAlt=""
           />
         </li>
       ))
