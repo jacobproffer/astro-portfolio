@@ -22,6 +22,10 @@ const { type, title, startDate, endDate } = Astro.props;
       <time datetime={startDate}>{formatDate(startDate)}</time>
       <div class="text-light-blue">-</div>
     )}
-    {endDate ? <time datetime={endDate}>{formatDate(endDate)}</time> : 'Present'}
+    {endDate ? (
+      <time datetime={endDate}>{formatDate(endDate)}</time>
+    ) : (
+      <span>Present</span>
+    )}
   </div>
 </div>

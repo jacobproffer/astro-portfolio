@@ -35,17 +35,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   extend={{
     meta: [
       {
-        name: "og:locale",
+        property: "og:locale",
         content: "en_US",
       },
       {
-        name: "og:description",
+        property: "og:description",
         content:
           seo?.description ??
           "Jacob Proffer is a front-end developer based in Marquette, Michigan with over nine years of experience.",
       },
       {
-        name: "og:site_name",
+        property: "og:site_name",
         content: siteName,
       },
     ],
