@@ -23,8 +23,8 @@ const projects = await getCollection("projects");
           <Project
             url={entry.data.url}
             headline={entry.data.title}
-            description={entry.data.description}
-            tags={entry.data.tags}
+            description={entry.data.description ?? ""}
+            tags={entry.data.tags ?? []}
             thumbnail={entry.data.thumbnail}
             thumbnailAlt={entry.data.title}
           />
