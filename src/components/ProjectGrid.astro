@@ -2,10 +2,7 @@
 import Section from "@components/Section.astro";
 import SecondaryHeadline from "@components/SecondaryHeadline.astro";
 import Project from "@components/Project.astro";
-import personalBlogImage from "@images/personal_blog.jpg";
-import deadMansBrewImage from "@images/tickets.jpg";
-import weylandYutaniImage from "@images/weyland-yutani.jpg";
-import whatisJacobPlayingImage from "@images/what_is_jacob_playing.jpg";
+import { getCollection } from "astro:content";
 
 interface Props {
   headline: string;
@@ -13,59 +10,23 @@ interface Props {
 
 const { headline } = Astro.props;
 
-const projects = [
-  {
-    url: "https://jacobproffer.com/",
-    title: "Personal Blog",
-    description:
-      "Hugo theme built with SCSS, JavaScript, and GreenSock Animation Platform.",
-    tags: ["hugo", "scss", "javascript"],
-    thumbnail: personalBlogImage,
-    thumbnailAlt: "",
-  },
-  {
-    url: "https://tickets.proffer.dev/",
-    title: "Dead Man's Brew",
-    description:
-      "Hugo theme built with SCSS, JavaScript, and GreenSock Animation Platform.",
-    tags: ["hugo", "scss", "javascript"],
-    thumbnail: deadMansBrewImage,
-    thumbnailAlt: "",
-  },
-  {
-    url: "https://weyland-yutani.proffer.dev/",
-    title: "Weyland Yutani",
-    description:
-      "Hugo theme built with SCSS, JavaScript, and GreenSock Animation Platform.",
-    tags: ["hugo", "scss", "javascript"],
-    thumbnail: weylandYutaniImage,
-    thumbnailAlt: "",
-  },
-  {
-    url: "https://whatisjacobplaying.com/",
-    title: "What is Jacob Playing",
-    description:
-      "Single page website built with Next.js and the Steam Web API to track user data.",
-    tags: ["next.js", "styled-components"],
-    thumbnail: whatisJacobPlayingImage,
-    thumbnailAlt: "",
-  },
-];
+// Load projects from content collection
+const projects = await getCollection("projects");
 ---
 
 <Section>
   <SecondaryHeadline text={headline} />
   <ol class="grid gap-y-3 p-3">
     {
-      projects.map((post: any, index: number) => (
+      projects.map((entry, index: number) => (
         <li class={index > 0 ? "border-t border-black" : ""}>
           <Project
-            url={post.url}
-            headline={post.title}
-            description={post.description}
-            tags={post.tags}
-            thumbnail={post.thumbnail}
-            thumbnailAlt={post.thumbnailAlt ?? ""}
+            url={entry.data.url}
+            headline={entry.data.title}
+            description={entry.data.description}
+            tags={entry.data.tags}
+            thumbnail={entry.data.thumbnail}
+            thumbnailAlt={entry.data.title}
           />
         </li>
       ))
