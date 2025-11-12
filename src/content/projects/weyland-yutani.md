@@ -1,7 +1,7 @@
 ---
 url: "https://weyland-yutani.proffer.dev/"
 title: "Weyland Yutani"
-description: "Hugo theme built with SCSS, JavaScript, and GreenSock Animation Platform."
+description: "A sci-fi inspired Hugo theme modeled after the fictional Weyland-Yutani Corporation, featuring futuristic UI elements, animated transitions, and a corporate dashboard aesthetic."
 tags:
   - "hugo"
   - "scss"
