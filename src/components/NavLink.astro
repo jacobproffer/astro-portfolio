@@ -8,7 +8,8 @@ const url = new URL(Astro.props.href, Astro.url);
 const isExternal = url.host !== Astro.url.host;
 const isCurrent = url.href === Astro.url.href;
 
-const { class: className } = Astro.props;
+// Extract class and other props separately
+const { class: className, ...otherProps } = Astro.props;
 ---
 
 <a
@@ -18,7 +19,7 @@ const { class: className } = Astro.props;
   ]}
   aria-current={isCurrent ? "page" : null}
   target={isExternal ? "_blank" : "_self"}
-  {...Astro.props}
+  {...otherProps}
 >
   <slot />
 </a>
