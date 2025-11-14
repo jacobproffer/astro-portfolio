@@ -2,65 +2,34 @@
 import AboutSection from "@components/AboutSection.astro";
 import DateItem from "@components/DateItem.astro";
 import TertiaryHeadline from "@components/TertiaryHeadline.astro";
+import { getCollection } from "astro:content";
 
-const experienceItems = [
-  {
-    company: "Elegant Seagulls",
-    positions: [
-      {
-        position: "Senior UI Developer",
-        startDate: "2025-07",
-        endDate: "",
-      },
-    ],
-  },
-  {
-    company: "Sullivan",
-    positions: [
-      {
-        position: "Developer",
-        startDate: "2025-01",
-        endDate: "2025-07",
-      },
-    ],
-  },
-  {
-    company: "Elegant Seagulls",
-    positions: [
-      {
-        position: "Senior Front-End Developer",
-        startDate: "2021-10",
-        endDate: "2025-01",
-      },
-      {
-        position: "Front-End Developer",
-        startDate: "2015-12",
-        endDate: "2021-10",
-      },
-      { position: "Intern", startDate: "2015-09", endDate: "2015-12" },
-    ],
-  },
-];
+// Load experience from content collection
+const experienceItems = await getCollection("experience");
+// Sort by order field
+const sortedExperience = experienceItems.sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
 <AboutSection secondaryHeadline="Experience">
   {
-    experienceItems?.length && (
+    sortedExperience?.length && (
       <ol class="grid gap-3 m-3">
-        {experienceItems.map((item) => (
+        {sortedExperience.map((item) => (
           <li class="grid gap-3 p-3 bg-mid-blue  border border-black border-t-highlight border-l-highlight">
-            <TertiaryHeadline text={item.company} />
-            {item.positions?.length &&
-              (item.positions.length === 1 ? (
+            <TertiaryHeadline text={item.data.company} />
+            {item.data.positions?.length &&
+              (item.data.positions.length === 1 ? (
                 <DateItem
                   type="Experience"
-                  title={item.positions[0].position}
-                  startDate={item.positions[0].startDate}
-                  endDate={item.positions[0].endDate}
+                  title={item.data.positions[0].position}
+                  startDate={item.data.positions[0].startDate}
+                  endDate={item.data.positions[0].endDate}
                 />
               ) : (
                 <ol class="grid gap-3">
-                  {item.positions.map((position) => (
+                  {item.data.positions.map((position) => (
                     <li>
                       <DateItem
                         type="Experience"
