@@ -3,6 +3,7 @@ import "@fontsource-variable/fira-code";
 import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
+import StructuredData from "@components/StructuredData.astro";
 import Container from "@components/Container.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -49,6 +50,7 @@ const { pageTitle, pageDescription } = Astro.props;
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
     <SiteSEO seo={{ title: pageTitle, description: pageDescription }} />
+    <StructuredData type="person" />
     <link
       rel="preload"
       as="font"

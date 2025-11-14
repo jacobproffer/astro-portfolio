@@ -1,0 +1,34 @@
+---
+interface Props {
+  type: "person" | "website";
+}
+
+const { type } = Astro.props;
+
+const personData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jacob Proffer",
+  jobTitle: "Senior Front-End Developer",
+  description:
+    "Front-end developer based in Marquette, Michigan with over ten years of experience",
+  url: "https://proffer.dev",
+  sameAs: [
+    "https://github.com/jacobproffer",
+    "https://linkedin.com/in/jacob-proffer-a829a892",
+  ],
+};
+
+const websiteData = {
+  "@context": "https://schema.org",
+  "@type": "Website",
+  name: "Jacob Proffer - Portfolio",
+  url: "https://proffer.dev",
+  description: "Portfolio website of Jacob Proffer, a front-end developer",
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(type === "person" ? personData : websiteData)}
+/>
