@@ -10,44 +10,43 @@ const { seo } = Astro.props;
 
 const siteName = "Jacob Proffer";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const defaultDescription =
+  "Jacob Proffer is a front-end developer based in Marquette, Michigan with over ten years of experience in creating accessible and performant web solutions.";
 ---
 
 <SEO
   title={seo?.title}
-  description={seo?.description ??
-    "Jacob Proffer is a front-end developer based in Marquette, Michigan with over nine years of experience."}
+  description={seo?.description ?? defaultDescription}
   canonical={canonicalURL}
   openGraph={{
     basic: {
       url: canonicalURL,
-      title: seo?.title ?? "Jacob Proffer",
+      title: seo?.title ?? siteName,
       type: "website",
       image: defaultImageFile.toString(),
     },
     image: {
       url: defaultImageFile.toString(),
       secureUrl: defaultImageFile.toString(),
-      alt: "",
+      alt: "Jacob Proffer - Front-End Developer Portfolio",
       height: 1200,
-      width: 800,
+      width: 630, // Better aspect ratio for social sharing
     },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    creator: "@jacobproffer", // Add your Twitter handle
   }}
   extend={{
     meta: [
-      {
-        property: "og:locale",
-        content: "en_US",
-      },
+      { property: "og:locale", content: "en_US" },
       {
         property: "og:description",
-        content:
-          seo?.description ??
-          "Jacob Proffer is a front-end developer based in Marquette, Michigan with over nine years of experience.",
+        content: seo?.description ?? defaultDescription,
       },
-      {
-        property: "og:site_name",
-        content: siteName,
-      },
+      { property: "og:site_name", content: siteName },
+      { name: "author", content: "Jacob Proffer" },
+      { name: "robots", content: "index, follow" },
     ],
   }}
 />
