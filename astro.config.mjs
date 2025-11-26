@@ -40,4 +40,8 @@ export default defineConfig({
       },
     },
   },
+
+  experimental: {
+    svgo: true
+  }
 });
