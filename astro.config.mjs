@@ -8,10 +8,6 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://proffer.dev/",
 
-  redirects: {
-    '/about/': '/',
-  },
-
   integrations: [sitemap()],
 
   // Image optimization configuration
