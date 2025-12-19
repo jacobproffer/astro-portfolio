@@ -1,10 +1,10 @@
 ---
 url: "https://tickets.proffer.dev/"
-title: "Dead Man's Brew"
-description: "Hugo theme built with SCSS, JavaScript, and GreenSock Animation Platform."
+title: "Deadman's Brew"
+description: "A personal movie ticket collection website, built with Astro, TypeScript, and Tailwind."
 tags:
-  - "hugo"
-  - "scss"
-  - "javascript"
+  - "astro"
+  - "tailwind"
+  - "typescript"
 thumbnail: "../../assets/images/tickets.jpg"
 ---
