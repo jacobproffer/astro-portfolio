@@ -1,7 +1,7 @@
 ---
 url: "https://weyland-yutani.proffer.dev/"
 title: "Weyland Yutani"
-description: "A sci-fi inspired Hugo theme modeled after the fictional Weyland-Yutani Corporation, featuring futuristic UI elements, animated transitions, and a corporate dashboard aesthetic."
+description: "A Weyland-Yutani Corporation inspired Hugo theme, featuring animated transitions, and a corporate aesthetic."
 tags:
   - "hugo"
   - "scss"
