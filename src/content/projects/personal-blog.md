@@ -1,7 +1,7 @@
 ---
 url: "https://jacobproffer.com/"
 title: "Personal Blog"
-description: "A personal blog featuring original articles on international travel, and language learning, built with Hugo and enhanced with custom animations."
+description: "A blog with articles on travel and language learning, built with Hugo and enhanced with custom animations."
 tags:
   - "hugo"
   - "scss"
