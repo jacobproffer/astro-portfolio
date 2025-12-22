@@ -1,5 +1,5 @@
 ---
-import "@fontsource-variable/fira-code";
+import "@fontsource-variable/fira-code/wght.css";
 import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
@@ -57,6 +57,7 @@ const { pageTitle, pageDescription } = Astro.props;
       type="font/woff2"
       href={firaCode}
       crossorigin="anonymous"
+      fetchpriority="high"
     />
   </head>
   <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
