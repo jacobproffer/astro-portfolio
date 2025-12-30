@@ -4,7 +4,7 @@ title: "Airports I've Been To"
 description: "Interactive travel map showcasing airports visited and flight routes taken."
 tags:
   - "astro"
-  - "tailwind"
+  - "tailwind-css"
   - "typescript"
 thumbnail: "../../assets/images/airports.jpg"
 ---
