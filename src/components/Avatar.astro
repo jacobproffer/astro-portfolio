@@ -12,10 +12,10 @@ import thumbnail from "@images/proffer_jacob.jpg";
         class="absolute z-20 h-full w-full motion-safe:animate-pulse outline-4 outline-light-blue -outline-offset-4 opacity-75"
       >
       </div>
-      <div class="crt-container">
+      <div class="relative w-full h-full">
         <Image
           id="avatar-image"
-          class="w-full h-full object-contain crt-image"
+          class="w-full h-full object-contain contrast-[1.2] brightness-110 animate-[textShadow_4s_infinite] motion-reduce:animate-none"
           src={thumbnail}
           alt=""
           widths={[144, 197, thumbnail.width]}
@@ -23,47 +23,24 @@ import thumbnail from "@images/proffer_jacob.jpg";
           quality="mid"
           loading="eager"
         />
-        <!-- Scan lines -->
-        <div class="crt-scanlines"></div>
-        <!-- Flicker overlay -->
-        <div class="crt-flicker"></div>
-        <!-- Screen curve/vignette -->
-        <div class="crt-vignette"></div>
+        <div
+          class="absolute inset-0 w-full h-full pointer-events-none z-2 bg-[linear-gradient(to_bottom,rgba(255,255,255,0)_50%,rgba(0,0,0,0.25)_50%)] bg-size-[100%_4px] animate-[scanlines_8s_linear_infinite] motion-reduce:animate-none"
+        >
+        </div>
+        <div
+          class="absolute inset-0 w-full h-full pointer-events-none z-3 bg-white/3 animate-[flicker_0.15s_infinite] motion-reduce:animate-none"
+        >
+        </div>
+        <div
+          class="absolute inset-0 w-full h-full pointer-events-none z-4 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.3)_100%)]"
+        >
+        </div>
       </div>
     </div>
   </div>
 </figure>
 
 <style>
-  .crt-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  .crt-image {
-    filter: contrast(1.2) brightness(1.1);
-    animation: textShadow 4s infinite;
-  }
-
-  /* Scan lines effect */
-  .crt-scanlines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0) 50%,
-      rgba(0, 0, 0, 0.25) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 2;
-    animation: scanlines 8s linear infinite;
-  }
-
   @keyframes scanlines {
     0% {
       background-position: 0 0;
@@ -71,19 +48,6 @@ import thumbnail from "@images/proffer_jacob.jpg";
     100% {
       background-position: 0 100%;
     }
-  }
-
-  /* Subtle flicker effect */
-  .crt-flicker {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    pointer-events: none;
-    z-index: 3;
-    animation: flicker 0.15s infinite;
   }
 
   @keyframes flicker {
@@ -152,7 +116,6 @@ import thumbnail from "@images/proffer_jacob.jpg";
     }
   }
 
-  /* Chromatic aberration and glow */
   @keyframes textShadow {
     0% {
       filter: contrast(1.2) brightness(1.1);
@@ -300,35 +263,6 @@ import thumbnail from "@images/proffer_jacob.jpg";
         2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
         -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3),
         0 0 3px;
-    }
-  }
-
-  /* Vignette and screen curve simulation */
-  .crt-vignette {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    );
-    pointer-events: none;
-    z-index: 4;
-  }
-
-  /* Disable effects for users who prefer reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .crt-image {
-      animation: none;
-    }
-    .crt-scanlines {
-      animation: none;
-    }
-    .crt-flicker {
-      animation: none;
     }
   }
 </style>
