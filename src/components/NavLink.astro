@@ -14,7 +14,7 @@ const { class: className, ...otherProps } = Astro.props;
 
 <a
   class:list={[
-    "block py-2 px-4 text-white bg-linear-to-t from-dark-blue to-mid-blue border border-black border-t-highlight border-l-highlight focus:outline-1 focus:outline-offset-1 focus:outline-dashed focus:outline-light-blue hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors",
+    "block py-2 px-4 text-white bg-linear-to-t from-dark-blue to-mid-blue border border-black border-t-highlight border-l-highlight motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors",
     className,
   ]}
   aria-current={isCurrent ? "page" : null}
