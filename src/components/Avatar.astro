@@ -15,7 +15,7 @@ import thumbnail from "@images/proffer_jacob.jpg";
       <div class="relative w-full h-full">
         <Image
           id="avatar-image"
-          class="w-full h-full object-contain contrast-[1.2] brightness-110 animate-[chromaticGlow_4s_infinite] motion-reduce:animate-none will-change-[filter]"
+          class="w-full h-full object-contain animate-[chromaticGlow_4s_infinite] motion-reduce:animate-none will-change-[filter]"
           src={thumbnail}
           alt=""
           widths={[144, 197, thumbnail.width]}
@@ -87,130 +87,41 @@ import thumbnail from "@images/proffer_jacob.jpg";
   }
 
   @keyframes chromaticGlow {
-    0% {
+    0%,
+    100% {
       filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.44px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.44px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    5% {
-      filter: contrast(1.15) brightness(1.05)
-        drop-shadow(2.79px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.79px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    10% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.03px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.03px 0 1px rgba(255, 0, 80, 0.3))
+        drop-shadow(0.5px 0 1px rgba(0, 30, 255, 0.5))
+        drop-shadow(-0.5px 0 1px rgba(255, 0, 80, 0.3))
         drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
     15% {
-      filter: contrast(1.18) brightness(1.08)
-        drop-shadow(0.4px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.4px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    20% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(3.48px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-3.48px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    25% {
-      filter: contrast(1.17) brightness(1.07)
-        drop-shadow(1.61px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-1.61px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    30% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.7px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.7px 0 1px rgba(255, 0, 80, 0.3))
+      filter: contrast(1.15) brightness(1.05)
+        drop-shadow(3px 0 1px rgba(0, 30, 255, 0.5))
+        drop-shadow(-3px 0 1px rgba(255, 0, 80, 0.3))
         drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
     35% {
       filter: contrast(1.19) brightness(1.09)
-        drop-shadow(3.9px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-3.9px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    40% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(3.87px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-3.87px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    45% {
-      filter: contrast(1.16) brightness(1.06)
-        drop-shadow(2.23px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.23px 0 1px rgba(255, 0, 80, 0.3))
+        drop-shadow(4px 0 1px rgba(0, 30, 255, 0.5))
+        drop-shadow(-4px 0 1px rgba(255, 0, 80, 0.3))
         drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
     50% {
       filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.08px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.08px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    55% {
-      filter: contrast(1.18) brightness(1.08)
-        drop-shadow(2.38px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.38px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    60% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(2.2px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.2px 0 1px rgba(255, 0, 80, 0.3))
+        drop-shadow(0.1px 0 1px rgba(0, 30, 255, 0.5))
+        drop-shadow(-0.1px 0 1px rgba(255, 0, 80, 0.3))
         drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
     65% {
       filter: contrast(1.17) brightness(1.07)
-        drop-shadow(2.86px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.86px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    70% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.49px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.49px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    75% {
-      filter: contrast(1.19) brightness(1.09)
-        drop-shadow(1.89px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-1.89px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    80% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.08px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.08px 0 1px rgba(255, 0, 80, 0.3))
+        drop-shadow(3px 0 1px rgba(0, 30, 255, 0.5))
+        drop-shadow(-3px 0 1px rgba(255, 0, 80, 0.3))
         drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
     85% {
       filter: contrast(1.16) brightness(1.06)
         drop-shadow(0.1px 0 1px rgba(0, 30, 255, 0.5))
         drop-shadow(-0.1px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    90% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(3.44px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-3.44px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    95% {
-      filter: contrast(1.18) brightness(1.08)
-        drop-shadow(2.18px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.18px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    100% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(2.62px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-2.62px 0 1px rgba(255, 0, 80, 0.3))
         drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
   }
