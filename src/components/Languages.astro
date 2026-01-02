@@ -29,7 +29,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
 
     while (hasMorePages) {
       const reposResponse = await fetch(
-        `https://api.github.com/user/repos?per_page=100&page=${page}&affiliation=owner,collaborator,organization_member&sort=updated`,
+        `https://api.github.com/user/repos?per_page=100&page=${page}&affiliation=owner&sort=updated`,
         {
           headers: {
             Authorization: `Bearer ${GITHUB_TOKEN}`,
@@ -70,10 +70,12 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
       }
     }
 
-    const nonForkRepos = allRepos.filter((repo: any) => !repo.fork);
+    const nonForkRepos = allRepos.filter(
+      (repo: any) => !repo.fork && !repo.private
+    );
 
     console.log(
-      `Fetched ${allRepos.length} repositories (${nonForkRepos.length} non-fork repositories)...`
+      `Fetched ${allRepos.length} repositories (${nonForkRepos.length} public non-fork repositories)...`
     );
 
     console.log(
@@ -129,6 +131,10 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
       results.forEach((result) => {
         if (result && result.languages) {
           const { languages, repo } = result;
+          // Skip private repositories to prevent data leakage
+          if (repo.private) {
+            return;
+          }
           for (const [lang, bytes] of Object.entries(languages)) {
             if (!languageStats[lang]) {
               languageStats[lang] = {
