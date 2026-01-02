@@ -4,6 +4,7 @@ import TertiaryHeadline from "./TertiaryHeadline.astro";
 
 // Fetch GitHub language statistics at build time
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+const TOP_LANGUAGES_COUNT = 8;
 
 interface LanguageStats {
   [language: string]: {
@@ -143,7 +144,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
                 repos: [],
               };
             }
-            languageStats[lang].bytes += bytes as number;
+            languageStats[lang].bytes += typeof bytes === "number" ? bytes : 0;
             languageStats[lang].repoCount += 1;
             languageStats[lang].repos.push({
               name: repo.name,
@@ -204,8 +205,11 @@ const sortedLanguages = filteredStats
       ? uniqueRepo.html_url
       : sortedRepos[0]?.html_url || "";
 
+    // Add the selected repo to the Set to prevent duplicates
     if (uniqueRepo) {
       usedRepos.add(uniqueRepo.name);
+    } else if (sortedRepos[0]) {
+      usedRepos.add(sortedRepos[0].name);
     }
 
     return {
@@ -217,7 +221,7 @@ const sortedLanguages = filteredStats
     };
   })
   .sort((a, b) => b.bytes - a.bytes)
-  .slice(0, 8); // Show top 8 languages
+  .slice(0, TOP_LANGUAGES_COUNT);
 ---
 
 <AboutSection secondaryHeadline="Technology Stack">
@@ -248,7 +252,7 @@ const sortedLanguages = filteredStats
         ))}
       </ol>
     ) : (
-      <p class="text-sm">Language statistics unavailable</p>
+      <p class="text-sm m-3">Language statistics unavailable</p>
     )
   }
 </AboutSection>
