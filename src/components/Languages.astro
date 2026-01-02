@@ -9,6 +9,7 @@ interface LanguageStats {
   [language: string]: {
     bytes: number;
     repoCount: number;
+    repos: Array<{ name: string; updated_at: string; html_url: string }>;
   };
 }
 
@@ -96,7 +97,8 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
           });
 
           if (langResponse.ok) {
-            return await langResponse.json();
+            const languages = await langResponse.json();
+            return { languages, repo };
           }
 
           if (langResponse.status === 403) {
@@ -123,15 +125,25 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
 
       const results = await Promise.all(languagePromises);
 
-      // Aggregate language bytes and repository counts from this batch
-      results.forEach((languages) => {
-        if (languages) {
+      // Aggregate language bytes, repository counts, and repos from this batch
+      results.forEach((result) => {
+        if (result && result.languages) {
+          const { languages, repo } = result;
           for (const [lang, bytes] of Object.entries(languages)) {
             if (!languageStats[lang]) {
-              languageStats[lang] = { bytes: 0, repoCount: 0 };
+              languageStats[lang] = {
+                bytes: 0,
+                repoCount: 0,
+                repos: [],
+              };
             }
             languageStats[lang].bytes += bytes as number;
             languageStats[lang].repoCount += 1;
+            languageStats[lang].repos.push({
+              name: repo.name,
+              updated_at: repo.updated_at,
+              html_url: repo.html_url,
+            });
           }
         }
       });
@@ -159,6 +171,7 @@ const EXCLUDED_LANGUAGES = [
   "Dockerfile",
   "Shell",
   "Hack",
+  "PHP",
 ];
 
 // Filter out excluded languages
@@ -166,13 +179,37 @@ const filteredStats = Object.entries(languageStats).filter(
   ([name]) => !EXCLUDED_LANGUAGES.includes(name)
 );
 
-// Sort by usage and include repository counts
+// Sort by usage and assign unique repos to each language
+const usedRepos = new Set<string>();
 const sortedLanguages = filteredStats
-  .map(([name, stats]) => ({
-    name,
-    bytes: stats.bytes,
-    repoCount: stats.repoCount,
-  }))
+  .map(([name, stats]) => {
+    // Sort repos by most recent
+    const sortedRepos = stats.repos.sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+    );
+
+    // Find the first repo that hasn't been used yet
+    const uniqueRepo = sortedRepos.find((repo) => !usedRepos.has(repo.name));
+    const mostRecentRepo = uniqueRepo
+      ? uniqueRepo.name
+      : sortedRepos[0]?.name || "";
+    const mostRecentRepoUrl = uniqueRepo
+      ? uniqueRepo.html_url
+      : sortedRepos[0]?.html_url || "";
+
+    if (uniqueRepo) {
+      usedRepos.add(uniqueRepo.name);
+    }
+
+    return {
+      name,
+      bytes: stats.bytes,
+      repoCount: stats.repoCount,
+      mostRecentRepo,
+      mostRecentRepoUrl,
+    };
+  })
   .sort((a, b) => b.bytes - a.bytes)
   .slice(0, 8); // Show top 8 languages
 ---
@@ -184,9 +221,22 @@ const sortedLanguages = filteredStats
         {sortedLanguages.map((lang) => (
           <li class="flex flex-col gap-3 p-3 mx-3 bg-mid-blue border border-black border-t-highlight border-l-highlight">
             <TertiaryHeadline text={lang.name} />
-            <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-wrap items-center justify-between gap-1">
-              {lang.repoCount}{" "}
-              {lang.repoCount === 1 ? "repository" : "repositories"}
+            <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-col gap-1">
+              <span>
+                {lang.repoCount}{" "}
+                {lang.repoCount === 1 ? "repository" : "repositories"}
+              </span>
+              <span class="text-white">
+                Most recent:{" "}
+                <a
+                  href={lang.mostRecentRepoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline hover:text-light-blue"
+                >
+                  {lang.mostRecentRepo}
+                </a>
+              </span>
             </div>
           </li>
         ))}
