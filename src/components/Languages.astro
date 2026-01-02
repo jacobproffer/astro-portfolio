@@ -8,6 +8,15 @@ const TOP_LANGUAGES_COUNT = 8;
 const MAX_REPOS_PER_LANGUAGE = 10; // Limit stored repos per language for memory efficiency
 const LANGUAGE_FETCH_BATCH_SIZE = 10; // Process repos in batches to avoid rate limits
 
+interface GitHubRepo {
+  name: string;
+  fork: boolean;
+  private: boolean;
+  languages_url: string;
+  updated_at: string;
+  html_url: string;
+}
+
 interface LanguageStats {
   [language: string]: {
     bytes: number;
@@ -29,7 +38,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
     const startTime = Date.now();
 
     // Fetch all repositories with pagination support
-    let allRepos: any[] = [];
+    let allRepos: GitHubRepo[] = [];
     let page = 1;
     let hasMorePages = true;
 
@@ -77,7 +86,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
     }
 
     const nonForkRepos = allRepos.filter(
-      (repo: any) => !repo.fork && !repo.private
+      (repo: GitHubRepo) => !repo.fork && !repo.private
     );
 
     console.log(
@@ -94,7 +103,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
     for (let i = 0; i < nonForkRepos.length; i += LANGUAGE_FETCH_BATCH_SIZE) {
       const batch = nonForkRepos.slice(i, i + LANGUAGE_FETCH_BATCH_SIZE);
 
-      const languagePromises = batch.map(async (repo: any) => {
+      const languagePromises = batch.map(async (repo: GitHubRepo) => {
         try {
           const langResponse = await fetch(repo.languages_url, {
             headers: {
