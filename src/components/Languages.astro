@@ -5,6 +5,8 @@ import TertiaryHeadline from "./TertiaryHeadline.astro";
 // Fetch GitHub language statistics at build time
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 const TOP_LANGUAGES_COUNT = 8;
+const MAX_REPOS_PER_LANGUAGE = 10; // Limit stored repos per language for memory efficiency
+const LANGUAGE_FETCH_BATCH_SIZE = 10; // Process repos in batches to avoid rate limits
 
 interface LanguageStats {
   [language: string]: {
@@ -16,7 +18,10 @@ interface LanguageStats {
 
 async function fetchLanguageStats(): Promise<LanguageStats> {
   if (!GITHUB_TOKEN) {
-    console.warn("GITHUB_TOKEN not set. Skipping language stats fetch.");
+    console.warn(
+      "GITHUB_TOKEN not set. Skipping GitHub language statistics fetch. " +
+        "This is expected if you have not configured a GitHub token; the Languages section will show 'Language statistics unavailable'."
+    );
     return {};
   }
 
@@ -84,11 +89,10 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
     );
 
     // Fetch language data for all repositories in parallel (in batches to avoid rate limits)
-    const BATCH_SIZE = 10;
     const languageStats: LanguageStats = {};
 
-    for (let i = 0; i < nonForkRepos.length; i += BATCH_SIZE) {
-      const batch = nonForkRepos.slice(i, i + BATCH_SIZE);
+    for (let i = 0; i < nonForkRepos.length; i += LANGUAGE_FETCH_BATCH_SIZE) {
+      const batch = nonForkRepos.slice(i, i + LANGUAGE_FETCH_BATCH_SIZE);
 
       const languagePromises = batch.map(async (repo: any) => {
         try {
@@ -146,11 +150,42 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
             }
             languageStats[lang].bytes += typeof bytes === "number" ? bytes : 0;
             languageStats[lang].repoCount += 1;
-            languageStats[lang].repos.push({
-              name: repo.name,
-              updated_at: repo.updated_at,
-              html_url: repo.html_url,
-            });
+
+            // Only store up to MAX_REPOS_PER_LANGUAGE most recent repos to optimize memory
+            if (languageStats[lang].repos.length < MAX_REPOS_PER_LANGUAGE) {
+              languageStats[lang].repos.push({
+                name: repo.name,
+                updated_at: repo.updated_at,
+                html_url: repo.html_url,
+              });
+              // Keep repos sorted by most recent
+              languageStats[lang].repos.sort(
+                (a, b) =>
+                  new Date(b.updated_at).getTime() -
+                  new Date(a.updated_at).getTime()
+              );
+            } else {
+              // Check if this repo is more recent than the oldest stored repo
+              const oldestStored =
+                languageStats[lang].repos[languageStats[lang].repos.length - 1];
+              if (
+                new Date(repo.updated_at) > new Date(oldestStored.updated_at)
+              ) {
+                languageStats[lang].repos[
+                  languageStats[lang].repos.length - 1
+                ] = {
+                  name: repo.name,
+                  updated_at: repo.updated_at,
+                  html_url: repo.html_url,
+                };
+                // Re-sort to maintain order
+                languageStats[lang].repos.sort(
+                  (a, b) =>
+                    new Date(b.updated_at).getTime() -
+                    new Date(a.updated_at).getTime()
+                );
+              }
+            }
           }
         }
       });
