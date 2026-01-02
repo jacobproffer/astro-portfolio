@@ -17,23 +17,59 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
   try {
     const startTime = Date.now();
 
-    // Fetch all repositories (public and private)
-    const reposResponse = await fetch(
-      `https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated`,
-      {
-        headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
-          Accept: "application/vnd.github.v3+json",
-        },
-      }
-    );
+    // Fetch all repositories with pagination support
+    let allRepos: any[] = [];
+    let page = 1;
+    let hasMorePages = true;
 
-    if (!reposResponse.ok) {
-      throw new Error(`GitHub API error: ${reposResponse.status}`);
+    while (hasMorePages) {
+      const reposResponse = await fetch(
+        `https://api.github.com/user/repos?per_page=100&page=${page}&affiliation=owner,collaborator,organization_member&sort=updated`,
+        {
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        }
+      );
+
+      if (!reposResponse.ok) {
+        if (reposResponse.status === 403) {
+          const rateLimitRemaining = reposResponse.headers.get(
+            "x-ratelimit-remaining"
+          );
+          const rateLimitReset = reposResponse.headers.get("x-ratelimit-reset");
+          const resetDate = rateLimitReset
+            ? new Date(parseInt(rateLimitReset) * 1000).toLocaleString()
+            : "unknown";
+
+          console.error(
+            `GitHub API rate limit exceeded. Remaining: ${rateLimitRemaining}. Resets at: ${resetDate}`
+          );
+          throw new Error(
+            `GitHub API rate limit exceeded. Resets at: ${resetDate}`
+          );
+        }
+        throw new Error(`GitHub API error: ${reposResponse.status}`);
+      }
+
+      const repos = await reposResponse.json();
+      allRepos = allRepos.concat(repos);
+
+      // Check if there are more pages by examining the Link header
+      const linkHeader = reposResponse.headers.get("Link");
+      hasMorePages = linkHeader ? linkHeader.includes('rel="next"') : false;
+
+      if (hasMorePages) {
+        page++;
+      }
     }
 
-    const repos = await reposResponse.json();
-    const nonForkRepos = repos.filter((repo: any) => !repo.fork);
+    const nonForkRepos = allRepos.filter((repo: any) => !repo.fork);
+
+    console.log(
+      `Fetched ${allRepos.length} repositories (${nonForkRepos.length} non-fork repositories)...`
+    );
 
     console.log(
       `Fetching language data for ${nonForkRepos.length} repositories...`
@@ -50,7 +86,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
         try {
           const langResponse = await fetch(repo.languages_url, {
             headers: {
-              Authorization: `token ${GITHUB_TOKEN}`,
+              Authorization: `Bearer ${GITHUB_TOKEN}`,
               Accept: "application/vnd.github.v3+json",
             },
           });
@@ -58,6 +94,22 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
           if (langResponse.ok) {
             return await langResponse.json();
           }
+
+          if (langResponse.status === 403) {
+            const rateLimitRemaining = langResponse.headers.get(
+              "x-ratelimit-remaining"
+            );
+            const rateLimitReset =
+              langResponse.headers.get("x-ratelimit-reset");
+            const resetDate = rateLimitReset
+              ? new Date(parseInt(rateLimitReset) * 1000).toLocaleString()
+              : "unknown";
+
+            console.warn(
+              `GitHub API rate limit exceeded while fetching ${repo.name}. Remaining: ${rateLimitRemaining}. Resets at: ${resetDate}`
+            );
+          }
+
           return null;
         } catch (error) {
           console.warn(`Failed to fetch languages for ${repo.name}:`, error);
@@ -109,14 +161,17 @@ const filteredStats = Object.entries(languageStats).filter(
 
 // Calculate total bytes and sort by usage
 const totalBytes = filteredStats.reduce((sum, [, bytes]) => sum + bytes, 0);
-const sortedLanguages = filteredStats
-  .map(([name, bytes]) => ({
-    name,
-    bytes,
-    percentage: ((bytes / totalBytes) * 100).toFixed(1),
-  }))
-  .sort((a, b) => b.bytes - a.bytes)
-  .slice(0, 8); // Show top 8 languages
+const sortedLanguages =
+  totalBytes > 0
+    ? filteredStats
+        .map(([name, bytes]) => ({
+          name,
+          bytes,
+          percentage: ((bytes / totalBytes) * 100).toFixed(1),
+        }))
+        .sort((a, b) => b.bytes - a.bytes)
+        .slice(0, 8) // Show top 8 languages
+    : [];
 ---
 
 <AboutSection secondaryHeadline="Language Breakdown">
@@ -127,17 +182,8 @@ const sortedLanguages = filteredStats
       sortedLanguages.length > 0 ? (
         <ol class="flex flex-col gap-3">
           {sortedLanguages.map((lang) => (
-            <li class="language-item flex flex-col gap-1">
-              <div class="flex justify-between items-center">
-                <h3 class="font-mono text-sm">{lang.name}</h3>
-                <span class="font-mono text-sm">{lang.percentage}%</span>
-              </div>
-              <div class="w-full bg-dark-blue border border-black border-t-highlight border-l-highlight h-2">
-                <div
-                  class="h-full bg-light-blue"
-                  style={`width: ${lang.percentage}%;`}
-                />
-              </div>
+            <li class="px-3 bg-dark-blue border border-black  border-t-highlight border-l-highlight">
+              <h3 class="text-light-blue font-mono">{lang.name}</h3>
             </li>
           ))}
         </ol>
