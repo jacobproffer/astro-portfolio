@@ -12,117 +12,16 @@ import thumbnail from "@images/proffer_jacob.jpg";
         class="absolute z-20 h-full w-full motion-safe:animate-pulse outline-4 outline-light-blue -outline-offset-4 opacity-75"
       >
       </div>
-      <div class="relative w-full h-full">
-        <Image
-          id="avatar-image"
-          class="w-full h-full object-contain animate-[chromaticGlow_4s_infinite] motion-reduce:animate-none will-change-[filter]"
-          src={thumbnail}
-          alt=""
-          widths={[144, 197, thumbnail.width]}
-          sizes={`(max-width: 767px) 300px, (min-width: 768px) 197px, ${thumbnail.width}px`}
-          quality="mid"
-          loading="eager"
-        />
-        <div
-          class="absolute inset-0 w-full h-full pointer-events-none z-20 bg-[linear-gradient(to_bottom,rgba(255,255,255,0)_50%,rgba(0,0,0,0.25)_50%)] bg-size-[100%_4px] animate-[scanlines_8s_linear_infinite] motion-reduce:animate-none will-change-[background-position]"
-        >
-        </div>
-        <div
-          class="absolute inset-0 w-full h-full pointer-events-none z-30 bg-white/3 animate-[flicker_1s_infinite] motion-reduce:animate-none will-change-[opacity]"
-        >
-        </div>
-        <div
-          class="absolute inset-0 w-full h-full pointer-events-none z-40 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.3)_100%)]"
-        >
-        </div>
-      </div>
+      <Image
+        class="w-full h-full object-contain"
+        src={thumbnail}
+        alt=""
+        widths={[144, 197, thumbnail.width]}
+        sizes={`(max-width: 767px) 300px, (min-width: 768px) 197px, ${thumbnail.width}px`}
+        quality="mid"
+        loading="eager"
+        dither="dot-vertical-5x3"
+      />
     </div>
   </div>
 </figure>
-
-<style>
-  @keyframes scanlines {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 0 100%;
-    }
-  }
-
-  @keyframes flicker {
-    0% {
-      opacity: 0.3;
-    }
-    10% {
-      opacity: 0.25;
-    }
-    20% {
-      opacity: 0.2;
-    }
-    30% {
-      opacity: 0.65;
-    }
-    40% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 0.95;
-    }
-    60% {
-      opacity: 0.2;
-    }
-    70% {
-      opacity: 0.55;
-    }
-    80% {
-      opacity: 0.7;
-    }
-    90% {
-      opacity: 0.7;
-    }
-    100% {
-      opacity: 0.25;
-    }
-  }
-
-  @keyframes chromaticGlow {
-    0%,
-    100% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.5px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.5px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    15% {
-      filter: contrast(1.15) brightness(1.05)
-        drop-shadow(3px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-3px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    35% {
-      filter: contrast(1.19) brightness(1.09)
-        drop-shadow(4px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-4px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    50% {
-      filter: contrast(1.2) brightness(1.1)
-        drop-shadow(0.1px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.1px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    65% {
-      filter: contrast(1.17) brightness(1.07)
-        drop-shadow(3px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-3px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-    85% {
-      filter: contrast(1.16) brightness(1.06)
-        drop-shadow(0.1px 0 1px rgba(0, 30, 255, 0.5))
-        drop-shadow(-0.1px 0 1px rgba(255, 0, 80, 0.3))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
-    }
-  }
-</style>
