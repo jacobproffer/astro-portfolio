@@ -1,11 +1,15 @@
 ---
 import AboutSection from "@components/AboutSection.astro";
+import TertiaryHeadline from "./TertiaryHeadline.astro";
 
 // Fetch GitHub language statistics at build time
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
 interface LanguageStats {
-  [language: string]: number;
+  [language: string]: {
+    bytes: number;
+    repoCount: number;
+  };
 }
 
 async function fetchLanguageStats(): Promise<LanguageStats> {
@@ -119,12 +123,15 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
 
       const results = await Promise.all(languagePromises);
 
-      // Aggregate language bytes from this batch
+      // Aggregate language bytes and repository counts from this batch
       results.forEach((languages) => {
         if (languages) {
           for (const [lang, bytes] of Object.entries(languages)) {
-            languageStats[lang] =
-              (languageStats[lang] || 0) + (bytes as number);
+            if (!languageStats[lang]) {
+              languageStats[lang] = { bytes: 0, repoCount: 0 };
+            }
+            languageStats[lang].bytes += bytes as number;
+            languageStats[lang].repoCount += 1;
           }
         }
       });
@@ -159,37 +166,33 @@ const filteredStats = Object.entries(languageStats).filter(
   ([name]) => !EXCLUDED_LANGUAGES.includes(name)
 );
 
-// Calculate total bytes and sort by usage
-const totalBytes = filteredStats.reduce((sum, [, bytes]) => sum + bytes, 0);
-const sortedLanguages =
-  totalBytes > 0
-    ? filteredStats
-        .map(([name, bytes]) => ({
-          name,
-          bytes,
-          percentage: ((bytes / totalBytes) * 100).toFixed(1),
-        }))
-        .sort((a, b) => b.bytes - a.bytes)
-        .slice(0, 8) // Show top 8 languages
-    : [];
+// Sort by usage and include repository counts
+const sortedLanguages = filteredStats
+  .map(([name, stats]) => ({
+    name,
+    bytes: stats.bytes,
+    repoCount: stats.repoCount,
+  }))
+  .sort((a, b) => b.bytes - a.bytes)
+  .slice(0, 8); // Show top 8 languages
 ---
 
-<AboutSection secondaryHeadline="Language Breakdown">
-  <div
-    class="grid gap-3 p-3 m-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
-  >
-    {
-      sortedLanguages.length > 0 ? (
-        <ol class="flex flex-col gap-3">
-          {sortedLanguages.map((lang) => (
-            <li class="px-3 bg-dark-blue border border-black  border-t-highlight border-l-highlight">
-              <h3 class="text-light-blue font-mono">{lang.name}</h3>
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <p class="text-sm">Language statistics unavailable</p>
-      )
-    }
-  </div>
+<AboutSection secondaryHeadline="Technology Stack">
+  {
+    sortedLanguages.length > 0 ? (
+      <ol class="flex flex-col gap-3 my-3">
+        {sortedLanguages.map((lang) => (
+          <li class="flex flex-col gap-3 p-3 mx-3 bg-mid-blue border border-black border-t-highlight border-l-highlight">
+            <TertiaryHeadline text={lang.name} />
+            <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-wrap items-center justify-between gap-1">
+              {lang.repoCount}{" "}
+              {lang.repoCount === 1 ? "repository" : "repositories"}
+            </div>
+          </li>
+        ))}
+      </ol>
+    ) : (
+      <p class="text-sm">Language statistics unavailable</p>
+    )
+  }
 </AboutSection>
