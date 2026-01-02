@@ -276,17 +276,17 @@ const sortedLanguages = filteredStats
           <li class="flex flex-col gap-3 p-3 mx-3 bg-mid-blue border border-black border-t-highlight border-l-highlight">
             <TertiaryHeadline text={lang.name} />
             <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-col gap-1">
-              <span>
+              <h4>
                 {lang.repoCount}{" "}
                 {lang.repoCount === 1 ? "repository" : "repositories"}
-              </span>
+              </h4>
               <span class="text-white">
                 Most recent:{" "}
                 <a
                   href={lang.mostRecentRepoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="underline hover:text-light-blue"
+                  class="underline hover:text-light-blue motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 focus:outline-solid"
                   aria-label={`View ${lang.mostRecentRepo} repository on GitHub`}
                 >
                   {lang.mostRecentRepo}
