@@ -1,0 +1,303 @@
+---
+import AboutSection from "@components/AboutSection.astro";
+import TertiaryHeadline from "./TertiaryHeadline.astro";
+
+// Fetch GitHub language statistics at build time
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+const TOP_LANGUAGES_COUNT = 8;
+const MAX_REPOS_PER_LANGUAGE = 10; // Limit stored repos per language for memory efficiency
+const LANGUAGE_FETCH_BATCH_SIZE = 10; // Process repos in batches to avoid rate limits
+
+interface GitHubRepo {
+  name: string;
+  fork: boolean;
+  private: boolean;
+  languages_url: string;
+  updated_at: string;
+  html_url: string;
+}
+
+interface LanguageStats {
+  [language: string]: {
+    bytes: number;
+    repoCount: number;
+    repos: Array<{ name: string; updated_at: string; html_url: string }>;
+  };
+}
+
+async function fetchLanguageStats(): Promise<LanguageStats> {
+  if (!GITHUB_TOKEN) {
+    console.warn(
+      "GITHUB_TOKEN not set. Skipping GitHub language statistics fetch. " +
+        "This is expected if you have not configured a GitHub token; the Languages section will show 'Language statistics unavailable'."
+    );
+    return {};
+  }
+
+  try {
+    const startTime = Date.now();
+
+    // Fetch all repositories with pagination support
+    let allRepos: GitHubRepo[] = [];
+    let page = 1;
+    let hasMorePages = true;
+
+    while (hasMorePages) {
+      const reposResponse = await fetch(
+        `https://api.github.com/user/repos?per_page=100&page=${page}&affiliation=owner&sort=updated`,
+        {
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        }
+      );
+
+      if (!reposResponse.ok) {
+        if (reposResponse.status === 403) {
+          const rateLimitRemaining = reposResponse.headers.get(
+            "x-ratelimit-remaining"
+          );
+          const rateLimitReset = reposResponse.headers.get("x-ratelimit-reset");
+          const resetDate = rateLimitReset
+            ? new Date(parseInt(rateLimitReset) * 1000).toLocaleString()
+            : "unknown";
+
+          console.error(
+            `GitHub API rate limit exceeded. Remaining: ${rateLimitRemaining}. Resets at: ${resetDate}`
+          );
+          throw new Error(
+            `GitHub API rate limit exceeded. Resets at: ${resetDate}`
+          );
+        }
+        throw new Error(`GitHub API error: ${reposResponse.status}`);
+      }
+
+      const repos = await reposResponse.json();
+      allRepos = allRepos.concat(repos);
+
+      // Check if there are more pages by examining the Link header
+      const linkHeader = reposResponse.headers.get("Link");
+      hasMorePages = linkHeader ? linkHeader.includes('rel="next"') : false;
+
+      if (hasMorePages) {
+        page++;
+      }
+    }
+
+    const nonForkRepos = allRepos.filter(
+      (repo: GitHubRepo) => !repo.fork && !repo.private
+    );
+
+    console.log(
+      `Fetched ${allRepos.length} repositories (${nonForkRepos.length} public non-fork repositories)...`
+    );
+
+    console.log(
+      `Fetching language data for ${nonForkRepos.length} repositories...`
+    );
+
+    // Fetch language data for all repositories in parallel (in batches to avoid rate limits)
+    const languageStats: LanguageStats = {};
+
+    for (let i = 0; i < nonForkRepos.length; i += LANGUAGE_FETCH_BATCH_SIZE) {
+      const batch = nonForkRepos.slice(i, i + LANGUAGE_FETCH_BATCH_SIZE);
+
+      const languagePromises = batch.map(async (repo: GitHubRepo) => {
+        try {
+          const langResponse = await fetch(repo.languages_url, {
+            headers: {
+              Authorization: `Bearer ${GITHUB_TOKEN}`,
+              Accept: "application/vnd.github.v3+json",
+            },
+          });
+
+          if (langResponse.ok) {
+            const languages = await langResponse.json();
+            return { languages, repo };
+          }
+
+          if (langResponse.status === 403) {
+            const rateLimitRemaining = langResponse.headers.get(
+              "x-ratelimit-remaining"
+            );
+            const rateLimitReset =
+              langResponse.headers.get("x-ratelimit-reset");
+            const resetDate = rateLimitReset
+              ? new Date(parseInt(rateLimitReset) * 1000).toLocaleString()
+              : "unknown";
+
+            console.warn(
+              `GitHub API rate limit exceeded while fetching ${repo.name}. Remaining: ${rateLimitRemaining}. Resets at: ${resetDate}`
+            );
+          }
+
+          return null;
+        } catch (error) {
+          console.warn(`Failed to fetch languages for ${repo.name}:`, error);
+          return null;
+        }
+      });
+
+      const results = await Promise.all(languagePromises);
+
+      // Aggregate language bytes, repository counts, and repos from this batch
+      results.forEach((result) => {
+        if (result && result.languages) {
+          const { languages, repo } = result;
+          // Skip private repositories to prevent data leakage
+          if (repo.private) {
+            return;
+          }
+          for (const [lang, bytes] of Object.entries(languages)) {
+            if (!languageStats[lang]) {
+              languageStats[lang] = {
+                bytes: 0,
+                repoCount: 0,
+                repos: [],
+              };
+            }
+            languageStats[lang].bytes += typeof bytes === "number" ? bytes : 0;
+            languageStats[lang].repoCount += 1;
+
+            // Only store up to MAX_REPOS_PER_LANGUAGE most recent repos to optimize memory
+            if (languageStats[lang].repos.length < MAX_REPOS_PER_LANGUAGE) {
+              languageStats[lang].repos.push({
+                name: repo.name,
+                updated_at: repo.updated_at,
+                html_url: repo.html_url,
+              });
+              // Keep repos sorted by most recent
+              languageStats[lang].repos.sort(
+                (a, b) =>
+                  new Date(b.updated_at).getTime() -
+                  new Date(a.updated_at).getTime()
+              );
+            } else {
+              // Check if this repo is more recent than the oldest stored repo
+              const oldestStored =
+                languageStats[lang].repos[languageStats[lang].repos.length - 1];
+              if (
+                new Date(repo.updated_at) > new Date(oldestStored.updated_at)
+              ) {
+                languageStats[lang].repos[
+                  languageStats[lang].repos.length - 1
+                ] = {
+                  name: repo.name,
+                  updated_at: repo.updated_at,
+                  html_url: repo.html_url,
+                };
+                // Re-sort to maintain order
+                languageStats[lang].repos.sort(
+                  (a, b) =>
+                    new Date(b.updated_at).getTime() -
+                    new Date(a.updated_at).getTime()
+                );
+              }
+            }
+          }
+        }
+      });
+    }
+
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    console.log(`Language stats fetched in ${duration}s`);
+
+    return languageStats;
+  } catch (error) {
+    console.error("Error fetching GitHub language stats:", error);
+    return {};
+  }
+}
+
+const languageStats = await fetchLanguageStats();
+
+// Languages to exclude
+const EXCLUDED_LANGUAGES = [
+  "Java",
+  "C++",
+  "C",
+  "C#",
+  "Ruby",
+  "Dockerfile",
+  "Shell",
+  "Hack",
+  "PHP",
+];
+
+// Filter out excluded languages
+const filteredStats = Object.entries(languageStats).filter(
+  ([name]) => !EXCLUDED_LANGUAGES.includes(name)
+);
+
+// Sort by usage and assign unique repos to each language
+const usedRepos = new Set<string>();
+const sortedLanguages = filteredStats
+  .map(([name, stats]) => {
+    // Sort repos by most recent
+    const sortedRepos = stats.repos.sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+    );
+
+    // Find the first repo that hasn't been used yet
+    const uniqueRepo = sortedRepos.find((repo) => !usedRepos.has(repo.name));
+    const mostRecentRepo = uniqueRepo
+      ? uniqueRepo.name
+      : sortedRepos[0]?.name || "";
+    const mostRecentRepoUrl = uniqueRepo
+      ? uniqueRepo.html_url
+      : sortedRepos[0]?.html_url || "";
+
+    // Add the selected repo to the Set to prevent duplicates
+    if (uniqueRepo) {
+      usedRepos.add(uniqueRepo.name);
+    } else if (sortedRepos[0]) {
+      usedRepos.add(sortedRepos[0].name);
+    }
+
+    return {
+      name,
+      bytes: stats.bytes,
+      repoCount: stats.repoCount,
+      mostRecentRepo,
+      mostRecentRepoUrl,
+    };
+  })
+  .sort((a, b) => b.bytes - a.bytes)
+  .slice(0, TOP_LANGUAGES_COUNT);
+---
+
+<AboutSection secondaryHeadline="Technology Stack">
+  {
+    sortedLanguages.length > 0 ? (
+      <ol class="flex flex-col gap-3 my-3">
+        {sortedLanguages.map((lang) => (
+          <li class="flex flex-col gap-3 p-3 mx-3 bg-mid-blue border border-black border-t-highlight border-l-highlight">
+            <TertiaryHeadline text={lang.name} />
+            <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-col gap-1">
+              <span>
+                {lang.repoCount}{" "}
+                {lang.repoCount === 1 ? "repository" : "repositories"}
+              </span>
+              <span class="text-white">
+                Most recent:{" "}
+                <a
+                  href={lang.mostRecentRepoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline hover:text-light-blue"
+                  aria-label={`View ${lang.mostRecentRepo} repository on GitHub`}
+                >
+                  {lang.mostRecentRepo}
+                </a>
+              </span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    ) : (
+      <p class="text-sm m-3">Language statistics unavailable</p>
+    )
+  }
+</AboutSection>

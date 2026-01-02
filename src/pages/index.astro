@@ -5,6 +5,7 @@ import Hero from "@components/Hero.astro";
 import ProjectGrid from "@components/ProjectGrid.astro";
 import Experience from "@components/Experience.astro";
 import Education from "@components/Education.astro";
+import Languages from "@components/Languages.astro";
 const pageTitle = "Jacob Proffer – Front-End Developer";
 const heroHeadline = "Jacob Proffer";
 ---
@@ -23,8 +24,11 @@ const heroHeadline = "Jacob Proffer";
     </div>
     <ProjectGrid headline="Personal Projects" />
     <div class="grid items-start md:grid-cols-2 gap-3 md:gap-6">
-      <Experience />
-      <Education />
+      <div class="flex flex-col gap-3 md:gap-6">
+        <Experience />
+        <Education />
+      </div>
+      <Languages />
     </div>
   </div>
 </BaseLayout>
