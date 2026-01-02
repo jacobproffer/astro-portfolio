@@ -1,0 +1,149 @@
+---
+import AboutSection from "@components/AboutSection.astro";
+
+// Fetch GitHub language statistics at build time
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+
+interface LanguageStats {
+  [language: string]: number;
+}
+
+async function fetchLanguageStats(): Promise<LanguageStats> {
+  if (!GITHUB_TOKEN) {
+    console.warn("GITHUB_TOKEN not set. Skipping language stats fetch.");
+    return {};
+  }
+
+  try {
+    const startTime = Date.now();
+
+    // Fetch all repositories (public and private)
+    const reposResponse = await fetch(
+      `https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated`,
+      {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
+    );
+
+    if (!reposResponse.ok) {
+      throw new Error(`GitHub API error: ${reposResponse.status}`);
+    }
+
+    const repos = await reposResponse.json();
+    const nonForkRepos = repos.filter((repo: any) => !repo.fork);
+
+    console.log(
+      `Fetching language data for ${nonForkRepos.length} repositories...`
+    );
+
+    // Fetch language data for all repositories in parallel (in batches to avoid rate limits)
+    const BATCH_SIZE = 10;
+    const languageStats: LanguageStats = {};
+
+    for (let i = 0; i < nonForkRepos.length; i += BATCH_SIZE) {
+      const batch = nonForkRepos.slice(i, i + BATCH_SIZE);
+
+      const languagePromises = batch.map(async (repo: any) => {
+        try {
+          const langResponse = await fetch(repo.languages_url, {
+            headers: {
+              Authorization: `token ${GITHUB_TOKEN}`,
+              Accept: "application/vnd.github.v3+json",
+            },
+          });
+
+          if (langResponse.ok) {
+            return await langResponse.json();
+          }
+          return null;
+        } catch (error) {
+          console.warn(`Failed to fetch languages for ${repo.name}:`, error);
+          return null;
+        }
+      });
+
+      const results = await Promise.all(languagePromises);
+
+      // Aggregate language bytes from this batch
+      results.forEach((languages) => {
+        if (languages) {
+          for (const [lang, bytes] of Object.entries(languages)) {
+            languageStats[lang] =
+              (languageStats[lang] || 0) + (bytes as number);
+          }
+        }
+      });
+    }
+
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    console.log(`Language stats fetched in ${duration}s`);
+
+    return languageStats;
+  } catch (error) {
+    console.error("Error fetching GitHub language stats:", error);
+    return {};
+  }
+}
+
+const languageStats = await fetchLanguageStats();
+
+// Languages to exclude
+const EXCLUDED_LANGUAGES = [
+  "Java",
+  "C++",
+  "C",
+  "C#",
+  "Ruby",
+  "Dockerfile",
+  "Shell",
+  "Hack",
+];
+
+// Filter out excluded languages
+const filteredStats = Object.entries(languageStats).filter(
+  ([name]) => !EXCLUDED_LANGUAGES.includes(name)
+);
+
+// Calculate total bytes and sort by usage
+const totalBytes = filteredStats.reduce((sum, [, bytes]) => sum + bytes, 0);
+const sortedLanguages = filteredStats
+  .map(([name, bytes]) => ({
+    name,
+    bytes,
+    percentage: ((bytes / totalBytes) * 100).toFixed(1),
+  }))
+  .sort((a, b) => b.bytes - a.bytes)
+  .slice(0, 8); // Show top 8 languages
+---
+
+<AboutSection secondaryHeadline="Language Breakdown">
+  <div
+    class="grid gap-3 p-3 m-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
+  >
+    {
+      sortedLanguages.length > 0 ? (
+        <ol class="flex flex-col gap-3">
+          {sortedLanguages.map((lang) => (
+            <li class="language-item flex flex-col gap-1">
+              <div class="flex justify-between items-center">
+                <h3 class="font-mono text-sm">{lang.name}</h3>
+                <span class="font-mono text-sm">{lang.percentage}%</span>
+              </div>
+              <div class="w-full bg-dark-blue border border-black border-t-highlight border-l-highlight h-2">
+                <div
+                  class="h-full bg-light-blue"
+                  style={`width: ${lang.percentage}%;`}
+                />
+              </div>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="text-sm">Language statistics unavailable</p>
+      )
+    }
+  </div>
+</AboutSection>
