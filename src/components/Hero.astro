@@ -14,7 +14,9 @@ const { headline } = Astro.props;
   >
     {
       headline && (
-        <h1 class="font-medium text-xl leading-8 text-balance">{headline}</h1>
+        <h1 class="font-medium text-xl text-gray leading-8 text-balance">
+          {headline}
+        </h1>
       )
     }
   </div>

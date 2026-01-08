@@ -6,4 +6,10 @@ interface Props {
 const { text } = Astro.props;
 ---
 
-{text && <h3 class="font-medium text-md leading-8 text-balance">{text}</h3>}
+{
+  text && (
+    <h3 class="font-medium text-md leading-8 text-balance">
+      {text}
+    </h3>
+  )
+}
