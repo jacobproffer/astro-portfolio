@@ -6,5 +6,6 @@ tags:
   - "astro"
   - "tailwind-css"
   - "typescript"
+  - "api"
 thumbnail: "../../assets/images/what_is_jacob_playing.jpg"
 ---
