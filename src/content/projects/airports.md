@@ -6,5 +6,6 @@ tags:
   - "astro"
   - "tailwind-css"
   - "typescript"
+  - "api"
 thumbnail: "../../assets/images/airports.jpg"
 ---
