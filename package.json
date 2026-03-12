@@ -9,13 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "3.6.0",
+    "@astrojs/sitemap": "3.7.1",
     "@fontsource-variable/fira-code": "^5.2.7",
-    "@sweetcorn/astro": "^0.4.1",
-    "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.5",
-    "astro-seo": "^0.8.4",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.4",
+    "astro-seo": "^1.1.0",
     "sharp": "^0.34.5",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.2.1"
   }
 }
