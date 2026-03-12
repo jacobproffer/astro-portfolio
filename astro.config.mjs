@@ -4,13 +4,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
-import sweetcorn from "@sweetcorn/astro";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://proffer.dev/",
 
-  integrations: [sitemap(), sweetcorn()],
+  integrations: [sitemap()],
 
   // Image optimization configuration
   image: {
