@@ -4,49 +4,103 @@ const defaultImageFile = new URL("/images/social.jpg", Astro.url);
 
 interface Props {
   seo?: SEOProps;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    authors?: string[];
+    section?: string;
+    tags?: string[];
+  };
 }
 
-const { seo } = Astro.props;
+const { seo, article } = Astro.props;
 
 const siteName = "Jacob Proffer";
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const defaultDescription =
   "Jacob Proffer is a front-end developer based in Marquette, Michigan with over ten years of experience in creating accessible and performant web solutions.";
+const keywords =
+  "front-end developer, web development, accessibility, performant web solutions, Michigan, Marquette, JavaScript, TypeScript, React, Astro";
+
+// JSON-LD Person Schema for portfolio
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteName,
+  url: Astro.site?.toString(),
+  jobTitle: "Front-End Developer",
+  description: defaultDescription,
+  image: defaultImageFile.toString(),
+  sameAs: [
+    "https://twitter.com/jacobproffer",
+    "https://github.com/jacobproffer",
+  ],
+  knowsAbout: [
+    "Front-End Development",
+    "Web Accessibility",
+    "Performance Optimization",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Astro",
+  ],
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "Northern Michigan University",
+  },
+};
 ---
 
 <SEO
   title={seo?.title}
+  titleTemplate="%s | Jacob Proffer"
   description={seo?.description ?? defaultDescription}
   canonical={canonicalURL}
+  charset="UTF-8"
   openGraph={{
     basic: {
       url: canonicalURL,
       title: seo?.title ?? siteName,
-      type: "website",
+      type: article ? "article" : "website",
       image: defaultImageFile.toString(),
     },
     image: {
       url: defaultImageFile.toString(),
       secureUrl: defaultImageFile.toString(),
       alt: "Jacob Proffer - Front-End Developer Portfolio",
-      height: 1200,
-      width: 630, // Better aspect ratio for social sharing
+      width: 1200,
+      height: 630,
     },
+    article: article
+      ? {
+          publishedTime: article.publishedTime,
+          modifiedTime: article.modifiedTime,
+          authors: article.authors ?? [siteName],
+          section: article.section,
+          tags: article.tags,
+        }
+      : undefined,
   }}
   twitter={{
     card: "summary_large_image",
-    creator: "@jacobproffer", // Add your Twitter handle
+    site: "@jacobproffer",
+    creator: "@jacobproffer",
   }}
   extend={{
     meta: [
+      { name: "keywords", content: keywords },
       { property: "og:locale", content: "en_US" },
       {
         property: "og:description",
         content: seo?.description ?? defaultDescription,
       },
       { property: "og:site_name", content: siteName },
-      { name: "author", content: "Jacob Proffer" },
+      { name: "author", content: siteName },
       { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#1a202c" },
     ],
+    link: [{ rel: "canonical", href: canonicalURL }],
   }}
 />
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
