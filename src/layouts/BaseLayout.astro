@@ -68,6 +68,15 @@ const { pageTitle, pageDescription } = Astro.props;
     </noscript>
   </head>
   <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
+    <!-- Loading overlay -->
+    <div
+      id="loading-overlay"
+      class="fixed inset-0 z-50 bg-dark"
+      style="clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);"
+      aria-hidden="true"
+    >
+    </div>
+
     <Container>
       <div
         class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
@@ -79,5 +88,30 @@ const { pageTitle, pageDescription } = Astro.props;
         <Footer />
       </div>
     </Container>
+
+    <script>
+      import { animate } from "motion";
+
+      const overlay = document.getElementById("loading-overlay");
+
+      if (overlay) {
+        // Animate from full screen sliding down, revealing content from top to bottom
+        animate(
+          overlay,
+          {
+            clipPath: [
+              "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", // Full screen coverage
+              "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", // Collapsed at bottom
+            ],
+          } as any,
+          { duration: 0.8, easing: [0.22, 1, 0.36, 1], delay: 0.2 } as any,
+        ).finished.then(() => {
+          // Remove overlay after animation completes
+          overlay.remove();
+        });
+      }
+    </script>
+
+
   </body>
 </html>
