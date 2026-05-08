@@ -64,10 +64,22 @@ const { pageTitle, pageDescription } = Astro.props;
         [data-animate] {
           opacity: 1 !important;
         }
+        /* Hide loading overlay when JavaScript is disabled */
+        #loading-overlay {
+          display: none !important;
+        }
       </style>
     </noscript>
   </head>
   <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
+    <!-- Loading overlay -->
+    <div
+      id="loading-overlay"
+      class="fixed inset-0 z-50 bg-dark"
+      aria-hidden="true"
+    >
+    </div>
+
     <Container>
       <div
         class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
@@ -79,5 +91,33 @@ const { pageTitle, pageDescription } = Astro.props;
         <Footer />
       </div>
     </Container>
+
+    <script lang="ts">
+      const overlay = document.getElementById("loading-overlay");
+
+      if (overlay) {
+        // Check if user prefers reduced motion
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (prefersReducedMotion) {
+          // Remove overlay immediately without animation
+          overlay.remove();
+        } else {
+          // Fade out the overlay
+          setTimeout(() => {
+            overlay.style.opacity = "0";
+            overlay.style.transition = "opacity 0.6s ease-out";
+
+            overlay.addEventListener("transitionend", () => {
+              overlay.remove();
+            });
+          }, 200);
+        }
+      }
+    </script>
+
+
   </body>
 </html>
