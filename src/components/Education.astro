@@ -6,7 +6,8 @@ import TertiaryHeadline from "./TertiaryHeadline.astro";
 
 <AboutSection secondaryHeadline="Education">
   <div
-    class="grid gap-3 p-3 m-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
+    class="education-item grid gap-3 p-3 m-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
+    data-animate
   >
     <TertiaryHeadline text="Northern Michigan University" />
     <DateItem
@@ -17,3 +18,13 @@ import TertiaryHeadline from "./TertiaryHeadline.astro";
     />
   </div>
 </AboutSection>
+
+<script>
+  import { animateOnScroll } from "../utils/animations";
+
+  // Animate education section as it scrolls into view
+  const educationItem = document.querySelector(".education-item");
+  if (educationItem) {
+    animateOnScroll(educationItem);
+  }
+</script>

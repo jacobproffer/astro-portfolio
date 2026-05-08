@@ -8,7 +8,7 @@ import { getCollection } from "astro:content";
 const experienceItems = await getCollection("experience");
 // Sort by order field
 const sortedExperience = experienceItems.sort(
-  (a, b) => a.data.order - b.data.order
+  (a, b) => a.data.order - b.data.order,
 );
 ---
 
@@ -17,7 +17,10 @@ const sortedExperience = experienceItems.sort(
     sortedExperience?.length && (
       <ol class="grid gap-3 m-3">
         {sortedExperience.map((item) => (
-          <li class="grid gap-3 p-3 bg-mid-blue  border border-black border-t-highlight border-l-highlight">
+          <li
+            class="experience-item grid gap-3 p-3 bg-mid-blue  border border-black border-t-highlight border-l-highlight"
+            data-animate
+          >
             <TertiaryHeadline text={item.data.company} />
             {item.data.positions?.length &&
               (item.data.positions.length === 1 ? (
@@ -47,3 +50,12 @@ const sortedExperience = experienceItems.sort(
     )
   }
 </AboutSection>
+
+<script>
+  import { animateOnScroll } from "../utils/animations";
+
+  // Animate each experience item as it scrolls into view
+  document.querySelectorAll(".experience-item").forEach((item) => {
+    animateOnScroll(item);
+  });
+</script>

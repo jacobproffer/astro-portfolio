@@ -12,7 +12,7 @@ const { headline } = Astro.props;
 
 // Load projects from content collection
 const projects = (await getCollection("projects")).sort((a, b) =>
-  a.data.title.localeCompare(b.data.title)
+  a.data.title.localeCompare(b.data.title),
 );
 ---
 
@@ -21,7 +21,10 @@ const projects = (await getCollection("projects")).sort((a, b) =>
   <ol class="grid gap-y-3 p-3">
     {
       projects.map((entry, index: number) => (
-        <li class={index > 0 ? "border-t border-black" : ""}>
+        <li
+          class={`project-item ${index > 0 ? "border-t border-black" : ""}`}
+          data-animate
+        >
           <Project
             url={entry.data.url}
             headline={entry.data.title}
@@ -35,3 +38,12 @@ const projects = (await getCollection("projects")).sort((a, b) =>
     }
   </ol>
 </Section>
+
+<script>
+  import { animateOnScroll } from "../utils/animations";
+
+  // Animate each project as it scrolls into view
+  document.querySelectorAll(".project-item").forEach((item) => {
+    animateOnScroll(item);
+  });
+</script>
