@@ -5,6 +5,13 @@
   opacity: 0;
 }
 
+/* Show content immediately for users who prefer reduced motion or if JS fails */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1;
+  }
+}
+
 @font-face {
   font-family: "Fira Code Variable";
   font-style: normal;

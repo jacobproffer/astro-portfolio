@@ -58,6 +58,14 @@ const { pageTitle, pageDescription } = Astro.props;
       crossorigin="anonymous"
       fetchpriority="high"
     />
+    <noscript>
+      <style>
+        /* Show all content when JavaScript is disabled */
+        [data-animate] {
+          opacity: 1 !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
     <Container>
