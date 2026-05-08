@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import thumbnail from "@images/proffer_jacob.jpg";
 ---
 
-<figure>
+<figure class="avatar-container">
   <div
     class="h-full bg-linear-to-t from-dark-blue to-mid-blue p-3 border-black border border-t-highlight border-l-highlight"
   >
@@ -13,14 +13,32 @@ import thumbnail from "@images/proffer_jacob.jpg";
       >
       </div>
       <Image
-        class="w-full h-full object-contain"
+        class="avatar-image w-full h-full object-contain"
         src={thumbnail}
         alt=""
         widths={[144, 197, thumbnail.width]}
         sizes={`(max-width: 767px) 300px, (min-width: 768px) 197px, ${thumbnail.width}px`}
         quality="mid"
         loading="eager"
+        data-animate
       />
     </div>
   </div>
 </figure>
+
+<script>
+  import { animate, spring } from "motion";
+
+  // Blur-to-focus animation with slight scale
+  const avatar = document.querySelector(".avatar-image");
+  if (avatar) {
+    animate(
+      avatar,
+      {
+        filter: ["blur(20px)", "blur(0px)"],
+        opacity: [0, 1],
+      } as any,
+      { duration: 1, easing: spring() } as any,
+    );
+  }
+</script>
