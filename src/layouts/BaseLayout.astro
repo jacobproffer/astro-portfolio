@@ -1,10 +1,9 @@
 ---
-import "@fontsource-variable/fira-code/wght.css";
-import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
+import "@fontsource-variable/manrope/wght.css";
+import manrope from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
 import StructuredData from "@components/StructuredData.astro";
-import Container from "@components/Container.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
@@ -54,7 +53,7 @@ const { pageTitle, pageDescription } = Astro.props;
       rel="preload"
       as="font"
       type="font/woff2"
-      href={firaCode}
+      href={manrope}
       crossorigin="anonymous"
       fetchpriority="high"
     />

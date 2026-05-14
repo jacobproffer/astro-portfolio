@@ -21,8 +21,8 @@ const { thumbnail, thumbnailAlt, headline, url, tags } = Astro.props;
           class="w-full h-full object-contain"
           src={thumbnail}
           alt={thumbnailAlt}
-          widths={[271, 663, 285]}
-          sizes="(max-width: 376px) 297px, (min-width: 376px) and (max-width: 767px) 663px, (min-width: 768px) 285px"
+          widths={[400, 800, 1200, 1600]}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           loading="lazy"
           quality="mid"
         />

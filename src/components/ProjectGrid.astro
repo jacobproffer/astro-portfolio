@@ -18,7 +18,7 @@ const projects = (await getCollection("projects")).sort((a, b) =>
 
 <Section dark>
   <SecondaryHeadline text={headline} />
-  <ol class="grid grid-cols-2 gap-y-15 gap-x-10">
+  <ol class="grid gap-y-15 gap-x-10 md:grid-cols-2">
     {
       projects.map((entry, index: number) => (
         <li class="project-item" data-animate>
