@@ -12,30 +12,34 @@ const languages = [
 ];
 ---
 
-<nav aria-label="Language switcher" class="flex gap-2">
-  {
-    languages.map((lang) => {
-      const isCurrent = currentLocale === lang.code;
-      const ariaLabel = isCurrent
-        ? `Current language: ${lang.name}`
-        : `Switch to ${lang.name}`;
+<nav class="max-w-max" aria-label="Language switcher">
+  <ul class="flex items-center gap-4 pt-2 px-6 py-3 bg-black rounded-full">
+    {
+      languages.map((lang) => {
+        const isCurrent = currentLocale === lang.code;
+        const ariaLabel = isCurrent
+          ? `Current language: ${lang.name}`
+          : `Switch to ${lang.name}`;
 
-      return (
-        <a
-          href={getRelativeLocaleUrl(lang.code, currentPath.slice(1))}
-          class:list={[
-            "px-2 py-1 text-sm transition-colors hover:text-gray-600 dark:hover:text-gray-300",
-            {
-              "font-bold underline": isCurrent,
-              "text-gray-500 dark:text-gray-400": !isCurrent,
-            },
-          ]}
-          aria-label={ariaLabel}
-          aria-current={isCurrent ? "page" : undefined}
-        >
-          {lang.label}
-        </a>
-      );
-    })
-  }
+        return (
+          <li>
+            <a
+              href={getRelativeLocaleUrl(lang.code, currentPath.slice(1))}
+              class:list={[
+                "text-sm text-white transition-colors hover:text-gray dark:hover:text-gray-300",
+                {
+                  "font-bold underline": isCurrent,
+                  "text-gray-500 dark:text-gray-400": !isCurrent,
+                },
+              ]}
+              aria-label={ariaLabel}
+              aria-current={isCurrent ? "page" : undefined}
+            >
+              {lang.label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
 </nav>

@@ -1,6 +1,5 @@
 ---
 import Logo from "@components/Logo.astro";
-import Navigation from "@components/Navigation.astro";
 import NavLink from "@components/NavLink.astro";
 import Container from "@components/Container.astro";
 import LanguageSwitcher from "@components/LanguageSwitcher.astro";
@@ -10,9 +9,7 @@ const currentLocale = Astro.currentLocale ?? "en";
 ---
 
 <Container>
-  <div
-    class="grid grid-cols-[max-content_1fr_max-content] items-center gap-4 pt-10 pb-5"
-  >
+  <div class="flex items-center justify-between gap-4 pt-10 pb-5">
     <header>
       <NavLink
         class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
@@ -20,9 +17,6 @@ const currentLocale = Astro.currentLocale ?? "en";
       >
       <Logo />
     </header>
-    <div class="flex justify-end gap-4 items-center">
-      <LanguageSwitcher />
-      <Navigation />
-    </div>
+    <LanguageSwitcher />
   </div>
 </Container>
