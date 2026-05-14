@@ -6,23 +6,17 @@ interface Props {
   thumbnail: ImageMetadata;
   thumbnailAlt: string;
   headline: string;
-  description?: string;
   url: string;
   tags?: Array<string>;
 }
 
-const { thumbnail, thumbnailAlt, headline, description, url, tags } =
-  Astro.props;
+const { thumbnail, thumbnailAlt, headline, url, tags } = Astro.props;
 ---
 
-<a
-  class="relative grid items-start gap-3 p-3 text-yellow bg-mid-blue border border-black border-t-highlight border-l-highlight outline-none motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 focus:outline-solid hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors md:grid-cols-[1fr_2fr]"
-  href={url}
-  target="_blank"
->
+<a class="relative grid items-start gap-y-5" href={url} target="_blank">
   {
     thumbnail && (
-      <div class="aspect-project border border-black overflow-hidden">
+      <div class="aspect-project overflow-hidden">
         <Image
           class="w-full h-full object-contain"
           src={thumbnail}
@@ -35,16 +29,13 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
       </div>
     )
   }
-  <div class="grid gap-1">
+  <div class="flex flex-col gap-1">
     {headline && <TertiaryHeadline text={headline} />}
-    {description && <p class="text-white">{description}</p>}
     {
       tags && (
-        <ul class="flex flex-wrap gap-2 mt-3">
+        <ul class="flex flex-wrap gap-2">
           {tags.map((tag: string) => (
-            <li class="px-3 text-light-blue bg-dark-blue border-black border border-t-highlight border-l-highlight">
-              {tag}
-            </li>
+            <li>{tag}</li>
           ))}
         </ul>
       )

@@ -1,18 +1,21 @@
 ---
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
-import NavLink from "./NavLink.astro";
+import NavLink from "@components/NavLink.astro";
+import Container from "@components/Container.astro";
 ---
 
-<div
-  class="grid grid-cols-[max-content_max-content] items-center justify-between p-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
->
-  <header>
-    <NavLink
-      class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
-      href="#content">Skip to main content</NavLink
-    >
-    <Logo />
-  </header>
-  <Navigation />
-</div>
+<Container>
+  <div
+    class="grid grid-cols-[max-content_max-content] items-center justify-between pt-10 pb-5"
+  >
+    <header>
+      <NavLink
+        class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
+        href="#content">Skip to main content</NavLink
+      >
+      <Logo />
+    </header>
+    <Navigation />
+  </div>
+</Container>

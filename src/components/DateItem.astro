@@ -12,18 +12,24 @@ const { type, title, startDate, endDate } = Astro.props;
 ---
 
 <div
-  class="flex flex-col gap-1 items-start justify-between p-3 bg-dark-blue border border-black border-t-highlight border-l-highlight max-md:flex-col max-md:items-start"
+  class="flex gap-5 items-start justify-between pt-3 border-t border-gray border-solid"
 >
-  <h4 class="text-light-blue text-balance leading-6">{title}</h4>
+  <h4>{title}</h4>
   <div class="flex flex-wrap items-center gap-1">
-    {startDate && (
-      <time datetime={startDate}>{formatDate(startDate)}</time>
-      <div class="text-light-blue">-</div>
-    )}
-    {endDate ? (
-      <time datetime={endDate}>{formatDate(endDate)}</time>
-    ) : (
-      <span>Present</span>
-    )}
+    {
+      startDate && (
+        <>
+          <time datetime={startDate}>{formatDate(startDate)}</time>
+          <div>-</div>
+        </>
+      )
+    }
+    {
+      endDate ? (
+        <time datetime={endDate}>{formatDate(endDate)}</time>
+      ) : (
+        <span>Present</span>
+      )
+    }
   </div>
 </div>

@@ -16,19 +16,15 @@ const projects = (await getCollection("projects")).sort((a, b) =>
 );
 ---
 
-<Section>
+<Section dark>
   <SecondaryHeadline text={headline} />
-  <ol class="grid gap-y-3 p-3">
+  <ol class="grid grid-cols-2 gap-y-15 gap-x-10">
     {
       projects.map((entry, index: number) => (
-        <li
-          class={`project-item ${index > 0 ? "border-t border-black" : ""}`}
-          data-animate
-        >
+        <li class="project-item" data-animate>
           <Project
             url={entry.data.url}
             headline={entry.data.title}
-            description={entry.data.description ?? ""}
             tags={entry.data.tags ?? []}
             thumbnail={entry.data.thumbnail}
             thumbnailAlt=""

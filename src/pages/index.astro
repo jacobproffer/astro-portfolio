@@ -11,24 +11,15 @@ const heroHeadline = "Jacob Proffer";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="grid gap-3 md:gap-6">
-    <div class="grid gap-3 md:grid-cols-[1fr_3fr] items-start md:gap-6">
-      <Avatar />
-      <Hero headline={heroHeadline}>
-        <p class="leading-6">
-          I'm a front-end developer based in Marquette, Michigan with ten years
-          of agency experience. I specialize in crafting accessible and
-          performant solutions for the web.
-        </p>
-      </Hero>
-    </div>
-    <ProjectGrid headline="Personal Projects" />
-    <div class="grid items-start md:grid-cols-2 gap-3 md:gap-6">
-      <div class="flex flex-col gap-3 md:gap-6">
-        <Experience />
-        <Education />
-      </div>
-      <Languages />
-    </div>
-  </div>
+  <Hero headline={heroHeadline}>
+    <p class="max-w-prose leading-6">
+      I'm a front-end developer based in Marquette, Michigan with ten years of
+      agency experience. I specialize in crafting accessible and performant
+      solutions for the web.
+    </p>
+  </Hero>
+  <ProjectGrid headline="Personal Projects" />
+  <Experience />
+  <Education />
+  <!-- <Languages /> -->
 </BaseLayout>

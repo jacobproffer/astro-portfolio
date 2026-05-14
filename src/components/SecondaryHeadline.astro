@@ -8,10 +8,8 @@ const { text } = Astro.props;
 
 {
   text && (
-    <div class="sticky top-0 z-10 py-1 px-3 bg-linear-to-t from-dark-blue to-mid-blue w-full border-black border-b">
-      <h2 class="font-medium text-lg text-gray leading-8 text-balance">
-        {text}
-      </h2>
+    <div>
+      <h2 class="text-4xl leading-8 text-balance">{text}</h2>
     </div>
   )
 }

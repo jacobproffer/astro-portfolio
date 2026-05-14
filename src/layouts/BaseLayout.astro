@@ -71,26 +71,19 @@ const { pageTitle, pageDescription } = Astro.props;
       </style>
     </noscript>
   </head>
-  <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
-    <!-- Loading overlay -->
+  <body class="mx-auto w-full leading-8 font-normal text-black bg-white">
     <div
       id="loading-overlay"
-      class="fixed inset-0 z-50 bg-dark"
+      class="fixed inset-0 z-50 bg-white"
       aria-hidden="true"
     >
     </div>
 
-    <Container>
-      <div
-        class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
-      >
-        <Header />
-        <main id="content">
-          <slot />
-        </main>
-        <Footer />
-      </div>
-    </Container>
+    <Header />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
 
     <script lang="ts">
       const overlay = document.getElementById("loading-overlay");
