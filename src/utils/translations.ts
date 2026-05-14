@@ -15,7 +15,6 @@ export const translations = {
     projects: "Personal Projects",
     experience: "Experience",
     education: "Education",
-    languages: "Languages",
 
     // Education
     universityName: "Northern Michigan University",
@@ -41,7 +40,6 @@ export const translations = {
     projects: "個人プロジェクト",
     experience: "職務経歴",
     education: "学歴",
-    languages: "言語",
 
     // Education
     universityName: "ノーザンミシガン大学",
