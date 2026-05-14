@@ -6,5 +6,5 @@ tags:
   - "hugo"
   - "scss"
   - "javascript"
-thumbnail: "../../assets/images/personal_blog.jpg"
+thumbnail: "../../../assets/images/personal_blog.jpg"
 ---

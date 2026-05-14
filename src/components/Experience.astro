@@ -3,16 +3,21 @@ import AboutSection from "@components/AboutSection.astro";
 import DateItem from "@components/DateItem.astro";
 import TertiaryHeadline from "@components/TertiaryHeadline.astro";
 import { getCollection } from "astro:content";
+import { filterByLocale } from "@utils/locale";
+import { t } from "@utils/translations";
 
-// Load experience from content collection
-const experienceItems = await getCollection("experience");
+const currentLocale = Astro.currentLocale ?? "en";
+
+// Load experience from content collection and filter by locale
+const allExperience = await getCollection("experience");
+const experienceItems = filterByLocale(allExperience, currentLocale);
 // Sort by order field
 const sortedExperience = experienceItems.sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---
 
-<AboutSection secondaryHeadline="Experience">
+<AboutSection secondaryHeadline={t(currentLocale, "experience")}>
   {
     sortedExperience?.length && (
       <ol class="grid gap-10">

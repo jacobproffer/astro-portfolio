@@ -3,6 +3,7 @@ import Section from "@components/Section.astro";
 import SecondaryHeadline from "@components/SecondaryHeadline.astro";
 import Project from "@components/Project.astro";
 import { getCollection } from "astro:content";
+import { filterByLocale } from "@utils/locale";
 
 interface Props {
   headline: string;
@@ -10,8 +11,11 @@ interface Props {
 
 const { headline } = Astro.props;
 
-// Load projects from content collection
-const projects = (await getCollection("projects")).sort((a, b) =>
+const currentLocale = Astro.currentLocale ?? "en";
+
+// Load projects from content collection and filter by locale
+const allProjects = await getCollection("projects");
+const projects = filterByLocale(allProjects, currentLocale).sort((a, b) =>
   a.data.title.localeCompare(b.data.title),
 );
 ---

@@ -1,0 +1,34 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLocale = Astro.currentLocale ?? "en";
+
+// Get the current path without locale prefix
+const currentPath = Astro.url.pathname.replace(/^\/(en|ja)/, "") || "/";
+
+const languages = [
+  { code: "en", label: "EN", name: "English" },
+  { code: "ja", label: "日本語", name: "Japanese" },
+];
+---
+
+<nav aria-label="Language switcher" class="flex gap-2">
+  {
+    languages.map((lang) => (
+      <a
+        href={getRelativeLocaleUrl(lang.code, currentPath.slice(1))}
+        class:list={[
+          "px-2 py-1 text-sm transition-colors hover:text-gray-600 dark:hover:text-gray-300",
+          {
+            "font-bold underline": currentLocale === lang.code,
+            "text-gray-500 dark:text-gray-400": currentLocale !== lang.code,
+          },
+        ]}
+        aria-label={`Switch to ${lang.name}`}
+        aria-current={currentLocale === lang.code ? "page" : undefined}
+      >
+        {lang.label}
+      </a>
+    ))
+  }
+</nav>

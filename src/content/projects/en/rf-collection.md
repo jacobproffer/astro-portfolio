@@ -6,5 +6,5 @@ tags:
   - "hugo"
   - "scss"
   - "javascript"
-thumbnail: "../../assets/images/unhealthy_obsession.jpg"
+thumbnail: "../../../assets/images/unhealthy_obsession.jpg"
 ---

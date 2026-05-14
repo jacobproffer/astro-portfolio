@@ -7,5 +7,5 @@ tags:
   - "tailwind-css"
   - "typescript"
   - "api"
-thumbnail: "../../assets/images/runescape.jpg"
+thumbnail: "../../../assets/images/runescape.jpg"
 ---
