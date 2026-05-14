@@ -7,10 +7,10 @@ interface Props {
   thumbnailAlt: string;
   headline: string;
   url: string;
-  tags?: Array<string>;
+  description?: string;
 }
 
-const { thumbnail, thumbnailAlt, headline, url, tags } = Astro.props;
+const { thumbnail, thumbnailAlt, headline, url, description } = Astro.props;
 ---
 
 <a class="relative grid items-start gap-y-5" href={url} target="_blank">
@@ -29,16 +29,8 @@ const { thumbnail, thumbnailAlt, headline, url, tags } = Astro.props;
       </div>
     )
   }
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-4">
     {headline && <TertiaryHeadline text={headline} />}
-    {
-      tags && (
-        <ul class="flex flex-wrap gap-2">
-          {tags.map((tag: string) => (
-            <li>{tag}</li>
-          ))}
-        </ul>
-      )
-    }
+    {description && <p class="max-w-prose text-gray">{description}</p>}
   </div>
 </a>

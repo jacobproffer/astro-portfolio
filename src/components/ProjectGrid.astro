@@ -29,7 +29,7 @@ const projects = filterByLocale(allProjects, currentLocale).sort((a, b) =>
           <Project
             url={entry.data.url}
             headline={entry.data.title}
-            tags={entry.data.tags ?? []}
+            description={entry.data.description}
             thumbnail={entry.data.thumbnail}
             thumbnailAlt=""
           />
