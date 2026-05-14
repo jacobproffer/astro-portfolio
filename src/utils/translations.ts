@@ -27,6 +27,13 @@ export const translations = {
 
     // Date formatting
     present: "Present",
+
+    // SEO
+    seoDescription:
+      "Jacob Proffer is a front-end developer based in Marquette, Michigan with over ten years of experience in creating accessible and performant web solutions.",
+    seoKeywords:
+      "front-end developer, web development, accessibility, performant web solutions, Michigan, Marquette, JavaScript, TypeScript, React, Astro",
+    jobTitle: "Front-End Developer",
   },
   ja: {
     // Navigation
@@ -52,6 +59,13 @@ export const translations = {
 
     // Date formatting
     present: "現在",
+
+    // SEO
+    seoDescription:
+      "Jacob Profferはミシガン州マーケットに拠点を置くフロントエンド開発者で、アクセシブルで高性能なウェブソリューションの作成において10年以上の経験があります。",
+    seoKeywords:
+      "フロントエンド開発者, ウェブ開発, アクセシビリティ, 高性能ウェブソリューション, ミシガン, マーケット, JavaScript, TypeScript, React, Astro",
+    jobTitle: "フロントエンド開発者",
   },
 } as const;
 
