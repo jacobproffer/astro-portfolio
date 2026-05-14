@@ -14,21 +14,28 @@ const languages = [
 
 <nav aria-label="Language switcher" class="flex gap-2">
   {
-    languages.map((lang) => (
-      <a
-        href={getRelativeLocaleUrl(lang.code, currentPath.slice(1))}
-        class:list={[
-          "px-2 py-1 text-sm transition-colors hover:text-gray-600 dark:hover:text-gray-300",
-          {
-            "font-bold underline": currentLocale === lang.code,
-            "text-gray-500 dark:text-gray-400": currentLocale !== lang.code,
-          },
-        ]}
-        aria-label={`Switch to ${lang.name}`}
-        aria-current={currentLocale === lang.code ? "page" : undefined}
-      >
-        {lang.label}
-      </a>
-    ))
+    languages.map((lang) => {
+      const isCurrent = currentLocale === lang.code;
+      const ariaLabel = isCurrent
+        ? `Current language: ${lang.name}`
+        : `Switch to ${lang.name}`;
+
+      return (
+        <a
+          href={getRelativeLocaleUrl(lang.code, currentPath.slice(1))}
+          class:list={[
+            "px-2 py-1 text-sm transition-colors hover:text-gray-600 dark:hover:text-gray-300",
+            {
+              "font-bold underline": isCurrent,
+              "text-gray-500 dark:text-gray-400": !isCurrent,
+            },
+          ]}
+          aria-label={ariaLabel}
+          aria-current={isCurrent ? "page" : undefined}
+        >
+          {lang.label}
+        </a>
+      );
+    })
   }
 </nav>

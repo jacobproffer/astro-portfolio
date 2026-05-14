@@ -31,6 +31,7 @@ const sortedExperience = experienceItems.sort(
                   title={item.data.positions[0].position}
                   startDate={item.data.positions[0].startDate}
                   endDate={item.data.positions[0].endDate}
+                  locale={currentLocale}
                 />
               ) : (
                 <ol class="grid gap-3">
@@ -41,6 +42,7 @@ const sortedExperience = experienceItems.sort(
                         title={position.position}
                         startDate={position.startDate}
                         endDate={position.endDate}
+                        locale={currentLocale}
                       />
                     </li>
                   ))}

@@ -48,7 +48,10 @@ const currentLocale = Astro.currentLocale ?? "en";
     <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
-    <SiteSEO seo={{ title: pageTitle, description: pageDescription }} />
+    <SiteSEO
+      seo={{ title: pageTitle, description: pageDescription }}
+      locale={currentLocale}
+    />
     <StructuredData type="person" />
     <link
       rel="preload"

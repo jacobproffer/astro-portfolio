@@ -8,5 +8,3 @@ tags:
   - "typescript"
 thumbnail: "../../../assets/images/tickets.jpg"
 ---
-
-地元のコーヒーショップのためのカスタムWordPressテーマ。レスポンシブデザインとモダンなUIを特徴としています。

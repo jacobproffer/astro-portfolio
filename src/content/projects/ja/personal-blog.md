@@ -8,5 +8,3 @@ tags:
   - "javascript"
 thumbnail: "../../../assets/images/personal_blog.jpg"
 ---
-
-ウェブ開発、アクセシビリティ、そしてフロントエンドのベストプラクティスについての考えや学びを共有する個人ブログ。

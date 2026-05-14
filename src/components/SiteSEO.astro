@@ -4,6 +4,7 @@ const defaultImageFile = new URL("/images/social.jpg", Astro.url);
 
 interface Props {
   seo?: SEOProps;
+  locale?: string;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -13,7 +14,14 @@ interface Props {
   };
 }
 
-const { seo, article } = Astro.props;
+const { seo, locale = "en", article } = Astro.props;
+
+// Map Astro locale to Open Graph locale format
+const ogLocaleMap: Record<string, string> = {
+  en: "en_US",
+  ja: "ja_JP",
+};
+const ogLocale = ogLocaleMap[locale] || "en_US";
 
 const siteName = "Jacob Proffer";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -89,7 +97,7 @@ const personSchema = {
   extend={{
     meta: [
       { name: "keywords", content: keywords },
-      { property: "og:locale", content: "en_US" },
+      { property: "og:locale", content: ogLocale },
       {
         property: "og:description",
         content: seo?.description ?? defaultDescription,
