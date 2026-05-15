@@ -9,6 +9,15 @@ import llms from "astro-llms-md";
 export default defineConfig({
   site: "https://proffer.dev/",
 
+  // Internationalization configuration
+  i18n: {
+    locales: ["en", "ja"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: false  // English URLs won't have /en/ prefix
+    }
+  },
+
   integrations: [sitemap(), llms({
     siteUrl: "https://proffer.dev",
     name: "Jacob Proffer",

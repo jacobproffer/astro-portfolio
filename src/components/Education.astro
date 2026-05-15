@@ -2,19 +2,21 @@
 import AboutSection from "@components/AboutSection.astro";
 import DateItem from "@components/DateItem.astro";
 import TertiaryHeadline from "./TertiaryHeadline.astro";
+import { t } from "@utils/translations";
+
+const currentLocale = Astro.currentLocale ?? "en";
 ---
 
-<AboutSection secondaryHeadline="Education">
-  <div
-    class="education-item grid gap-3 p-3 m-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
-    data-animate
-  >
-    <TertiaryHeadline text="Northern Michigan University" />
+<AboutSection secondaryHeadline={t(currentLocale, "education")} dark>
+  <div class="education-item grid gap-3" data-animate>
+    <TertiaryHeadline text={t(currentLocale, "universityName")} />
     <DateItem
       type="education"
-      title="Bachelor of Fine Arts in Computer Art"
+      title={t(currentLocale, "degree")}
       startDate="2010-08"
       endDate="2014-05"
+      dark
+      locale={currentLocale}
     />
   </div>
 </AboutSection>

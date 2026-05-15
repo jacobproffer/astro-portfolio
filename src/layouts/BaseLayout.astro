@@ -1,10 +1,9 @@
 ---
-import "@fontsource-variable/fira-code/wght.css";
-import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
+import "@fontsource-variable/manrope/wght.css";
+import manrope from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
 import StructuredData from "@components/StructuredData.astro";
-import Container from "@components/Container.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
@@ -14,9 +13,10 @@ interface Props {
 }
 
 const { pageTitle, pageDescription } = Astro.props;
+const currentLocale = Astro.currentLocale ?? "en";
 ---
 
-<html lang="en">
+<html lang={currentLocale}>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -48,13 +48,16 @@ const { pageTitle, pageDescription } = Astro.props;
     <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
-    <SiteSEO seo={{ title: pageTitle, description: pageDescription }} />
+    <SiteSEO
+      seo={{ title: pageTitle, description: pageDescription }}
+      locale={currentLocale}
+    />
     <StructuredData type="person" />
     <link
       rel="preload"
       as="font"
       type="font/woff2"
-      href={firaCode}
+      href={manrope}
       crossorigin="anonymous"
       fetchpriority="high"
     />
@@ -71,26 +74,19 @@ const { pageTitle, pageDescription } = Astro.props;
       </style>
     </noscript>
   </head>
-  <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
-    <!-- Loading overlay -->
+  <body class="mx-auto w-full leading-8 font-normal text-black bg-white">
     <div
       id="loading-overlay"
-      class="fixed inset-0 z-50 bg-dark"
+      class="fixed inset-0 z-50 bg-white"
       aria-hidden="true"
     >
     </div>
 
-    <Container>
-      <div
-        class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
-      >
-        <Header />
-        <main id="content">
-          <slot />
-        </main>
-        <Footer />
-      </div>
-    </Container>
+    <Header />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
 
     <script lang="ts">
       const overlay = document.getElementById("loading-overlay");

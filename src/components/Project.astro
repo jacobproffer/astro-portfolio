@@ -6,48 +6,31 @@ interface Props {
   thumbnail: ImageMetadata;
   thumbnailAlt: string;
   headline: string;
-  description?: string;
   url: string;
-  tags?: Array<string>;
+  description?: string;
 }
 
-const { thumbnail, thumbnailAlt, headline, description, url, tags } =
-  Astro.props;
+const { thumbnail, thumbnailAlt, headline, url, description } = Astro.props;
 ---
 
-<a
-  class="relative grid items-start gap-3 p-3 text-yellow bg-mid-blue border border-black border-t-highlight border-l-highlight outline-none motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 focus:outline-solid hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors md:grid-cols-[1fr_2fr]"
-  href={url}
-  target="_blank"
->
+<a class="relative grid items-start gap-y-5" href={url} target="_blank">
   {
     thumbnail && (
-      <div class="aspect-project border border-black overflow-hidden">
+      <div class="aspect-project overflow-hidden">
         <Image
-          class="w-full h-full object-contain"
+          class="w-full h-full object-cover"
           src={thumbnail}
           alt={thumbnailAlt}
-          widths={[271, 663, 285]}
-          sizes="(max-width: 376px) 297px, (min-width: 376px) and (max-width: 767px) 663px, (min-width: 768px) 285px"
+          widths={[400, 800, 1200, 1600]}
+          sizes="(max-width: 640px) 100vw, 50vw"
           loading="lazy"
           quality="mid"
         />
       </div>
     )
   }
-  <div class="grid gap-1">
+  <div class="flex flex-col gap-4">
     {headline && <TertiaryHeadline text={headline} />}
-    {description && <p class="text-white">{description}</p>}
-    {
-      tags && (
-        <ul class="flex flex-wrap gap-2 mt-3">
-          {tags.map((tag: string) => (
-            <li class="px-3 text-light-blue bg-dark-blue border-black border border-t-highlight border-l-highlight">
-              {tag}
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {description && <p class="max-w-prose text-gray">{description}</p>}
   </div>
 </a>

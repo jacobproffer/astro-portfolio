@@ -7,5 +7,5 @@ tags:
   - "tailwind-css"
   - "typescript"
   - "api"
-thumbnail: "../../assets/images/airports.jpg"
+thumbnail: "../../../assets/images/airports.jpg"
 ---

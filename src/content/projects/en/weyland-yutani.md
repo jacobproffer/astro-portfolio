@@ -6,5 +6,5 @@ tags:
   - "hugo"
   - "scss"
   - "javascript"
-thumbnail: "../../assets/images/weyland-yutani.jpg"
+thumbnail: "../../../assets/images/weyland-yutani.jpg"
 ---

@@ -1,9 +1,11 @@
 ---
 import { SEO, type Props as SEOProps } from "astro-seo";
+import { t } from "../utils/translations";
 const defaultImageFile = new URL("/images/social.jpg", Astro.url);
 
 interface Props {
   seo?: SEOProps;
+  locale?: string;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -13,14 +15,19 @@ interface Props {
   };
 }
 
-const { seo, article } = Astro.props;
+const { seo, locale = "en", article } = Astro.props;
+
+// Map Astro locale to Open Graph locale format
+const ogLocaleMap: Record<string, string> = {
+  en: "en_US",
+  ja: "ja_JP",
+};
+const ogLocale = ogLocaleMap[locale] || "en_US";
 
 const siteName = "Jacob Proffer";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
-const defaultDescription =
-  "Jacob Proffer is a front-end developer based in Marquette, Michigan with over ten years of experience in creating accessible and performant web solutions.";
-const keywords =
-  "front-end developer, web development, accessibility, performant web solutions, Michigan, Marquette, JavaScript, TypeScript, React, Astro";
+const defaultDescription = t(locale, "seoDescription");
+const keywords = t(locale, "seoKeywords");
 
 // JSON-LD Person Schema for portfolio
 const personSchema = {
@@ -28,7 +35,7 @@ const personSchema = {
   "@type": "Person",
   name: siteName,
   url: Astro.site?.toString(),
-  jobTitle: "Front-End Developer",
+  jobTitle: t(locale, "jobTitle"),
   description: defaultDescription,
   image: defaultImageFile.toString(),
   sameAs: [
@@ -89,7 +96,7 @@ const personSchema = {
   extend={{
     meta: [
       { name: "keywords", content: keywords },
-      { property: "og:locale", content: "en_US" },
+      { property: "og:locale", content: ogLocale },
       {
         property: "og:description",
         content: seo?.description ?? defaultDescription,

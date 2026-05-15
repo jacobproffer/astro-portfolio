@@ -1,8 +1,13 @@
 ---
+import Container from "@components/Container.astro";
 import NavLink from "@components/NavLink.astro";
 
 const links = [
-  { href: "https://monkeytype.com/profile/jproffer", label: "Monkeytype" },
+  { href: "https://www.github.com/jacobproffer/", label: "GitHub" },
+  {
+    href: "https://www.linkedin.com/in/jacob-proffer-a829a892/",
+    label: "LinkedIn",
+  },
   {
     href: "https://dribbble.com/jacobproffer/",
     label: "Dribbble",
@@ -14,20 +19,20 @@ const links = [
 ];
 ---
 
-<footer
-  class="p-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
->
-  <nav aria-label="secondary">
-    <ul class="flex gap-4 max-md:flex-col max-md:text-center">
-      {
-        links
-          .sort((a, b) => a.label.localeCompare(b.label))
-          .map((link) => (
-            <li>
-              <NavLink href={link.href}>{link.label}</NavLink>
-            </li>
-          ))
-      }
-    </ul>
-  </nav>
+<footer class="py-10 lg:py-20">
+  <Container>
+    <nav aria-label="secondary">
+      <ul class="flex gap-4">
+        {
+          links
+            .sort((a, b) => a.label.localeCompare(b.label))
+            .map((link) => (
+              <li>
+                <NavLink href={link.href}>{link.label}</NavLink>
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+  </Container>
 </footer>

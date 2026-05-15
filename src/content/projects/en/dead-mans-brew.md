@@ -6,5 +6,5 @@ tags:
   - "astro"
   - "tailwind-css"
   - "typescript"
-thumbnail: "../../assets/images/tickets.jpg"
+thumbnail: "../../../assets/images/tickets.jpg"
 ---

@@ -3,6 +3,7 @@ import Section from "@components/Section.astro";
 import SecondaryHeadline from "@components/SecondaryHeadline.astro";
 import Project from "@components/Project.astro";
 import { getCollection } from "astro:content";
+import { filterByLocale } from "@utils/locale";
 
 interface Props {
   headline: string;
@@ -10,26 +11,25 @@ interface Props {
 
 const { headline } = Astro.props;
 
-// Load projects from content collection
-const projects = (await getCollection("projects")).sort((a, b) =>
+const currentLocale = Astro.currentLocale ?? "en";
+
+// Load projects from content collection and filter by locale
+const allProjects = await getCollection("projects");
+const projects = filterByLocale(allProjects, currentLocale).sort((a, b) =>
   a.data.title.localeCompare(b.data.title),
 );
 ---
 
-<Section>
+<Section dark>
   <SecondaryHeadline text={headline} />
-  <ol class="grid gap-y-3 p-3">
+  <ol class="grid gap-y-10 gap-x-10 md:grid-cols-2 lg:gap-y-15">
     {
       projects.map((entry, index: number) => (
-        <li
-          class={`project-item ${index > 0 ? "border-t border-black" : ""}`}
-          data-animate
-        >
+        <li class="project-item" data-animate>
           <Project
             url={entry.data.url}
             headline={entry.data.title}
-            description={entry.data.description ?? ""}
-            tags={entry.data.tags ?? []}
+            description={entry.data.description}
             thumbnail={entry.data.thumbnail}
             thumbnailAlt=""
           />
