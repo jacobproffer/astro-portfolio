@@ -20,7 +20,7 @@ const sortedExperience = experienceItems.sort(
 <AboutSection secondaryHeadline={t(currentLocale, "experience")}>
   {
     sortedExperience?.length && (
-      <ol class="grid gap-10">
+      <ol class="grid gap-5 lg:gap-10">
         {sortedExperience.map((item) => (
           <li class="experience-item flex flex-col gap-5" data-animate>
             <TertiaryHeadline text={item.data.company} />
