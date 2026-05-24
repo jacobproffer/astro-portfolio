@@ -20,21 +20,28 @@ const projects = filterByLocale(allProjects, currentLocale).sort((a, b) =>
 );
 ---
 
-<Section dark>
+<Section>
   <SecondaryHeadline text={headline} />
-  <ol class="grid gap-y-10 gap-x-10 md:grid-cols-2 lg:gap-y-15">
+  <ol class="grid gap-y-12 gap-x-2 md:grid-cols-2">
     {
-      projects.map((entry, index: number) => (
-        <li class="project-item" data-animate>
-          <Project
-            url={entry.data.url}
-            headline={entry.data.title}
-            description={entry.data.description}
-            thumbnail={entry.data.thumbnail}
-            thumbnailAlt=""
-          />
-        </li>
-      ))
+      projects.map((entry, index: number) => {
+        const isFullWidth = (index + 1) % 3 === 0;
+        return (
+          <li
+            class={`project-item ${isFullWidth ? "lg:col-span-full" : ""}`}
+            data-animate
+          >
+            <Project
+              url={entry.data.url}
+              headline={entry.data.title}
+              description={entry.data.description}
+              thumbnail={entry.data.thumbnail}
+              thumbnailAlt=""
+              fullWidth={isFullWidth}
+            />
+          </li>
+        );
+      })
     }
   </ol>
 </Section>

@@ -13,7 +13,9 @@ const languages = [
 ---
 
 <nav class="max-w-max" aria-label="Language switcher">
-  <ul class="flex items-center gap-4 pt-2 px-6 py-3 bg-black rounded-full">
+  <ul
+    class="flex items-center gap-2 px-2 py-2 bg-gray-100 rounded-full shadow-sm border border-gray-200"
+  >
     {
       languages.map((lang) => {
         const isCurrent = currentLocale === lang.code;
@@ -26,10 +28,11 @@ const languages = [
             <a
               href={getRelativeLocaleUrl(lang.code, currentPath.slice(1))}
               class:list={[
-                "text-sm text-white transition-colors hover:text-gray dark:hover:text-gray-300",
+                "text-sm transition-all duration-200 px-4 py-1.5 rounded-full block",
                 {
-                  "font-bold underline": isCurrent,
-                  "text-gray-500 dark:text-gray-400": !isCurrent,
+                  "font-semibold bg-white text-gray-900 shadow-sm": isCurrent,
+                  "text-gray-600 hover:text-gray-900 hover:bg-white/60":
+                    !isCurrent,
                 },
               ]}
               aria-label={ariaLabel}

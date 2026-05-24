@@ -1,6 +1,4 @@
 ---
-import "@fontsource-variable/manrope/wght.css";
-import manrope from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
 import StructuredData from "@components/StructuredData.astro";
@@ -53,14 +51,6 @@ const currentLocale = Astro.currentLocale ?? "en";
       locale={currentLocale}
     />
     <StructuredData type="person" />
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href={manrope}
-      crossorigin="anonymous"
-      fetchpriority="high"
-    />
     <noscript>
       <style>
         /* Show all content when JavaScript is disabled */
@@ -74,16 +64,18 @@ const currentLocale = Astro.currentLocale ?? "en";
       </style>
     </noscript>
   </head>
-  <body class="mx-auto w-full leading-8 font-normal text-black bg-white">
+  <body
+    class="mx-auto w-full leading-relaxed font-normal text-[--color-text-primary] bg-gradient-to-b from-white to-[--color-surface] antialiased"
+  >
     <div
       id="loading-overlay"
-      class="fixed inset-0 z-50 bg-white"
+      class="fixed inset-0 z-50 bg-gradient-to-b from-white to-[--color-surface]"
       aria-hidden="true"
     >
     </div>
 
     <Header />
-    <main id="content">
+    <main id="content" class="relative">
       <slot />
     </main>
     <Footer />

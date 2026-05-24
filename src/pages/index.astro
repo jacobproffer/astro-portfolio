@@ -13,11 +13,15 @@ const heroHeadline = "Jacob Proffer";
 
 <BaseLayout pageTitle={pageTitle}>
   <Hero headline={heroHeadline}>
-    <p class="max-w-prose text-lg/8">
+    <p
+      class="max-w-2xl text-xl md:text-2xl text-[--color-text-secondary] leading-relaxed"
+    >
       {t(currentLocale, "heroDescription")}
     </p>
   </Hero>
   <ProjectGrid headline={t(currentLocale, "projects")} />
-  <Experience />
-  <Education />
+  <div class="bg-[--color-surface]">
+    <Experience />
+    <Education />
+  </div>
 </BaseLayout>

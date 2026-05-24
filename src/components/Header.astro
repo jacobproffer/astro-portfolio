@@ -8,15 +8,37 @@ import { t } from "@utils/translations";
 const currentLocale = Astro.currentLocale ?? "en";
 ---
 
-<Container>
-  <div class="flex items-center justify-between gap-4 pt-10 pb-5">
-    <header>
-      <NavLink
-        class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
-        href="#content">{t(currentLocale, "skipToContent")}</NavLink
-      >
-      <Logo />
-    </header>
-    <LanguageSwitcher />
-  </div>
-</Container>
+<div
+  id="site-header"
+  class="sticky top-0 z-50 backdrop-blur-xl bg-[--color-background]/80 border-b border-[--color-divider] transition-all duration-300"
+>
+  <Container>
+    <div class="flex items-center justify-between gap-4 py-4">
+      <header>
+        <NavLink
+          class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
+          href="#content">{t(currentLocale, "skipToContent")}</NavLink
+        >
+        <Logo />
+      </header>
+      <LanguageSwitcher />
+    </div>
+  </Container>
+</div>
+
+<script>
+  // Add shadow to header on scroll
+  const header = document.getElementById("site-header");
+
+  if (header) {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header.style.boxShadow = "0 4px 24px rgba(0, 0, 0, 0.08)";
+      } else {
+        header.style.boxShadow = "none";
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
+</script>

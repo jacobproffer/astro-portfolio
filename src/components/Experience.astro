@@ -20,9 +20,9 @@ const sortedExperience = experienceItems.sort(
 <AboutSection secondaryHeadline={t(currentLocale, "experience")}>
   {
     sortedExperience?.length && (
-      <ol class="grid gap-5 lg:gap-10">
+      <ol class="grid gap-8 lg:gap-12">
         {sortedExperience.map((item) => (
-          <li class="experience-item flex flex-col gap-5" data-animate>
+          <li class="experience-item flex flex-col gap-6" data-animate>
             <TertiaryHeadline text={item.data.company} />
             {item.data.positions?.length &&
               (item.data.positions.length === 1 ? (
@@ -34,7 +34,7 @@ const sortedExperience = experienceItems.sort(
                   locale={currentLocale}
                 />
               ) : (
-                <ol class="grid gap-3">
+                <ol class="grid gap-4">
                   {item.data.positions.map((position) => (
                     <li>
                       <DateItem

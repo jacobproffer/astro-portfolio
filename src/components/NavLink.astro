@@ -10,10 +10,18 @@ const isCurrent = url.href === Astro.url.href;
 
 // Extract class and other props separately
 const { class: className, ...otherProps } = Astro.props;
+
+// Check if custom positioning is used (like for skip links)
+const hasCustomPositioning =
+  className?.includes("absolute") || className?.includes("fixed");
 ---
 
 <a
-  class:list={["block", className]}
+  class:list={[
+    !hasCustomPositioning && "inline-block",
+    "transition-colors duration-200 hover:text-[--color-accent]",
+    className,
+  ]}
   aria-current={isCurrent ? "page" : null}
   target={isExternal ? "_blank" : "_self"}
   {...otherProps}

@@ -19,20 +19,29 @@ const links = [
 ];
 ---
 
-<footer class="py-10 lg:py-20">
+<footer
+  class="py-20 lg:py-28 border-t border-[--color-divider] bg-[--color-surface]"
+>
   <Container>
-    <nav aria-label="secondary">
-      <ul class="flex gap-4">
-        {
-          links
-            .sort((a, b) => a.label.localeCompare(b.label))
-            .map((link) => (
-              <li>
-                <NavLink href={link.href}>{link.label}</NavLink>
-              </li>
-            ))
-        }
-      </ul>
-    </nav>
+    <div class="flex flex-col gap-8">
+      <nav aria-label="secondary">
+        <ul
+          class="flex flex-wrap gap-x-8 gap-y-4 text-[--color-text-secondary] text-base"
+        >
+          {
+            links
+              .sort((a, b) => a.label.localeCompare(b.label))
+              .map((link) => (
+                <li>
+                  <NavLink href={link.href}>{link.label}</NavLink>
+                </li>
+              ))
+          }
+        </ul>
+      </nav>
+      <p class="text-sm text-[--color-text-tertiary]">
+        © {new Date().getFullYear()} Jacob Proffer. All rights reserved.
+      </p>
+    </div>
   </Container>
 </footer>
