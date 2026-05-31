@@ -7,7 +7,7 @@ import { t } from "@utils/translations";
 const currentLocale = Astro.currentLocale ?? "en";
 ---
 
-<AboutSection secondaryHeadline={t(currentLocale, "education")}>
+<AboutSection number={3} secondaryHeadline={t(currentLocale, "education")}>
   <div class="education-item grid gap-4" data-animate>
     <TertiaryHeadline text={t(currentLocale, "universityName")} />
     <DateItem

@@ -17,7 +17,7 @@ const sortedExperience = experienceItems.sort(
 );
 ---
 
-<AboutSection secondaryHeadline={t(currentLocale, "experience")}>
+<AboutSection number={2} secondaryHeadline={t(currentLocale, "experience")}>
   {
     sortedExperience?.length && (
       <ol class="grid gap-8 lg:gap-12">

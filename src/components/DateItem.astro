@@ -7,43 +7,36 @@ interface Props {
   title: string;
   startDate?: string;
   endDate?: string;
-  dark?: boolean;
   locale?: string;
 }
 
-const { type, title, startDate, endDate, dark, locale = "en" } = Astro.props;
+const { type, title, startDate, endDate, locale = "en" } = Astro.props;
 ---
 
 <div
-  class="flex gap-x-6 gap-y-2 items-start justify-between py-4 border-t border-[--color-divider] max-md:flex-col"
+  class="flex gap-x-6 gap-y-2 items-start justify-between py-4 border-t border-black max-md:flex-col"
 >
-  <h4
-    class:list={[
-      "text-[--color-text-primary] md:text-xl font-medium",
-      { "text-[--color-text-secondary]": dark },
-    ]}
-  >
+  <h4 class="md:text-xl font-medium">
     {title}
   </h4>
-  <div
-    class:list={[
-      "flex flex-wrap items-center gap-1 text-[--color-text-secondary] text-sm",
-      { "text-[--color-text-tertiary]": dark },
-    ]}
-  >
+  <div class="flex flex-wrap items-center gap-1 text-sm">
     {
       startDate && (
         <>
-          <time datetime={startDate}>{formatDate(startDate, locale)}</time>
+          <time class="text-lg" datetime={startDate}>
+            {formatDate(startDate, locale)}
+          </time>
           <div>-</div>
         </>
       )
     }
     {
       endDate ? (
-        <time datetime={endDate}>{formatDate(endDate, locale)}</time>
+        <time class="text-lg" datetime={endDate}>
+          {formatDate(endDate, locale)}
+        </time>
       ) : (
-        <span>{t(locale, "present")}</span>
+        <span class="text-lg">{t(locale, "present")}</span>
       )
     }
   </div>

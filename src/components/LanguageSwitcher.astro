@@ -13,9 +13,7 @@ const languages = [
 ---
 
 <nav class="max-w-max" aria-label="Language switcher">
-  <ul
-    class="flex items-center gap-2 px-2 py-2 bg-gray-100 rounded-full shadow-sm border border-gray-200"
-  >
+  <ul class="flex items-center gap-2 px-2 py-2 bg-black rounded-full">
     {
       languages.map((lang) => {
         const isCurrent = currentLocale === lang.code;
@@ -30,7 +28,7 @@ const languages = [
               class:list={[
                 "text-sm transition-all duration-200 px-4 py-1.5 rounded-full block",
                 {
-                  "font-semibold bg-white text-gray-900 shadow-sm": isCurrent,
+                  "font-semibold bg-black text-yellow shadow-sm": isCurrent,
                   "text-gray-600 hover:text-gray-900 hover:bg-white/60":
                     !isCurrent,
                 },

@@ -3,14 +3,18 @@ import Section from "@components/Section.astro";
 import SecondaryHeadline from "./SecondaryHeadline.astro";
 
 interface Props {
-  dark?: boolean;
+  number: number;
   secondaryHeadline?: string;
 }
 
-const { secondaryHeadline } = Astro.props;
+const { number, secondaryHeadline } = Astro.props;
 ---
 
-<Section dark={Astro.props.dark}>
-  {secondaryHeadline && <SecondaryHeadline text={secondaryHeadline} />}
+<Section>
+  {
+    secondaryHeadline && (
+      <SecondaryHeadline number={number} text={secondaryHeadline} />
+    )
+  }
   <slot />
 </Section>

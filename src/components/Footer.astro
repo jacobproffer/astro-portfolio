@@ -19,15 +19,11 @@ const links = [
 ];
 ---
 
-<footer
-  class="py-20 lg:py-28 border-t border-[--color-divider] bg-[--color-surface]"
->
+<footer class="py-20 lg:py-28">
   <Container>
     <div class="flex flex-col gap-8">
       <nav aria-label="secondary">
-        <ul
-          class="flex flex-wrap gap-x-8 gap-y-4 text-[--color-text-secondary] text-base"
-        >
+        <ul class="flex flex-wrap gap-x-8 gap-y-4 text-base">
           {
             links
               .sort((a, b) => a.label.localeCompare(b.label))
@@ -39,7 +35,7 @@ const links = [
           }
         </ul>
       </nav>
-      <p class="text-sm text-[--color-text-tertiary]">
+      <p class="text-sm">
         © {new Date().getFullYear()} Jacob Proffer. All rights reserved.
       </p>
     </div>
