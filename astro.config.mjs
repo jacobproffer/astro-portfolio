@@ -37,16 +37,6 @@ export default defineConfig({
   // Vite configuration
   vite: {
     plugins: [tailwindcss()],
-    build: {
-      // Improve build performance
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['astro'],
-          },
-        },
-      },
-    },
   },
 
   experimental: {
