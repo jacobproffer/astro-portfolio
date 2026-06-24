@@ -20,8 +20,5 @@
   },
   "devDependencies": {
     "astro-llms-md": "^2.2.2"
-  },
-  "overrides": {
-    "vite": "^7"
   }
 }
