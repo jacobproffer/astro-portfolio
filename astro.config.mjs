@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [sitemap(), llms({
     siteUrl: "https://proffer.dev",
     name: "Jacob Proffer",
-    description: "Jacob Proffer is a front-end developer based in Marquette, Michigan with over ten years of experience in creating accessible and performant web solutions.",
+    description: "Jacob Proffer is a front-end developer based in Marquette, Michigan with over eleven years of experience in creating accessible and performant web solutions.",
     generateIndividualMd: true,
     generateLlmsTxt: true,
     generateLlmsFullTxt: true,
