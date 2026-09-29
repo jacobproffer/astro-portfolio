@@ -46,7 +46,7 @@ const { pageTitle, pageDescription } = Astro.props;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#080808" />
     <meta name="generator" content={Astro.generator} />
     <SiteSEO seo={{ title: pageTitle, description: pageDescription }} />
     <StructuredData type="person" />
@@ -82,10 +82,10 @@ const { pageTitle, pageDescription } = Astro.props;
 
     <Container>
       <div
-        class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
+        class="mx-auto grid w-full max-w-6xl gap-32 px-6 py-8 sm:px-10 sm:py-12 lg:px-16"
       >
         <Header />
-        <main id="content">
+        <main id="content" class="grid gap-16">
           <slot />
         </main>
         <Footer />

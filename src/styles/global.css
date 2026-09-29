@@ -26,16 +26,50 @@
 }
 
 @theme {
-  --color-black: #0d1418;
-  --color-dark: #181a1c;
-  --color-gray: #e2e2e2;
-  --color-light: #2d2d2d;
-  --color-highlight: #3c3a3a;
-  --color-light-blue: #6cb1e1;
-  --color-mid-blue: #132b38;
-  --color-dark-blue: #162128;
-  --color-yellow: #ffd800;
-  --color-green: #6ee16c;
-  --font-sans: "Fira Code Variable", monospace;
+  --color-black: #080808;
+  --color-dark: #080808;
+  --color-gray: #f2f2f2;
+  --color-light: #151515;
+  --color-highlight: #2e2e2e;
+  --color-light-blue: #a8c8d8;
+  --color-mid-blue: #111111;
+  --color-dark-blue: #0b0b0b;
+  --color-yellow: #f0f0f0;
+  --color-green: #53d98b;
+  --color-icon-button-border: #242424;
+  --color-icon-button-background: #171717;
+  --color-icon-button-foreground: #a5a5a5;
+  --color-icon-button-hover-border: #666666;
+  --color-icon-button-hover-background: #292929;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
   --aspect-ratio-project: "1200/621";
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    background: #080808;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    background: #080808;
+    color: #f2f2f2;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+}
+
+@layer components {
+  .section-label {
+    color: #efefef;
+    font-size: 1rem;
+    font-weight: 600;
+  }
 }

@@ -1,5 +1,5 @@
 ---
-import NavLink from "@components/NavLink.astro";
+import IconButton from "@components/IconButton.astro";
 
 const links = [
   { href: "https://www.github.com/jacobproffer/", label: "GitHub" },
@@ -10,14 +10,37 @@ const links = [
 ];
 ---
 
-<nav aria-label="primary">
-  <ul class="flex gap-3">
+<nav aria-label="social">
+  <ul class="flex gap-2">
     {
       links
         .sort((a, b) => a.label.localeCompare(b.label))
         .map((link) => (
           <li>
-            <NavLink href={link.href}>{link.label}</NavLink>
+            <IconButton href={link.href} label={link.label}>
+              <span class="sr-only">{link.label}</span>
+              {link.label === "GitHub" ? (
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 16 16"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                >
+                  <path d="M8 1.5a6.5 6.5 0 0 0-2.05 12.67c.33.06.45-.14.45-.31v-1.1c-1.84.4-2.23-.78-2.23-.78-.3-.77-.74-.98-.74-.98-.6-.41.04-.4.04-.4.67.05 1.02.69 1.02.69.58 1.02 1.53.73 1.9.56.06-.43.23-.73.42-.9-1.47-.17-3.01-.73-3.01-3.24 0-.72.26-1.3.68-1.76-.07-.17-.3-.85.07-1.75 0 0 .55-.18 1.8.67a6.2 6.2 0 0 1 3.28 0c1.25-.85 1.8-.67 1.8-.67.37.9.14 1.58.07 1.75.42.46.68 1.04.68 1.76 0 2.52-1.54 3.07-3.01 3.24.24.21.45.62.45 1.25v1.85c0 .17.12.37.46.31A6.5 6.5 0 0 0 8 1.5Z" />
+                </svg>
+              ) : (
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 16 16"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                >
+                  <path d="M3.1 2.5h9.8c.33 0 .6.27.6.6v9.8c0 .33-.27.6-.6.6H3.1a.6.6 0 0 1-.6-.6V3.1c0-.33.27-.6.6-.6ZM5.2 6.1H3.9v4.7h1.3V6.1Zm-.65-.65a.78.78 0 1 0 0-1.56.78.78 0 0 0 0 1.56Zm3.1.65H6.4v4.7h1.25V8.5c0-.61.12-1.2.87-1.2s.75.7.75 1.24v2.26h1.25V8.29c0-1.23-.26-2.18-1.68-2.18-.68 0-1.13.37-1.31.72h-.02V6.1Z" />
+                </svg>
+              )}
+            </IconButton>
           </li>
         ))
     }

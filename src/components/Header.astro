@@ -1,18 +1,66 @@
 ---
-import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
 import NavLink from "./NavLink.astro";
+import IconButton from "./IconButton.astro";
 ---
 
-<div
-  class="grid grid-cols-[max-content_max-content] items-center justify-between p-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
->
-  <header>
-    <NavLink
-      class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
-      href="#content">Skip to main content</NavLink
-    >
-    <Logo />
-  </header>
+<header class="flex items-center justify-between gap-6">
+  <NavLink
+    class="absolute -top-full left-1/2 -translate-x-1/2 rounded-md bg-white px-3 py-1 text-black transition-top ease-in-out focus:top-4"
+    href="#content">Skip to main content</NavLink
+  >
+  <nav aria-label="primary">
+    <ul class="flex items-center gap-2">
+      <li>
+        <IconButton href="/" label="Home">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            width="14"
+            height="14"
+            fill="none"
+          >
+            <path
+              d="m2.5 7 5.5-4.5L13.5 7v6.5h-4V9h-3v4.5h-4V7Z"
+              stroke="currentColor"
+              stroke-linejoin="round"></path>
+          </svg>
+        </IconButton>
+      </li>
+      <li>
+        <IconButton href="#work" label="Selected work">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            width="14"
+            height="14"
+            fill="none"
+          >
+            <path
+              d="M3 4.5h10M3 7.5h10M3 10.5h6"
+              stroke="currentColor"
+              stroke-linecap="round"></path>
+          </svg>
+        </IconButton>
+      </li>
+      <li>
+        <IconButton href="#about" label="About">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            width="14"
+            height="14"
+            fill="none"
+          >
+            <circle cx="8" cy="5" r="2.25" stroke="currentColor"></circle>
+            <path
+              d="M3.5 13c.6-2.2 2.1-3.25 4.5-3.25s3.9 1.05 4.5 3.25"
+              stroke="currentColor"
+              stroke-linecap="round"></path>
+          </svg>
+        </IconButton>
+      </li>
+    </ul>
+  </nav>
   <Navigation />
-</div>
+</header>

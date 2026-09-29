@@ -6,29 +6,65 @@ import ProjectGrid from "@components/ProjectGrid.astro";
 import Experience from "@components/Experience.astro";
 import Education from "@components/Education.astro";
 import Languages from "@components/Languages.astro";
+import { Image } from "astro:assets";
+import aboutCoding from "@images/proffer_jacob.jpg";
+import aboutBridge from "@images/airports.jpg";
+import aboutDog from "@images/unhealthy_obsession.jpg";
 const pageTitle = "Jacob Proffer – Front-End Developer";
 const heroHeadline = "Jacob Proffer";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="grid gap-3 md:gap-6">
-    <div class="grid gap-3 md:grid-cols-[1fr_3fr] items-start md:gap-6">
-      <Avatar />
+  <div class="grid gap-32">
+    <div class="grid max-w-2xl gap-8 pt-24">
+      <div class="w-16">
+        <Avatar />
+      </div>
       <Hero headline={heroHeadline}>
-        <p class="leading-6">
+        <p>
           I'm a front-end developer based in Marquette, Michigan with eleven
           years of agency experience. I specialize in crafting accessible and
           performant solutions for the web.
         </p>
       </Hero>
     </div>
-    <ProjectGrid headline="Personal Projects" />
-    <div class="grid items-start md:grid-cols-2 gap-3 md:gap-6">
-      <div class="flex flex-col gap-3 md:gap-6">
-        <Experience />
+    <ProjectGrid headline="Selected work" />
+    <Languages />
+    <section id="about" aria-labelledby="about-heading" class="grid gap-5">
+      <h2 id="about-heading" class="section-label">About</h2>
+      <div class="grid gap-8 muted-copy">
+        <p>
+          I started coding out of curiosity and grew into developing complete
+          products that balance design and engineering.
+        </p>
+        <p>
+          My stack includes TypeScript, React, Next.js, Node, and PostgreSQL,
+          but I love exploring new technologies that make the web better.
+        </p>
+      </div>
+      <div class="grid grid-cols-3 items-start gap-4 pt-8">
+        <Image
+          class="aspect-[4/5] w-full rotate-2 rounded-2xl object-cover"
+          src={aboutCoding}
+          alt=""
+        />
+        <Image
+          class="aspect-[4/5] w-full -rotate-2 rounded-2xl object-cover"
+          src={aboutBridge}
+          alt=""
+        />
+        <Image
+          class="aspect-[4/5] w-full rotate-2 rounded-2xl object-cover"
+          src={aboutDog}
+          alt=""
+        />
+      </div>
+    </section>
+    <div class="grid gap-10 md:grid-cols-2 md:gap-6">
+      <Experience />
+      <div class="grid gap-10">
         <Education />
       </div>
-      <Languages />
     </div>
   </div>
 </BaseLayout>

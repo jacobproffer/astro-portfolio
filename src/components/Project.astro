@@ -16,15 +16,15 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
 ---
 
 <a
-  class="relative grid items-start gap-3 p-3 text-yellow bg-mid-blue border border-black border-t-highlight border-l-highlight outline-none motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 focus:outline-solid hover:text-light-blue hover:border-t-black hover:border-l-black hover:border-r-highlight hover:border-b-highlight transition-colors md:grid-cols-[1fr_2fr]"
+  class="relative grid gap-4 text-gray outline-none transition-opacity hover:opacity-75 focus-visible:outline-2 focus-visible:outline-light-blue"
   href={url}
   target="_blank"
 >
   {
     thumbnail && (
-      <div class="aspect-project border border-black overflow-hidden">
+      <div class="aspect-[1.35] overflow-hidden rounded-3xl border border-[#242424] bg-dark-blue">
         <Image
-          class="w-full h-full object-contain"
+          class="h-full w-full object-cover"
           src={thumbnail}
           alt={thumbnailAlt}
           widths={[271, 663, 285]}
@@ -35,14 +35,14 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
       </div>
     )
   }
-  <div class="grid gap-1">
+  <div class="grid gap-1 px-1">
     {headline && <TertiaryHeadline text={headline} />}
-    {description && <p class="text-white">{description}</p>}
+    {description && <p class="muted-copy line-clamp-2">{description}</p>}
     {
       tags && (
-        <ul class="flex flex-wrap gap-2 mt-3">
+        <ul class="hidden">
           {tags.map((tag: string) => (
-            <li class="px-3 text-light-blue bg-dark-blue border-black border border-t-highlight border-l-highlight">
+            <li class="border border-[#252525] bg-dark-blue px-1.5 text-[0.6rem] text-light-blue">
               {tag}
             </li>
           ))}

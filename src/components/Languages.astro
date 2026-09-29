@@ -1,6 +1,5 @@
 ---
 import AboutSection from "@components/AboutSection.astro";
-import TertiaryHeadline from "./TertiaryHeadline.astro";
 
 // Fetch GitHub language statistics at build time
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
@@ -266,43 +265,31 @@ const sortedLanguages = filteredStats
   })
   .sort((a, b) => b.bytes - a.bytes)
   .slice(0, TOP_LANGUAGES_COUNT);
+
+const stack = sortedLanguages.length
+  ? sortedLanguages.map(({ name }) => name)
+  : [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Astro",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Docker",
+    ];
 ---
 
 <AboutSection secondaryHeadline="Technology Stack">
-  {
-    sortedLanguages.length > 0 ? (
-      <ol class="flex flex-col gap-3 my-3">
-        {sortedLanguages.map((lang) => (
-          <li
-            class="language-item flex flex-col gap-3 p-3 mx-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
-            data-animate
-          >
-            <TertiaryHeadline text={lang.name} />
-            <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-col gap-1">
-              <h4>
-                {lang.repoCount}{" "}
-                {lang.repoCount === 1 ? "repository" : "repositories"}
-              </h4>
-              <span class="text-white">
-                Most recent:{" "}
-                <a
-                  href={lang.mostRecentRepoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline text-yellow hover:text-light-blue motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 focus:outline-solid"
-                  aria-label={`View ${lang.mostRecentRepo} repository on GitHub`}
-                >
-                  {lang.mostRecentRepo}
-                </a>
-              </span>
-            </div>
-          </li>
-        ))}
-      </ol>
-    ) : (
-      <p class="text-sm m-3">Language statistics unavailable</p>
-    )
-  }
+  <ul class="flex flex-wrap gap-2" aria-label="Technologies">
+    {
+      stack.map((item) => (
+        <li class="grid h-11 min-w-11 place-items-center rounded-xl bg-light px-2 text-center text-[0.55rem] text-gray">
+          {item}
+        </li>
+      ))
+    }
+  </ul>
 </AboutSection>
 
 <script>
