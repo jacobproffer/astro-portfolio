@@ -65,11 +65,3 @@
     text-underline-offset: 0.2em;
   }
 }
-
-@layer components {
-  .section-label {
-    color: #efefef;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-}

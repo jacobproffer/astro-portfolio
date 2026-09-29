@@ -16,7 +16,7 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
 ---
 
 <a
-  class="relative grid gap-4 text-gray outline-none transition-opacity hover:opacity-75 focus-visible:outline-2 focus-visible:outline-light-blue"
+  class="relative grid gap-8 text-gray outline-none transition-opacity hover:opacity-75 focus-visible:outline-2 focus-visible:outline-light-blue"
   href={url}
   target="_blank"
 >
@@ -35,19 +35,8 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
       </div>
     )
   }
-  <div class="grid gap-1 px-1">
+  <div class="grid gap-4 px-4">
     {headline && <TertiaryHeadline text={headline} />}
-    {description && <p class="muted-copy line-clamp-2">{description}</p>}
-    {
-      tags && (
-        <ul class="hidden">
-          {tags.map((tag: string) => (
-            <li class="border border-[#252525] bg-dark-blue px-1.5 text-[0.6rem] text-light-blue">
-              {tag}
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {description && <p class="text-gray line-clamp-2">{description}</p>}
   </div>
 </a>

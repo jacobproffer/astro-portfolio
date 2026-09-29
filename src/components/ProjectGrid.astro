@@ -17,15 +17,9 @@ const projects = (await getCollection("projects")).sort((a, b) =>
 ---
 
 <Section>
-  <div id="work" class="grid gap-4">
-    <div class="flex items-center justify-between">
-      <SecondaryHeadline text={headline} />
-      <a
-        class="text-[0.65rem] text-gray underline-offset-4 hover:underline"
-        href="#work-list">View all</a
-      >
-    </div>
-    <ol id="work-list" class="grid grid-cols-2 gap-x-2 gap-y-6">
+  <div id="work" class="grid gap-8">
+    <SecondaryHeadline text={headline} />
+    <ol class="grid gap-x-6 gap-y-12 sm:grid-cols-2">
       {
         projects.map((entry) => (
           <li class="project-item" data-animate>
