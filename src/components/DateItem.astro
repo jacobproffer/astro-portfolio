@@ -12,10 +12,10 @@ const { title, startDate, endDate } = Astro.props;
 ---
 
 <div
-  class="flex flex-col items-start gap-4"
+  class="flex flex-col items-start gap-2"
 >
-  <h4 class="text-foreground text-balance leading-5">{title}</h4>
-  <div class="flex flex-wrap items-center gap-2 text-caption">
+  <h4 class="text-base font-medium leading-6 text-foreground text-balance">{title}</h4>
+  <div class="flex flex-wrap items-center gap-2 text-xs font-medium text-icon-muted">
     {startDate && (
       <time datetime={startDate}>{formatDate(startDate)}</time>
       <div class="text-accent">-</div>

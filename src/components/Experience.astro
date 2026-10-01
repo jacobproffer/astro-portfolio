@@ -15,9 +15,9 @@ const sortedExperience = experienceItems.sort(
 <AboutSection secondaryHeadline="Experience">
   {
     sortedExperience?.length && (
-      <ol class="grid gap-4">
+      <ol class="grid gap-8">
         {sortedExperience.map((item) => (
-          <li class="experience-item grid gap-1" data-animate>
+          <li class="experience-item grid gap-4" data-animate>
             <TertiaryHeadline text={item.data.company} />
             {item.data.positions?.length &&
               (item.data.positions.length === 1 ? (
