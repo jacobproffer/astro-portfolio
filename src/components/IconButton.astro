@@ -10,10 +10,9 @@ const { href, label } = Astro.props;
 ---
 
 <NavLink
-  class="grid size-14 place-items-center rounded-full border border-border bg-surface-raised p-0 text-icon-muted transition-colors hover:border-border-hover hover:bg-surface-hover hover:text-white focus-visible:border-border-hover focus-visible:bg-surface-hover focus-visible:text-white"
+  class="grid size-14 place-items-center rounded-full border border-border bg-surface-raised p-0 text-icon transition-colors [&>svg]:size-5 hover:border-border-hover hover:bg-surface-hover hover:text-white focus-visible:border-border-hover focus-visible:bg-surface-hover focus-visible:text-white"
   href={href}
   aria-label={label}
-  title={label}
 >
   <slot />
 </NavLink>
