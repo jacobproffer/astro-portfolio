@@ -16,13 +16,13 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
 ---
 
 <a
-  class="relative grid gap-8 text-gray outline-none transition-opacity hover:opacity-75 focus-visible:outline-2 focus-visible:outline-light-blue"
+  class="relative grid gap-8 text-foreground outline-none transition-opacity hover:opacity-75 focus-visible:outline-2 focus-visible:outline-accent"
   href={url}
   target="_blank"
 >
   {
     thumbnail && (
-      <div class="aspect-[1.35] overflow-hidden rounded-3xl border border-[#242424] bg-dark-blue">
+      <div class="aspect-project overflow-hidden rounded-3xl border border-border bg-surface-deep">
         <Image
           class="h-full w-full object-cover"
           src={thumbnail}
@@ -37,6 +37,6 @@ const { thumbnail, thumbnailAlt, headline, description, url, tags } =
   }
   <div class="grid gap-4 px-4">
     {headline && <TertiaryHeadline text={headline} />}
-    {description && <p class="text-gray line-clamp-2">{description}</p>}
+    {description && <p class="text-foreground line-clamp-2">{description}</p>}
   </div>
 </a>

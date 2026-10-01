@@ -21,7 +21,7 @@ const heroHeadline = "Jacob Proffer";
         <Avatar />
       </div>
       <Hero headline={heroHeadline}>
-        <p class="muted-copy max-w-4xl text-gray">
+        <p class="max-w-4xl text-foreground">
           I'm a front-end developer based in Marquette, Michigan with eleven
           years of agency experience. I specialize in crafting accessible and
           performant solutions for the web.
@@ -31,8 +31,8 @@ const heroHeadline = "Jacob Proffer";
     <ProjectGrid headline="Personal Projects" />
     <Languages />
     <section id="about" aria-labelledby="about-heading" class="grid gap-5">
-      <h2 id="about-heading" class="section-label">About</h2>
-      <div class="grid gap-8 muted-copy">
+      <h2 id="about-heading">About</h2>
+      <div class="grid gap-8">
         <p>
           I started coding out of curiosity and grew into developing complete
           products that balance design and engineering.
@@ -44,23 +44,23 @@ const heroHeadline = "Jacob Proffer";
       </div>
       <div class="grid grid-cols-3 items-start gap-4 pt-8">
         <Image
-          class="aspect-[4/5] w-full rotate-2 rounded-2xl object-cover"
+          class="aspect-portrait w-full rotate-2 rounded-2xl object-cover"
           src={aboutCoding}
           alt=""
         />
         <Image
-          class="aspect-[4/5] w-full -rotate-2 rounded-2xl object-cover"
+          class="aspect-portrait w-full -rotate-2 rounded-2xl object-cover"
           src={aboutBridge}
           alt=""
         />
         <Image
-          class="aspect-[4/5] w-full rotate-2 rounded-2xl object-cover"
+          class="aspect-portrait w-full rotate-2 rounded-2xl object-cover"
           src={aboutDog}
           alt=""
         />
       </div>
     </section>
-    <div class="grid gap-10 md:grid-cols-2 md:gap-6">
+    <div class="grid gap-10">
       <Experience />
       <div class="grid gap-10">
         <Education />
