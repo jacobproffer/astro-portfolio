@@ -1,0 +1,21 @@
+---
+// Decorative crosshairs pinned to the corners of the nearest positioned parent.
+const corners = [
+  "top-0 left-0 -translate-x-1/2 -translate-y-1/2",
+  "top-0 right-0 translate-x-1/2 -translate-y-1/2",
+  "bottom-0 left-0 -translate-x-1/2 translate-y-1/2",
+  "bottom-0 right-0 translate-x-1/2 translate-y-1/2",
+];
+---
+
+{
+  corners.map((position) => (
+    <span
+      class:list={["pointer-events-none absolute size-4 text-mute", position]}
+      aria-hidden="true"
+    >
+      <span class="absolute top-1/2 left-0 h-px w-full bg-current" />
+      <span class="absolute top-0 left-1/2 h-full w-px bg-current" />
+    </span>
+  ))
+}

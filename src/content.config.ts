@@ -24,8 +24,10 @@ const experience = defineCollection({
         position: z.string(),
         startDate: z.string(),
         endDate: z.string().optional(),
+        highlights: z.array(z.string()).optional(), // Accomplishment bullets
       }),
     ),
+    note: z.string().optional(), // e.g. "Rehired"
     order: z.number(), // For sorting experience items
   }),
 });

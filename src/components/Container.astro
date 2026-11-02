@@ -8,7 +8,7 @@ const { class: className, ...rest } = Astro.props;
 ---
 
 <div
-  class:list={["max-w-(--breakpoint-md) md:max-w-(--breakpoint-lg) mx-auto", className]}
+  class:list={["mx-auto w-full max-w-[1440px] px-4 md:px-8", className]}
   {...rest}
 >
   <slot />

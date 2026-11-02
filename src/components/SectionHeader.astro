@@ -1,0 +1,23 @@
+---
+interface Props {
+  id: string;
+  index: string;
+  title: string;
+  meta?: string;
+}
+
+const { id, index, title, meta } = Astro.props;
+---
+
+<header class="grid gap-4 pt-16 pb-8 md:pt-24 md:pb-12">
+  <div class="label flex justify-between text-mute">
+    <span>({index})</span>
+    {meta && <span>{meta}</span>}
+  </div>
+  <h2
+    id={id}
+    class="font-wide text-[clamp(2.5rem,10vw,9rem)] leading-[0.85] font-black tracking-[-0.04em] text-balance uppercase"
+  >
+    {title}
+  </h2>
+</header>

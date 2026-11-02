@@ -1,5 +1,85 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #0b0c0a;
+  --color-panel: #131511;
+  --color-line: #454b40; /* dividers, ~2.2:1 on ink */
+  --color-mute: #a3aa9c; /* secondary text, 8.2:1 on ink (AAA) */
+  --color-bone: #e8ebe3;
+  --color-acid: #c4f82a;
+  --color-acid-deep: #a6d81c;
+
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --aspect-project: 1200 / 621;
+
+  --animate-marquee: marquee 120s linear infinite;
+  --animate-stretch: stretch 1.4s cubic-bezier(0.7, 0, 0.2, 1) both;
+
+  @keyframes marquee {
+    to {
+      translate: -50% 0;
+    }
+  }
+
+  @keyframes stretch {
+    from {
+      font-stretch: 62%;
+      letter-spacing: 0.08em;
+    }
+  }
+}
+
+/* Archivo's width axis runs 62%–125%; these lean on it for display type. */
+@utility font-wide {
+  font-stretch: 125%;
+}
+
+@utility font-narrow {
+  font-stretch: 62%;
+}
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-bone);
+}
+
+/* Spec-sheet label: tiny uppercase mono. */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Dotted leader between a readout's key and value. */
+@utility leader {
+  flex: 1;
+  min-width: 1rem;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.55;
+  translate: 0 -0.3em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+  }
+
+  ::selection {
+    background: var(--color-acid);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-acid);
+    outline-offset: 3px;
+  }
+}
+
 /* Hide elements that will be animated */
 [data-animate] {
   opacity: 0;
@@ -10,32 +90,8 @@
   [data-animate] {
     opacity: 1;
   }
-}
 
-@font-face {
-  font-family: "Fira Code Variable";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 300 700;
-  src: url(@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2)
-    format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@theme {
-  --color-black: #0d1418;
-  --color-dark: #181a1c;
-  --color-gray: #e2e2e2;
-  --color-light: #2d2d2d;
-  --color-highlight: #3c3a3a;
-  --color-light-blue: #6cb1e1;
-  --color-mid-blue: #132b38;
-  --color-dark-blue: #162128;
-  --color-yellow: #ffd800;
-  --color-green: #6ee16c;
-  --font-sans: "Fira Code Variable", monospace;
-  --aspect-ratio-project: "1200/621";
+  html {
+    scroll-behavior: auto;
+  }
 }

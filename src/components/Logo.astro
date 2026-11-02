@@ -2,9 +2,15 @@
 import LogoGraphic from "@images/logo.svg";
 ---
 
-<div class="grid items-center gap-3 md:grid-cols-[48px_1fr]">
-  <div class="w-12 h-12">
+<a
+  href="/"
+  class="group inline-flex items-center gap-2 transition-colors hover:text-acid"
+>
+  <span
+    class="size-7 transition-transform duration-500 group-hover:rotate-180"
+    aria-hidden="true"
+  >
     <LogoGraphic />
-  </div>
-  <span class="text-lg max-md:hidden">proffer.dev</span>
-</div>
+  </span>
+  <span class="label">Proffer.dev</span>
+</a>

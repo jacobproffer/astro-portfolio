@@ -1,14 +1,8 @@
 ---
-import Section from "@components/Section.astro";
-import SecondaryHeadline from "@components/SecondaryHeadline.astro";
+import Container from "@components/Container.astro";
+import SectionHeader from "@components/SectionHeader.astro";
 import Project from "@components/Project.astro";
 import { getCollection } from "astro:content";
-
-interface Props {
-  headline: string;
-}
-
-const { headline } = Astro.props;
 
 // Load projects from content collection
 const projects = (await getCollection("projects")).sort(
@@ -16,28 +10,32 @@ const projects = (await getCollection("projects")).sort(
 );
 ---
 
-<Section>
-  <SecondaryHeadline text={headline} />
-  <ol class="grid gap-y-3 p-3">
-    {
-      projects.map((entry, index: number) => (
-        <li
-          class={`project-item ${index > 0 ? "border-t border-black" : ""}`}
-          data-animate
-        >
-          <Project
-            url={entry.data.url}
-            headline={entry.data.title}
-            description={entry.data.description ?? ""}
-            tags={entry.data.tags ?? []}
-            thumbnail={entry.data.thumbnail}
-            thumbnailAlt=""
-          />
-        </li>
-      ))
-    }
-  </ol>
-</Section>
+<section aria-labelledby="work" class="border-b border-line">
+  <Container>
+    <SectionHeader
+      id="work"
+      index="01"
+      title="Selected Projects"
+      meta={`[${String(projects.length).padStart(2, "0")}] entries`}
+    />
+    <ol class="pb-16 md:pb-24">
+      {
+        projects.map((entry, index: number) => (
+          <li class="project-item" data-animate>
+            <Project
+              index={index}
+              url={entry.data.url}
+              headline={entry.data.title}
+              description={entry.data.description ?? ""}
+              tags={entry.data.tags ?? []}
+              thumbnail={entry.data.thumbnail}
+            />
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>
 
 <script>
   import { animateOnScroll } from "../utils/animations";

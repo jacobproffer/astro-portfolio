@@ -1,28 +1,93 @@
 ---
-import Section from "./Section.astro";
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import CropMarks from "@components/CropMarks.astro";
+import Readout from "@components/Readout.astro";
+import Avatar from "@components/Avatar.astro";
+import { location, resumePdf, yearsOfExperience } from "@/data/site";
 
-interface Props {
-  headline: string;
-}
+const current = (await getCollection("experience")).find((entry) =>
+  entry.data.positions.some((position) => !position.endDate),
+);
 
-const { headline } = Astro.props;
+const readout = [
+  { key: "Discipline", value: "Front-End" },
+  { key: "Experience", value: `${yearsOfExperience} yrs` },
+  { key: "Based", value: location.city },
+  ...(current ? [{ key: "Currently", value: current.data.company }] : []),
+  { key: "Focus", value: "A11y / Perf / Motion" },
+];
 ---
 
-<Section>
-  <div
-    class="p-3 bg-linear-to-t from-dark-blue to-mid-blue border-black border-b"
-  >
-    {
-      headline && (
-        <h1 class="font-medium text-xl text-gray leading-8 text-balance">
-          {headline}
-        </h1>
-      )
-    }
-  </div>
-  <div
-    class="p-3 m-3 border border-black border-t-highlight border-l-highlight bg-mid-blue"
-  >
-    <slot />
-  </div>
-</Section>
+<section aria-labelledby="hero-title" class="border-b border-line">
+  <Container class="relative py-10 md:py-16">
+    <div class="relative">
+      <CropMarks />
+
+      <div
+        class="label grid grid-cols-2 gap-4 px-3 pt-6 text-mute md:grid-cols-4"
+      >
+        <span>(JP—{yearsOfExperience})</span>
+        <span class="max-md:hidden">Portfolio / {new Date().getFullYear()}</span>
+        <span class="max-md:hidden">Index 001</span>
+        <span class="text-right">
+          Status <span class="text-acid">&gt;&gt;&gt; Building</span>
+        </span>
+      </div>
+
+      <h1
+        id="hero-title"
+        class="font-wide motion-safe:animate-stretch px-1 pt-6 pb-8 text-[clamp(3.25rem,14.6vw,13.25rem)] leading-[0.82] font-black tracking-[-0.04em] uppercase md:pt-10"
+      >
+        <span class="block">Jacob</span>{" "}
+        <span class="block whitespace-nowrap">
+          Proffer<span
+            class="ml-[0.06em] inline-block size-[0.18em] bg-acid align-baseline"
+            aria-hidden="true"></span>
+        </span>
+      </h1>
+
+      <div
+        class="grid gap-8 border-t border-line px-3 pt-8 pb-6 md:grid-cols-12 md:gap-6"
+      >
+        <div class="max-md:max-w-60 md:col-span-3">
+          <Avatar />
+        </div>
+
+        <div class="flex flex-col gap-8 md:col-span-6 lg:col-span-5">
+          <p
+            class="text-2xl leading-tight font-medium text-balance md:text-3xl"
+          >
+            Front-end developer in Marquette, Michigan with eleven years of
+            agency experience, crafting <span class="text-acid"
+              >accessible, performant</span
+            > interfaces for the web.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="#contact"
+              class="label inline-flex items-center gap-2 bg-acid px-5 py-3 font-semibold text-ink transition-colors hover:bg-bone"
+            >
+              Get in touch <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href="#work"
+              class="label inline-flex items-center gap-2 border border-mute px-5 py-3 transition-colors hover:border-acid hover:text-acid"
+            >
+              View work <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              href={resumePdf}
+              download
+              class="label inline-flex items-center gap-2 border border-mute px-5 py-3 transition-colors hover:border-acid hover:text-acid"
+            >
+              Résumé <span class="sr-only">(PDF)</span><span aria-hidden="true">↧</span>
+            </a>
+          </div>
+        </div>
+
+        <Readout items={readout} class="md:col-span-3 lg:col-span-3 lg:col-start-10" />
+      </div>
+    </div>
+  </Container>
+</section>

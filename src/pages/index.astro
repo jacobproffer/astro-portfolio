@@ -1,34 +1,28 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Avatar from "@components/Avatar.astro";
 import Hero from "@components/Hero.astro";
+import Marquee from "@components/Marquee.astro";
 import ProjectGrid from "@components/ProjectGrid.astro";
 import Experience from "@components/Experience.astro";
-import Education from "@components/Education.astro";
-import Languages from "@components/Languages.astro";
+import Stack from "@components/Stack.astro";
 const pageTitle = "Jacob Proffer – Front-End Developer";
-const heroHeadline = "Jacob Proffer";
+
+const disciplines = [
+  "Accessibility",
+  "Performance",
+  "Motion",
+  "Design Systems",
+  "Astro",
+  "TypeScript",
+  "Tailwind CSS",
+  "Hugo",
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="grid gap-3 md:gap-6">
-    <div class="grid gap-3 md:grid-cols-[1fr_3fr] items-start md:gap-6">
-      <Avatar />
-      <Hero headline={heroHeadline}>
-        <p class="leading-6">
-          I'm a front-end developer based in Marquette, Michigan with eleven
-          years of agency experience. I specialize in crafting accessible and
-          performant solutions for the web.
-        </p>
-      </Hero>
-    </div>
-    <ProjectGrid headline="Personal Projects" />
-    <div class="grid items-start md:grid-cols-2 gap-3 md:gap-6">
-      <div class="flex flex-col gap-3 md:gap-6">
-        <Experience />
-        <Education />
-      </div>
-      <Languages />
-    </div>
-  </div>
+  <Hero />
+  <Marquee items={disciplines} />
+  <ProjectGrid />
+  <Experience />
+  <Stack />
 </BaseLayout>

@@ -1,61 +1,136 @@
 ---
-import AboutSection from "@components/AboutSection.astro";
-import DateItem from "@components/DateItem.astro";
-import TertiaryHeadline from "@components/TertiaryHeadline.astro";
+import Container from "@components/Container.astro";
+import SectionHeader from "@components/SectionHeader.astro";
+import DateRange from "@components/DateRange.astro";
 import { getCollection } from "astro:content";
+import { education } from "@/data/site";
 
 // Load experience from content collection
-const experienceItems = await getCollection("experience");
-// Sort by order field
-const sortedExperience = experienceItems.sort(
+const experienceItems = (await getCollection("experience")).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---
 
-<AboutSection secondaryHeadline="Experience">
-  {
-    sortedExperience?.length && (
-      <ol class="grid gap-3 m-3">
-        {sortedExperience.map((item) => (
-          <li
-            class="experience-item grid gap-3 p-3 bg-mid-blue  border border-black border-t-highlight border-l-highlight"
-            data-animate
-          >
-            <TertiaryHeadline text={item.data.company} />
-            {item.data.positions?.length &&
-              (item.data.positions.length === 1 ? (
-                <DateItem
-                  type="Experience"
-                  title={item.data.positions[0].position}
-                  startDate={item.data.positions[0].startDate}
-                  endDate={item.data.positions[0].endDate}
-                />
-              ) : (
-                <ol class="grid gap-3">
-                  {item.data.positions.map((position) => (
-                    <li>
-                      <DateItem
-                        type="Experience"
-                        title={position.position}
-                        startDate={position.startDate}
-                        endDate={position.endDate}
-                      />
-                    </li>
-                  ))}
-                </ol>
-              ))}
-          </li>
-        ))}
-      </ol>
-    )
-  }
-</AboutSection>
+<section aria-labelledby="experience" class="border-b border-line">
+  <Container class="pb-16 md:pb-24">
+    <SectionHeader
+      id="experience"
+      index="02"
+      title="Experience"
+      meta="Employment record"
+    />
+
+    <div
+      class="relative grid bg-acid text-ink md:grid-cols-[4.5rem_1fr]"
+      data-animate
+      id="experience-ticket"
+    >
+      <!-- Ticket stub (decorative; repeats the section's content) -->
+      <div
+        aria-hidden="true"
+        class="flex items-center justify-between gap-4 border-b border-dashed border-ink/50 px-4 py-3 md:flex-col md:border-r md:border-b-0 md:px-0 md:py-6"
+      >
+        <span class="label md:[writing-mode:vertical-rl] md:rotate-180">
+          Record / Front-End Development
+        </span>
+        <span class="label md:[writing-mode:vertical-rl] md:rotate-180">
+          2015 → Present
+        </span>
+      </div>
+
+      <div class="px-4 md:px-8">
+        <ol>
+          {
+            experienceItems.map((item, index) => (
+              <li
+                class:list={[
+                  "grid gap-4 py-6 md:grid-cols-12 md:gap-6 md:py-8",
+                  index > 0 && "border-t border-ink/30",
+                ]}
+              >
+                <div class="grid content-start gap-2 md:col-span-5">
+                  <h3 class="font-wide text-2xl leading-none font-extrabold tracking-tight uppercase md:text-4xl">
+                    {item.data.company}
+                  </h3>
+                  {item.data.note && (
+                    <span class="label">[{item.data.note}]</span>
+                  )}
+                </div>
+                <div class="grid gap-4 md:col-span-7">
+                  <ol class="grid gap-5">
+                    {item.data.positions.map((position) => (
+                      <li class="grid gap-2">
+                        <div class="flex items-end gap-3">
+                          <h4 class="font-semibold">{position.position}</h4>
+                          <span class="leader" aria-hidden="true" />
+                          <DateRange
+                            class="label"
+                            start={position.startDate}
+                            end={position.endDate}
+                          />
+                        </div>
+                        {position.highlights?.length && (
+                          <ul class="grid gap-1 text-sm leading-relaxed">
+                            {position.highlights.map((highlight) => (
+                              <li class="flex gap-2">
+                                <span aria-hidden="true">✱</span>
+                                {highlight}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <!-- Perforated divider with ticket notches -->
+      <div
+        class="relative border-t border-dashed border-ink/50 md:col-span-2"
+        aria-hidden="true"
+      >
+        <span class="absolute top-0 -left-3 size-6 -translate-y-1/2 rounded-full bg-ink"></span>
+        <span class="absolute top-0 -right-3 size-6 -translate-y-1/2 rounded-full bg-ink"></span>
+      </div>
+
+      <div
+        class="grid gap-4 px-4 py-6 md:col-span-2 md:grid-cols-[4.5rem_1fr] md:gap-0 md:px-0 md:py-8"
+      >
+        <h3 class="label md:text-center">
+          <span aria-hidden="true">Edu.</span>
+          <span class="sr-only">Education</span>
+        </h3>
+        <div class="grid gap-2 md:grid-cols-12 md:gap-6 md:px-8">
+          <h4 class="font-wide text-xl leading-none font-extrabold uppercase md:col-span-5 md:text-2xl">
+            {education.school}
+          </h4>
+          <p class="flex items-end gap-3 md:col-span-7">
+            <span class="font-semibold">{education.shortDegree}</span>
+            <span class="leader" aria-hidden="true"></span>
+            <DateRange
+              class="label"
+              start={education.startDate}
+              end={education.endDate}
+            />
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
 
 <script>
   import { animateOnScroll } from "../utils/animations";
 
-  // Animate each experience item as it scrolls into view
-  document.querySelectorAll(".experience-item").forEach((item) => {
-    animateOnScroll(item);
-  });
+  // The ticket holds the whole record and can be several viewports tall, so
+  // trigger on first intersection rather than a 30% threshold.
+  const ticket = document.getElementById("experience-ticket");
+  if (ticket) {
+    animateOnScroll(ticket, undefined, {}, "some");
+  }
 </script>
