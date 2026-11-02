@@ -127,8 +127,10 @@ const experienceItems = (await getCollection("experience")).sort(
 <script>
   import { animateOnScroll } from "../utils/animations";
 
+  // The ticket holds the whole record and can be several viewports tall, so
+  // trigger on first intersection rather than a 30% threshold.
   const ticket = document.getElementById("experience-ticket");
   if (ticket) {
-    animateOnScroll(ticket);
+    animateOnScroll(ticket, undefined, {}, "some");
   }
 </script>

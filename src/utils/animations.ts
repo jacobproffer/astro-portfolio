@@ -45,6 +45,9 @@ export function fadeInStagger(
 
 /**
  * Animate on scroll into view
+ * @param amount - Share of the element that must be visible to trigger.
+ * Use "some" for elements that can be taller than the viewport, where a
+ * fractional threshold may never be reached.
  */
 export function animateOnScroll(
   element: Element,
@@ -53,6 +56,7 @@ export function animateOnScroll(
     transform: ["translateY(40px)", "translateY(0px)"],
   },
   options: ExtendedAnimationOptions = {},
+  amount: number | "some" | "all" = 0.3,
 ) {
   // Skip if already animated
   if (element.hasAttribute("data-animated")) return;
@@ -68,7 +72,7 @@ export function animateOnScroll(
         ...options,
       });
     },
-    { amount: 0.3 },
+    { amount },
   );
 }
 

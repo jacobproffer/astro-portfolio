@@ -11,10 +11,12 @@ const REPEAT = 3;
 const run = Array.from({ length: REPEAT }, () => items).flat();
 ---
 
-<div class="overflow-hidden border-b border-line bg-acid py-3 text-ink">
+<div
+  class="marquee group/marquee relative overflow-hidden border-b border-line bg-acid text-ink"
+>
   <p class="sr-only">{items.join(", ")}</p>
   <div
-    class="flex w-max motion-safe:animate-marquee hover:[animation-play-state:paused]"
+    class="flex w-max py-3 motion-safe:animate-marquee group-hover/marquee:[animation-play-state:paused] group-data-paused/marquee:[animation-play-state:paused]"
     aria-hidden="true"
   >
     {
@@ -30,4 +32,48 @@ const run = Array.from({ length: REPEAT }, () => items).flat();
       ))
     }
   </div>
+
+  <!-- WCAG 2.2.2: a keyboard-operable way to stop the motion. Shown once the
+       script runs; hidden when reduced motion already stops the animation. -->
+  <button
+    type="button"
+    class="marquee-toggle label absolute inset-y-0 right-0 flex items-center gap-2 bg-ink px-4 text-acid transition-colors hover:bg-panel focus-visible:-outline-offset-4 motion-reduce:hidden"
+    hidden
+  >
+    <span class="marquee-icon w-3 text-center" aria-hidden="true">❚❚</span>
+    <span class="marquee-label">Pause</span>
+  </button>
 </div>
+
+<script>
+  const STORAGE_KEY = "marquee-paused";
+
+  document.querySelectorAll<HTMLElement>(".marquee").forEach((marquee) => {
+    const toggle = marquee.querySelector<HTMLButtonElement>(".marquee-toggle");
+    const icon = marquee.querySelector(".marquee-icon");
+    const label = marquee.querySelector(".marquee-label");
+    if (!toggle || !icon || !label) return;
+
+    const setPaused = (paused: boolean) => {
+      marquee.toggleAttribute("data-paused", paused);
+      icon.textContent = paused ? "▶" : "❚❚";
+      label.textContent = paused ? "Play" : "Pause";
+      try {
+        localStorage.setItem(STORAGE_KEY, String(paused));
+      } catch {
+        // Storage can be unavailable; the toggle still works for this visit.
+      }
+    };
+
+    let saved = false;
+    try {
+      saved = localStorage.getItem(STORAGE_KEY) === "true";
+    } catch {}
+
+    setPaused(saved);
+    toggle.hidden = false;
+    toggle.addEventListener("click", () =>
+      setPaused(!marquee.hasAttribute("data-paused")),
+    );
+  });
+</script>

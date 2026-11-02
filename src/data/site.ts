@@ -24,10 +24,10 @@ export const yearsOfExperience = Math.floor(
 );
 
 export const sections = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#stack", label: "Stack" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#work", label: "Work" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#stack", label: "Stack" },
+  { href: "/#contact", label: "Contact" },
   { href: "/resume/", label: "Résumé" },
 ];
 

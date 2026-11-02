@@ -231,6 +231,11 @@ const contact = [
     text-decoration: none;
   }
 
+  /* The global acid outline is ~1.25:1 on white paper; use ink instead. */
+  .resume a:focus-visible {
+    outline-color: var(--color-ink);
+  }
+
   @media print {
     .resume-section h2::after,
     .print-color {
