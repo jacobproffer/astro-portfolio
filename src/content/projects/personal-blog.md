@@ -7,4 +7,5 @@ tags:
   - "scss"
   - "javascript"
 thumbnail: "../../assets/images/personal_blog.jpg"
+order: 5
 ---

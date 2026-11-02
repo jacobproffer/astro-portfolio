@@ -11,8 +11,8 @@ interface Props {
 const { headline } = Astro.props;
 
 // Load projects from content collection
-const projects = (await getCollection("projects")).sort((a, b) =>
-  a.data.title.localeCompare(b.data.title),
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
 );
 ---
 

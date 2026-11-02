@@ -7,4 +7,5 @@ tags:
   - "scss"
   - "javascript"
 thumbnail: "../../assets/images/unhealthy_obsession.jpg"
+order: 8
 ---
