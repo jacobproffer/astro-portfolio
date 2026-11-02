@@ -7,7 +7,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "resume:pdf": "bash scripts/resume-pdf.sh"
+    "resume:pdf": "bash scripts/resume-pdf.sh",
+    "social:image": "node scripts/social/render.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
