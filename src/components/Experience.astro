@@ -1,7 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import SectionHeader from "@components/SectionHeader.astro";
-import { formatShortDate } from "@utils/date";
+import DateRange from "@components/DateRange.astro";
 import { getCollection } from "astro:content";
 import { education } from "@/data/site";
 
@@ -9,9 +9,6 @@ import { education } from "@/data/site";
 const experienceItems = (await getCollection("experience")).sort(
   (a, b) => a.data.order - b.data.order,
 );
-
-const dateRange = (start: string, end?: string) =>
-  `${formatShortDate(start)} → ${end ? formatShortDate(end) : "Present"}`;
 ---
 
 <section aria-labelledby="experience" class="border-b border-line">
@@ -28,8 +25,9 @@ const dateRange = (start: string, end?: string) =>
       data-animate
       id="experience-ticket"
     >
-      <!-- Ticket stub -->
+      <!-- Ticket stub (decorative; repeats the section's content) -->
       <div
+        aria-hidden="true"
         class="flex items-center justify-between gap-4 border-b border-dashed border-ink/50 px-4 py-3 md:flex-col md:border-r md:border-b-0 md:px-0 md:py-6"
       >
         <span class="label md:[writing-mode:vertical-rl] md:rotate-180">
@@ -63,11 +61,13 @@ const dateRange = (start: string, end?: string) =>
                     {item.data.positions.map((position) => (
                       <li class="grid gap-2">
                         <div class="flex items-end gap-3">
-                          <span class="font-semibold">{position.position}</span>
+                          <h4 class="font-semibold">{position.position}</h4>
                           <span class="leader" aria-hidden="true" />
-                          <span class="label whitespace-nowrap">
-                            {dateRange(position.startDate, position.endDate)}
-                          </span>
+                          <DateRange
+                            class="label"
+                            start={position.startDate}
+                            end={position.endDate}
+                          />
                         </div>
                         {position.highlights?.length && (
                           <ul class="grid gap-1 text-sm leading-relaxed">
@@ -101,17 +101,22 @@ const dateRange = (start: string, end?: string) =>
       <div
         class="grid gap-4 px-4 py-6 md:col-span-2 md:grid-cols-[4.5rem_1fr] md:gap-0 md:px-0 md:py-8"
       >
-        <h3 class="label md:text-center">Edu.</h3>
+        <h3 class="label md:text-center">
+          <span aria-hidden="true">Edu.</span>
+          <span class="sr-only">Education</span>
+        </h3>
         <div class="grid gap-2 md:grid-cols-12 md:gap-6 md:px-8">
-          <p class="font-wide text-xl leading-none font-extrabold uppercase md:col-span-5 md:text-2xl">
+          <h4 class="font-wide text-xl leading-none font-extrabold uppercase md:col-span-5 md:text-2xl">
             {education.school}
-          </p>
+          </h4>
           <p class="flex items-end gap-3 md:col-span-7">
             <span class="font-semibold">{education.shortDegree}</span>
             <span class="leader" aria-hidden="true"></span>
-            <span class="label whitespace-nowrap">
-              {dateRange(education.startDate, education.endDate)}
-            </span>
+            <DateRange
+              class="label"
+              start={education.startDate}
+              end={education.endDate}
+            />
           </p>
         </div>
       </div>

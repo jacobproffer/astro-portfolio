@@ -1,0 +1,27 @@
+---
+import { formatDate, formatShortDate } from "@utils/date";
+
+interface Props {
+  start: string; // "YYYY-MM", a valid datetime month string
+  end?: string; // Omit for a current role
+  format?: "short" | "long";
+  separator?: string;
+  class?: string;
+}
+
+const {
+  start,
+  end,
+  format = "short",
+  separator = "→",
+  class: className,
+} = Astro.props;
+
+const display = format === "short" ? formatShortDate : formatDate;
+---
+
+<span class:list={["whitespace-nowrap", className]}>
+  <time datetime={start}>{display(start)}</time>{" "}
+  <span aria-hidden="true">{separator}</span><span class="sr-only">to</span>{" "}
+  {end ? <time datetime={end}>{display(end)}</time> : "Present"}
+</span>

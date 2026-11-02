@@ -4,7 +4,7 @@ import "@fontsource-variable/jetbrains-mono/wght.css";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
 import { getCollection } from "astro:content";
-import { formatDate } from "@utils/date";
+import DateRange from "@components/DateRange.astro";
 import { education, email, location, primaryLinks, resumePdf } from "@/data/site";
 import { projectIds, skills, summary, title } from "@/data/resume";
 
@@ -16,9 +16,6 @@ const allProjects = await getCollection("projects");
 const projects = projectIds
   .map((id) => allProjects.find((entry) => entry.id === id))
   .filter((entry) => entry !== undefined);
-
-const dateRange = (start: string, end?: string) =>
-  `${formatDate(start)} – ${end ? formatDate(end) : "Present"}`;
 
 // Display links without the protocol, trailing slash, or "www."
 const bare = (url: string) =>
@@ -114,7 +111,7 @@ const contact = [
             experience.map((item) => (
               <li class="break-inside-avoid">
                 <h3 class="font-wide text-[10pt] font-extrabold uppercase">
-                  {item.data.company}
+                  {item.data.company}{" "}
                   {item.data.note && (
                     <span class="ml-1.5 font-mono text-[7.5pt] font-normal tracking-normal normal-case">
                       ({item.data.note})
@@ -126,9 +123,13 @@ const contact = [
                     <li>
                       <div class="flex items-baseline justify-between gap-4">
                         <h4 class="font-semibold">{position.position}</h4>
-                        <span class="font-mono text-[7.5pt] whitespace-nowrap">
-                          {dateRange(position.startDate, position.endDate)}
-                        </span>
+                        <DateRange
+                          class="font-mono text-[7.5pt]"
+                          start={position.startDate}
+                          end={position.endDate}
+                          format="long"
+                          separator="–"
+                        />
                       </div>
                       {position.highlights?.length && (
                         <ul class="mt-0.5 grid gap-0.5">
@@ -170,13 +171,19 @@ const contact = [
       <section class="resume-section">
         <h2>Education</h2>
         <div class="flex items-baseline justify-between gap-4 max-sm:flex-col max-sm:gap-0">
-          <p>
-            <span class="font-semibold">{education.school}</span>
-            {`, ${education.degree}, ${education.honors}`}
-          </p>
-          <span class="font-mono text-[7.5pt] whitespace-nowrap">
-            {dateRange(education.startDate, education.endDate)}
-          </span>
+          <div>
+            <h3 class="inline font-semibold">{education.school}</h3>
+            <p class="inline">
+              {`, ${education.degree}, ${education.honors}`}
+            </p>
+          </div>
+          <DateRange
+            class="font-mono text-[7.5pt]"
+            start={education.startDate}
+            end={education.endDate}
+            format="long"
+            separator="–"
+          />
         </div>
       </section>
     </main>
