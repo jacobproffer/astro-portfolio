@@ -1,0 +1,63 @@
+---
+import Container from "@components/Container.astro";
+import SectionHeader from "@components/SectionHeader.astro";
+import { stack } from "@/data/stack";
+
+const total = stack.reduce((sum, group) => sum + group.items.length, 0);
+const letter = (index: number) => String.fromCharCode(65 + index);
+---
+
+<section aria-labelledby="stack" class="border-b border-line">
+  <Container class="pb-16 md:pb-24">
+    <SectionHeader
+      id="stack"
+      index="03"
+      title="Stack"
+      meta={`[${String(total).padStart(2, "0")}] tools`}
+    />
+    <dl class="border-b border-line">
+      {
+        stack.map((group, index) => (
+          <div
+            class="stack-group group grid gap-4 border-t border-line py-6 md:grid-cols-12 md:gap-6 md:py-8"
+            data-animate
+          >
+            <dt class="label flex justify-between gap-4 pt-2 text-mute md:col-span-3 md:flex-col md:justify-start md:gap-1">
+              <span class="text-bone group-hover:text-acid">
+                ({letter(index)}) {group.category}
+              </span>
+              <span>
+                {String(group.items.length).padStart(2, "0")} entries
+              </span>
+            </dt>
+            <dd class="md:col-span-9">
+              <ul class="font-wide flex flex-wrap items-baseline gap-x-[0.35em] text-[clamp(1.75rem,4.8vw,4.25rem)] leading-[1.05] font-extrabold tracking-[-0.03em] uppercase">
+                {group.items.map((item, itemIndex) => (
+                  <li class="whitespace-nowrap">
+                    <span class="transition-colors duration-500 md:text-outline md:group-hover:text-acid md:group-hover:[-webkit-text-stroke-color:var(--color-acid)]">
+                      {item}
+                    </span>
+                    {itemIndex < group.items.length - 1 && (
+                      <span class="ml-[0.2em] text-line" aria-hidden="true">
+                        /
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Container>
+</section>
+
+<script>
+  import { animateOnScroll } from "../utils/animations";
+
+  // Animate each stack group as it scrolls into view
+  document.querySelectorAll(".stack-group").forEach((item) => {
+    animateOnScroll(item);
+  });
+</script>

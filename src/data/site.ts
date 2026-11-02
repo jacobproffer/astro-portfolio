@@ -1,5 +1,5 @@
 // TODO: swap in the address you want public before deploying.
-export const email = "hello@proffer.dev";
+export const email = "jacob@proffer.dev";
 
 export const location = {
   city: "Marquette, MI",
