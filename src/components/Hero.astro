@@ -4,7 +4,7 @@ import Container from "@components/Container.astro";
 import CropMarks from "@components/CropMarks.astro";
 import Readout from "@components/Readout.astro";
 import Avatar from "@components/Avatar.astro";
-import { location, yearsOfExperience } from "@/data/site";
+import { location, resumePdf, yearsOfExperience } from "@/data/site";
 
 const current = (await getCollection("experience")).find((entry) =>
   entry.data.positions.some((position) => !position.endDate),
@@ -75,6 +75,13 @@ const readout = [
               class="label inline-flex items-center gap-2 border border-mute px-5 py-3 transition-colors hover:border-acid hover:text-acid"
             >
               View work <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              href={resumePdf}
+              download
+              class="label inline-flex items-center gap-2 border border-mute px-5 py-3 transition-colors hover:border-acid hover:text-acid"
+            >
+              Résumé <span class="sr-only">(PDF)</span><span aria-hidden="true">↧</span>
             </a>
           </div>
         </div>

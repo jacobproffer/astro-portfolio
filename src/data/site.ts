@@ -1,5 +1,15 @@
-// TODO: swap in the address you want public before deploying.
 export const email = "jacob@proffer.dev";
+
+export const resumePdf = "/Jacob_Proffer_Resume.pdf";
+
+export const education = {
+  school: "Northern Michigan University",
+  degree: "Bachelor of Fine Arts in Electronic Imaging",
+  shortDegree: "BFA, Electronic Imaging",
+  honors: "Magna Cum Laude",
+  startDate: "2010-08",
+  endDate: "2014-05",
+};
 
 export const location = {
   city: "Marquette, MI",
@@ -18,6 +28,7 @@ export const sections = [
   { href: "#experience", label: "Experience" },
   { href: "#stack", label: "Stack" },
   { href: "#contact", label: "Contact" },
+  { href: "/resume/", label: "Résumé" },
 ];
 
 export const primaryLinks = [

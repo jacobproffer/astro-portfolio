@@ -1,0 +1,234 @@
+---
+import "@fontsource-variable/archivo/standard.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+import "@styles/global.css";
+import SiteSEO from "@components/SiteSEO.astro";
+import { getCollection } from "astro:content";
+import { formatDate } from "@utils/date";
+import { education, email, location, primaryLinks, resumePdf } from "@/data/site";
+import { projectIds, skills, summary, title } from "@/data/resume";
+
+const experience = (await getCollection("experience")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const allProjects = await getCollection("projects");
+const projects = projectIds
+  .map((id) => allProjects.find((entry) => entry.id === id))
+  .filter((entry) => entry !== undefined);
+
+const dateRange = (start: string, end?: string) =>
+  `${formatDate(start)} – ${end ? formatDate(end) : "Present"}`;
+
+// Display links without the protocol, trailing slash, or "www."
+const bare = (url: string) =>
+  url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
+const contact = [
+  { label: location.city },
+  { label: email, href: `mailto:${email}` },
+  { label: "proffer.dev", href: "https://proffer.dev/" },
+  ...primaryLinks.map((link) => ({ label: bare(link.href), href: link.href })),
+];
+---
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <meta name="theme-color" content="#0b0c0a" />
+    <SiteSEO
+      seo={{
+        title: "Résumé",
+        description: `Résumé for Jacob Proffer, ${title.toLowerCase()} in ${location.city}.`,
+      }}
+    />
+  </head>
+  <body class="bg-ink font-sans text-bone antialiased print:bg-white">
+    <!-- Screen-only toolbar -->
+    <div class="label mx-auto flex max-w-[8.5in] items-center justify-between gap-4 px-4 py-4 print:hidden">
+      <a href="/" class="transition-colors hover:text-acid">← Proffer.dev</a>
+      <div class="flex gap-3">
+        <button
+          type="button"
+          id="print"
+          class="border border-mute px-4 py-2 transition-colors hover:border-acid hover:text-acid"
+        >
+          Print
+        </button>
+        <a
+          href={resumePdf}
+          download
+          class="bg-acid px-4 py-2 font-semibold text-ink transition-colors hover:bg-bone"
+        >
+          Download PDF ↓
+        </a>
+      </div>
+    </div>
+
+    <main
+      class="resume mx-auto mb-12 w-full max-w-[8.5in] bg-white sm:min-h-[11in] print:min-h-0 px-[0.6in] py-[0.55in] text-[9.25pt] leading-[1.35] text-black shadow-2xl max-sm:px-5 max-sm:py-8 print:m-0 print:max-w-none print:p-0 print:shadow-none"
+    >
+      <header class="border-b-[3px] border-black pb-3">
+        <h1 class="font-wide text-[26pt] leading-none font-black tracking-[-0.03em] uppercase">
+          Jacob Proffer<span
+            class="ml-[0.08em] inline-block size-[0.2em] bg-acid align-baseline print-color"
+            aria-hidden="true"></span>
+        </h1>
+        <p class="mt-1.5 text-[11pt] font-semibold">{title}</p>
+        <ul class="mt-2 flex flex-wrap gap-x-2 font-mono text-[7.5pt]">
+          {
+            contact.map((item, index) => (
+              <li class="flex gap-2">
+                {index > 0 && <span aria-hidden="true">/</span>}
+                {item.href ? <a href={item.href}>{item.label}</a> : item.label}
+              </li>
+            ))
+          }
+        </ul>
+      </header>
+
+      <section class="resume-section">
+        <h2>Summary</h2>
+        <p>{summary}</p>
+      </section>
+
+      <section class="resume-section">
+        <h2>Skills</h2>
+        <dl class="grid gap-1">
+          {
+            skills.map((group) => (
+              <div class="grid grid-cols-[1.45in_1fr] gap-3 max-sm:grid-cols-1 max-sm:gap-0">
+                <dt class="font-semibold">{group.category}</dt>
+                <dd>{group.items.join(", ")}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="resume-section">
+        <h2>Experience</h2>
+        <ol class="grid gap-3">
+          {
+            experience.map((item) => (
+              <li class="break-inside-avoid">
+                <h3 class="font-wide text-[10pt] font-extrabold uppercase">
+                  {item.data.company}
+                  {item.data.note && (
+                    <span class="ml-1.5 font-mono text-[7.5pt] font-normal tracking-normal normal-case">
+                      ({item.data.note})
+                    </span>
+                  )}
+                </h3>
+                <ol class="mt-1 grid gap-1.5">
+                  {item.data.positions.map((position) => (
+                    <li>
+                      <div class="flex items-baseline justify-between gap-4">
+                        <h4 class="font-semibold">{position.position}</h4>
+                        <span class="font-mono text-[7.5pt] whitespace-nowrap">
+                          {dateRange(position.startDate, position.endDate)}
+                        </span>
+                      </div>
+                      {position.highlights?.length && (
+                        <ul class="mt-0.5 grid gap-0.5">
+                          {position.highlights.map((highlight) => (
+                            <li class="relative pl-3.5 before:absolute before:top-[0.55em] before:left-0.5 before:size-[0.38em] before:bg-black">
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="resume-section">
+        <h2>Selected Projects</h2>
+        <ul class="grid gap-1.5">
+          {
+            projects.map((entry) => (
+              <li class="break-inside-avoid">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="font-semibold">{entry.data.title}</h3>
+                  <a href={entry.data.url} class="font-mono text-[7.5pt]">
+                    {bare(entry.data.url)}
+                  </a>
+                </div>
+                <p>{entry.data.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="resume-section">
+        <h2>Education</h2>
+        <div class="flex items-baseline justify-between gap-4 max-sm:flex-col max-sm:gap-0">
+          <p>
+            <span class="font-semibold">{education.school}</span>
+            {`, ${education.degree}, ${education.honors}`}
+          </p>
+          <span class="font-mono text-[7.5pt] whitespace-nowrap">
+            {dateRange(education.startDate, education.endDate)}
+          </span>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document
+        .getElementById("print")
+        ?.addEventListener("click", () => window.print());
+    </script>
+  </body>
+</html>
+
+<style>
+  @page {
+    size: letter;
+    margin: 0.55in 0.6in;
+  }
+
+  .resume-section {
+    margin-top: 0.7rem;
+  }
+
+  /* Wide uppercase heading with an acid rule; the rule prints as a light
+     gray on black-and-white printers, so nothing depends on it. */
+  .resume-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 0.35rem;
+    font-size: 8pt;
+    font-weight: 800;
+    font-stretch: 125%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .resume-section h2::after {
+    content: "";
+    flex: 1;
+    height: 3px;
+    background: var(--color-acid);
+  }
+
+  .resume a {
+    text-decoration: none;
+  }
+
+  @media print {
+    .resume-section h2::after,
+    .print-color {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+  }
+</style>
