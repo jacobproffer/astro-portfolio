@@ -36,7 +36,7 @@ const dateRange = (start: string, end?: string) =>
     >
       <!-- Ticket stub -->
       <div
-        class="flex items-center justify-between gap-4 border-b border-dashed border-ink/40 px-4 py-3 md:flex-col md:border-r md:border-b-0 md:px-0 md:py-6"
+        class="flex items-center justify-between gap-4 border-b border-dashed border-ink/50 px-4 py-3 md:flex-col md:border-r md:border-b-0 md:px-0 md:py-6"
       >
         <span class="label md:[writing-mode:vertical-rl] md:rotate-180">
           Record / Front-End Development
@@ -53,7 +53,7 @@ const dateRange = (start: string, end?: string) =>
               <li
                 class:list={[
                   "grid gap-4 py-6 md:grid-cols-12 md:gap-6 md:py-8",
-                  index > 0 && "border-t border-ink/20",
+                  index > 0 && "border-t border-ink/30",
                 ]}
               >
                 <h3 class="font-wide text-2xl leading-none font-extrabold tracking-tight uppercase md:col-span-5 md:text-4xl">
@@ -90,7 +90,7 @@ const dateRange = (start: string, end?: string) =>
 
       <!-- Perforated divider with ticket notches -->
       <div
-        class="relative border-t border-dashed border-ink/40 md:col-span-2"
+        class="relative border-t border-dashed border-ink/50 md:col-span-2"
         aria-hidden="true"
       >
         <span class="absolute top-0 -left-3 size-6 -translate-y-1/2 rounded-full bg-ink"></span>

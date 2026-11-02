@@ -3,8 +3,8 @@
 @theme {
   --color-ink: #0b0c0a;
   --color-panel: #131511;
-  --color-line: #2a2e26;
-  --color-mute: #8b9285;
+  --color-line: #454b40; /* dividers, ~2.2:1 on ink */
+  --color-mute: #a3aa9c; /* secondary text, 8.2:1 on ink (AAA) */
   --color-bone: #e8ebe3;
   --color-acid: #c4f82a;
   --color-acid-deep: #a6d81c;
@@ -14,7 +14,7 @@
 
   --aspect-project: 1200 / 621;
 
-  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 120s linear infinite;
   --animate-stretch: stretch 1.4s cubic-bezier(0.7, 0, 0.2, 1) both;
 
   @keyframes marquee {
@@ -59,7 +59,7 @@
   flex: 1;
   min-width: 1rem;
   border-bottom: 1px dotted currentColor;
-  opacity: 0.4;
+  opacity: 0.55;
   translate: 0 -0.3em;
 }
 

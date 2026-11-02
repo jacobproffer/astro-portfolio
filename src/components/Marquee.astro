@@ -4,6 +4,11 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+// Each half of the track must be wider than the widest viewport, or a gap
+// shows before the -50% loop resets. Repeat the items to pad it out.
+const REPEAT = 3;
+const run = Array.from({ length: REPEAT }, () => items).flat();
 ---
 
 <div class="overflow-hidden border-b border-line bg-acid py-3 text-ink">
@@ -15,7 +20,7 @@ const { items } = Astro.props;
     {
       [0, 1].map(() => (
         <ul class="flex shrink-0">
-          {items.map((item) => (
+          {run.map((item) => (
             <li class="font-wide flex items-center gap-6 pr-6 text-lg font-extrabold whitespace-nowrap uppercase">
               {item}
               <span class="text-base">✱</span>
