@@ -11,6 +11,7 @@ const projects = defineCollection({
       description: z.string(),
       tags: z.array(z.string()),
       thumbnail: image(),
+      order: z.number(), // Lower numbers appear first
     }),
 });
 

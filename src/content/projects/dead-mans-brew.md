@@ -8,4 +8,5 @@ tags:
   - "typescript"
   - "sanity"
 thumbnail: "../../assets/images/tickets.jpg"
+order: 2
 ---
