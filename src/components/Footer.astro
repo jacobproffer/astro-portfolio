@@ -1,33 +1,74 @@
 ---
+import Container from "@components/Container.astro";
 import NavLink from "@components/NavLink.astro";
+import { email, location, primaryLinks, secondaryLinks } from "@/data/site";
 
-const links = [
-  { href: "https://monkeytype.com/profile/jproffer", label: "Monkeytype" },
-  {
-    href: "https://dribbble.com/jacobproffer/",
-    label: "Dribbble",
-  },
-  {
-    href: "https://www.wanikani.com/users/chongo",
-    label: "WaniKani",
-  },
-];
+const links = [...primaryLinks, ...secondaryLinks];
 ---
 
-<footer
-  class="p-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
->
-  <nav aria-label="secondary">
-    <ul class="flex gap-4 max-md:flex-col max-md:text-center">
-      {
-        links
-          .sort((a, b) => a.label.localeCompare(b.label))
-          .map((link) => (
-            <li>
-              <NavLink href={link.href}>{link.label}</NavLink>
-            </li>
-          ))
-      }
-    </ul>
-  </nav>
+<footer aria-labelledby="contact" class="overflow-hidden">
+  <Container class="pt-16 md:pt-24">
+    <div class="label flex justify-between text-mute">
+      <span>(04)</span>
+      <span>Open to conversations</span>
+    </div>
+
+    <h2
+      id="contact"
+      class="font-wide pt-4 text-[clamp(2.5rem,10vw,9rem)] leading-[0.85] font-black tracking-[-0.04em] uppercase"
+    >
+      Let's build<br />something<span class="text-acid">.</span>
+    </h2>
+
+    <div class="grid gap-8 py-12 md:grid-cols-12 md:gap-6 md:py-16">
+      <p class="text-xl leading-snug text-mute md:col-span-5 md:text-2xl">
+        Hiring for front-end, or need a developer who sweats the details?
+        Send a note and I'll get back to you.
+      </p>
+      <div class="md:col-span-7 md:justify-self-end">
+        <a
+          href={`mailto:${email}`}
+          class="group font-wide inline-flex items-center gap-3 border-b-2 border-acid pb-2 text-[clamp(1.25rem,3.4vw,2.75rem)] leading-none font-extrabold tracking-tight transition-colors hover:text-acid"
+        >
+          {email}
+          <span
+            class="transition-transform group-hover:translate-x-1"
+            aria-hidden="true">→</span
+          >
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="grid gap-6 border-t border-line py-6 md:grid-cols-12 md:items-center"
+    >
+      <nav aria-label="secondary" class="md:col-span-7">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2">
+          {
+            links.map((link) => (
+              <li>
+                <NavLink href={link.href}>{link.label}</NavLink>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <p class="label text-mute md:col-span-3">
+        © {new Date().getFullYear()} Jacob Proffer · {location.city}
+      </p>
+      <a
+        href="#content"
+        class="label transition-colors hover:text-acid md:col-span-2 md:justify-self-end"
+      >
+        Back to top ↑
+      </a>
+    </div>
+  </Container>
+
+  <p
+    class="font-wide text-outline pointer-events-none -mb-[0.18em] text-center text-[16.5vw] leading-none font-black tracking-[-0.05em] uppercase select-none"
+    aria-hidden="true"
+  >
+    Proffer
+  </p>
 </footer>

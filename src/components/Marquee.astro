@@ -1,0 +1,28 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="overflow-hidden border-b border-line bg-acid py-3 text-ink">
+  <p class="sr-only">{items.join(", ")}</p>
+  <div
+    class="flex w-max motion-safe:animate-marquee hover:[animation-play-state:paused]"
+    aria-hidden="true"
+  >
+    {
+      [0, 1].map(() => (
+        <ul class="flex shrink-0">
+          {items.map((item) => (
+            <li class="font-wide flex items-center gap-6 pr-6 text-lg font-extrabold whitespace-nowrap uppercase">
+              {item}
+              <span class="text-base">✱</span>
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</div>

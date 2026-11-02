@@ -1,10 +1,10 @@
 ---
-import "@fontsource-variable/fira-code/wght.css";
-import firaCode from "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2";
+import "@fontsource-variable/archivo/standard.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+import archivo from "@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2";
 import "@styles/global.css";
 import SiteSEO from "@components/SiteSEO.astro";
 import StructuredData from "@components/StructuredData.astro";
-import Container from "@components/Container.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
@@ -46,7 +46,7 @@ const { pageTitle, pageDescription } = Astro.props;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#0b0c0a" />
     <meta name="generator" content={Astro.generator} />
     <SiteSEO seo={{ title: pageTitle, description: pageDescription }} />
     <StructuredData type="person" />
@@ -54,7 +54,7 @@ const { pageTitle, pageDescription } = Astro.props;
       rel="preload"
       as="font"
       type="font/woff2"
-      href={firaCode}
+      href={archivo}
       crossorigin="anonymous"
       fetchpriority="high"
     />
@@ -64,60 +64,18 @@ const { pageTitle, pageDescription } = Astro.props;
         [data-animate] {
           opacity: 1 !important;
         }
-        /* Hide loading overlay when JavaScript is disabled */
-        #loading-overlay {
-          display: none !important;
-        }
       </style>
     </noscript>
   </head>
-  <body class="mx-auto w-full leading-8 font-normal text-white bg-dark">
-    <!-- Loading overlay -->
-    <div
-      id="loading-overlay"
-      class="fixed inset-0 z-50 bg-dark"
-      aria-hidden="true"
+  <body class="min-h-dvh bg-ink font-sans text-bone antialiased">
+    <a
+      class="label fixed top-3 left-1/2 z-50 -translate-x-1/2 -translate-y-[200%] bg-acid px-4 py-2 text-ink transition-transform focus:translate-y-0"
+      href="#content">Skip to main content</a
     >
-    </div>
-
-    <Container>
-      <div
-        class="grid gap-3 p-3 m-3 bg-light md:gap-6 md:p-6 md:m-6 border border-black border-t-highlight border-l-highlight"
-      >
-        <Header />
-        <main id="content">
-          <slot />
-        </main>
-        <Footer />
-      </div>
-    </Container>
-
-    <script lang="ts">
-      const overlay = document.getElementById("loading-overlay");
-
-      if (overlay) {
-        // Check if user prefers reduced motion
-        const prefersReducedMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-
-        if (prefersReducedMotion) {
-          // Remove overlay immediately without animation
-          overlay.remove();
-        } else {
-          // Fade out the overlay
-          setTimeout(() => {
-            overlay.style.opacity = "0";
-            overlay.style.transition = "opacity 0.6s ease-out";
-
-            overlay.addEventListener("transitionend", () => {
-              overlay.remove();
-            });
-          }, 200);
-        }
-      }
-    </script>
-
-
+    <Header />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

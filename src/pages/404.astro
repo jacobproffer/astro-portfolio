@@ -1,18 +1,29 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Hero from "@components/Hero.astro";
+import Container from "@components/Container.astro";
+import CropMarks from "@components/CropMarks.astro";
 import InlineLink from "@components/InlineLink.astro";
-const pageTitle = "404";
 ---
 
 <BaseLayout pageTitle="404">
-  <Hero headline={pageTitle}>
-    <p class="leading-6">
-      Sorry, the page you are looking for does not exist. If you think this is
-      an error, please file a <InlineLink
-        href="https://github.com/jacobproffer/astro-portfolio/issues"
-        >GitHub issue</InlineLink
-      >.
-    </p>
-  </Hero>
+  <Container class="py-16 md:py-24">
+    <div class="relative grid gap-8 p-6 md:p-10">
+      <CropMarks />
+      <p class="label text-mute">
+        Error <span class="text-acid">&gt;&gt;&gt; Page not found</span>
+      </p>
+      <h1
+        class="font-wide motion-safe:animate-stretch text-[clamp(6rem,30vw,22rem)] leading-[0.8] font-black tracking-[-0.05em]"
+      >
+        404<span class="text-acid">.</span>
+      </h1>
+      <p class="max-w-xl text-xl leading-snug text-mute">
+        Sorry, the page you are looking for does not exist. If you think this is
+        an error, please file a <InlineLink
+          href="https://github.com/jacobproffer/astro-portfolio/issues"
+          >GitHub issue</InlineLink
+        >.
+      </p>
+    </div>
+  </Container>
 </BaseLayout>

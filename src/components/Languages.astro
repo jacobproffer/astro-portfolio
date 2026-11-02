@@ -1,6 +1,6 @@
 ---
-import AboutSection from "@components/AboutSection.astro";
-import TertiaryHeadline from "./TertiaryHeadline.astro";
+import Container from "@components/Container.astro";
+import SectionHeader from "@components/SectionHeader.astro";
 
 // Fetch GitHub language statistics at build time
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
@@ -210,7 +210,35 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
   }
 }
 
-const languageStats = await fetchLanguageStats();
+// Without a token in dev, show sample rows so the layout can still be styled.
+const SAMPLE_STATS: LanguageStats = Object.fromEntries(
+  [
+    ["JavaScript", 900000, 28],
+    ["Astro", 520000, 14],
+    ["CSS", 380000, 17],
+    ["TypeScript", 300000, 6],
+    ["HTML", 210000, 19],
+    ["SCSS", 120000, 7],
+  ].map(([name, bytes, repoCount]) => [
+    name,
+    {
+      bytes: bytes as number,
+      repoCount: repoCount as number,
+      repos: [
+        {
+          name: "sample-repo",
+          updated_at: new Date().toISOString(),
+          html_url: "https://github.com/jacobproffer",
+        },
+      ],
+    },
+  ]),
+);
+
+const fetchedStats = await fetchLanguageStats();
+const isSample =
+  import.meta.env.DEV && Object.keys(fetchedStats).length === 0;
+const languageStats = isSample ? SAMPLE_STATS : fetchedStats;
 
 // Languages to exclude
 const EXCLUDED_LANGUAGES = [
@@ -266,44 +294,68 @@ const sortedLanguages = filteredStats
   })
   .sort((a, b) => b.bytes - a.bytes)
   .slice(0, TOP_LANGUAGES_COUNT);
+
+const totalBytes = sortedLanguages.reduce((sum, lang) => sum + lang.bytes, 0);
+const share = (bytes: number) => Math.round((bytes / totalBytes) * 100);
 ---
 
-<AboutSection secondaryHeadline="Technology Stack">
-  {
-    sortedLanguages.length > 0 ? (
-      <ol class="flex flex-col gap-3 my-3">
-        {sortedLanguages.map((lang) => (
-          <li
-            class="language-item flex flex-col gap-3 p-3 mx-3 bg-mid-blue border border-black border-t-highlight border-l-highlight"
-            data-animate
-          >
-            <TertiaryHeadline text={lang.name} />
-            <div class="p-3 text-light-blue bg-dark-blue border border-black border-t-highlight border-l-highlight flex flex-col gap-1">
-              <h4>
-                {lang.repoCount}{" "}
-                {lang.repoCount === 1 ? "repository" : "repositories"}
-              </h4>
-              <span class="text-white">
-                Most recent:{" "}
+<section aria-labelledby="stack" class="border-b border-line">
+  <Container class="pb-16 md:pb-24">
+    <SectionHeader
+      id="stack"
+      index="03"
+      title="Stack"
+      meta={isSample ? "Sample data (dev only)" : "Live from GitHub"}
+    />
+    {
+      sortedLanguages.length > 0 ? (
+        <ol class="border-b border-line">
+          {sortedLanguages.map((lang, index) => (
+            <li
+              class="language-item grid items-center gap-x-6 gap-y-3 border-t border-line py-5 md:grid-cols-12"
+              data-animate
+            >
+              <span class="label text-mute max-md:hidden md:col-span-1">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 class="font-wide text-2xl leading-none font-extrabold tracking-tight uppercase md:col-span-3 md:text-3xl">
+                {lang.name}
+              </h3>
+              <div class="flex items-center gap-4 md:col-span-4">
+                <div class="h-2 flex-1 bg-line" aria-hidden="true">
+                  <div
+                    class="h-full bg-acid"
+                    style={`width: ${share(lang.bytes)}%`}
+                  />
+                </div>
+                <span class="label w-10 text-right">
+                  {share(lang.bytes)}%
+                </span>
+              </div>
+              <div class="label flex justify-between gap-4 md:col-span-4">
+                <span class="text-mute">
+                  {lang.repoCount}{" "}
+                  {lang.repoCount === 1 ? "repo" : "repos"}
+                </span>
                 <a
                   href={lang.mostRecentRepoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="underline text-yellow hover:text-light-blue motion-safe:focus:animate-pulse focus:outline-4 focus:outline-light-blue focus:-outline-offset-4 focus:outline-solid"
-                  aria-label={`View ${lang.mostRecentRepo} repository on GitHub`}
+                  class="truncate underline decoration-line underline-offset-4 transition-colors hover:text-acid hover:decoration-acid"
+                  aria-label={`View ${lang.mostRecentRepo} repository on GitHub (opens in a new tab)`}
                 >
-                  {lang.mostRecentRepo}
+                  Latest: {lang.mostRecentRepo} ↗
                 </a>
-              </span>
-            </div>
-          </li>
-        ))}
-      </ol>
-    ) : (
-      <p class="text-sm m-3">Language statistics unavailable</p>
-    )
-  }
-</AboutSection>
+              </div>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="label text-mute">Language statistics unavailable</p>
+      )
+    }
+  </Container>
+</section>
 
 <script>
   import { animateOnScroll } from "../utils/animations";

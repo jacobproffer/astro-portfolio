@@ -3,24 +3,19 @@ import { Image } from "astro:assets";
 import thumbnail from "@images/proffer_jacob.jpg";
 ---
 
-<figure>
-  <div
-    class="h-full bg-linear-to-t from-dark-blue to-mid-blue p-3 border-black border border-t-highlight border-l-highlight"
+<figure class="group relative aspect-square overflow-hidden bg-acid">
+  <Image
+    class="size-full object-cover grayscale contrast-125 mix-blend-multiply transition duration-700 group-hover:scale-105"
+    src={thumbnail}
+    alt="Portrait of Jacob Proffer"
+    widths={[240, 360, thumbnail.width]}
+    sizes="(max-width: 767px) 240px, 360px"
+    quality="mid"
+    loading="eager"
+  />
+  <figcaption
+    class="label absolute bottom-2 left-2 bg-ink px-1.5 py-0.5 text-acid"
   >
-    <div class="relative border-black border aspect-square overflow-hidden">
-      <div
-        class="absolute z-20 h-full w-full motion-safe:animate-pulse outline-4 outline-light-blue -outline-offset-4 opacity-75"
-      >
-      </div>
-      <Image
-        class="w-full h-full object-contain"
-        src={thumbnail}
-        alt=""
-        widths={[144, 197, thumbnail.width]}
-        sizes={`(max-width: 767px) 300px, (min-width: 768px) 197px, ${thumbnail.width}px`}
-        quality="mid"
-        loading="eager"
-      />
-    </div>
-  </div>
+    Fig. 01
+  </figcaption>
 </figure>

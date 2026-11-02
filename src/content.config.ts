@@ -26,6 +26,7 @@ const experience = defineCollection({
         endDate: z.string().optional(),
       }),
     ),
+    highlights: z.array(z.string()).optional(), // Accomplishment bullets
     order: z.number(), // For sorting experience items
   }),
 });

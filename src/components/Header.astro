@@ -1,18 +1,25 @@
 ---
+import Container from "@components/Container.astro";
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
-import NavLink from "./NavLink.astro";
+import { location } from "@/data/site";
 ---
 
-<div
-  class="grid grid-cols-[max-content_max-content] items-center justify-between p-3 bg-linear-to-t from-dark-blue to-mid-blue border border-black border-l-highlight border-t-highlight"
+<header
+  class="sticky top-0 z-40 border-b border-line bg-ink/85 backdrop-blur-md"
 >
-  <header>
-    <NavLink
-      class="absolute -top-full left-1/2 -translate-x-1/2 transition-top ease-in-out focus:top-7 md:focus:top-15"
-      href="#content">Skip to main content</NavLink
-    >
-    <Logo />
-  </header>
-  <Navigation />
-</div>
+  <Container class="grid h-14 grid-cols-[1fr_auto] items-center gap-6 lg:grid-cols-12">
+    <div class="lg:col-span-3">
+      <Logo />
+    </div>
+    <p class="label text-mute max-lg:hidden lg:col-span-2">
+      [ Front-End Developer ]
+    </p>
+    <p class="label text-mute max-lg:hidden lg:col-span-2">
+      {location.coordinates}
+    </p>
+    <div class="lg:col-span-5 lg:justify-self-end">
+      <Navigation />
+    </div>
+  </Container>
+</header>
