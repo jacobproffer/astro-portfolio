@@ -12,7 +12,7 @@
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  --aspect-project: 1200 / 621;
+  --aspect-project: 1200 / 630;
 
   --animate-marquee: marquee 120s linear infinite;
   --animate-stretch: stretch 1.4s cubic-bezier(0.7, 0, 0.2, 1) both;
