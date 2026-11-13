@@ -14,17 +14,20 @@ const links = [...primaryLinks, ...secondaryLinks];
 
 <footer aria-labelledby="contact" class="overflow-hidden">
   <Container class="pt-16 md:pt-24">
-    <div class="label flex justify-between text-mute">
-      <span>(04)</span>
-      <span>Open to conversations</span>
-    </div>
+    <div data-split-group>
+      <div class="label flex justify-between text-mute">
+        <span data-split-meta>(04)</span>
+        <span data-split-meta>Open to conversations</span>
+      </div>
 
-    <h2
-      id="contact"
+      <h2
+        id="contact"
+        data-split
       class="font-wide pt-4 text-[clamp(2.5rem,10vw,9rem)] leading-[0.85] font-black tracking-[-0.04em] uppercase"
     >
-      Let's build<br />something<span class="text-acid">.</span>
-    </h2>
+        Let's build<br />something<span class="text-acid">.</span>
+      </h2>
+    </div>
 
     <div class="grid gap-8 py-12 md:grid-cols-12 md:gap-6 md:py-16">
       <p class="text-xl leading-snug text-mute md:col-span-5 md:text-2xl">
@@ -91,3 +94,9 @@ const links = [...primaryLinks, ...secondaryLinks];
     Proffer
   </div>
 </footer>
+
+<script>
+  import { splitHeadings } from "../utils/textEffects";
+
+  splitHeadings();
+</script>

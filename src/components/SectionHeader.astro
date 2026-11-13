@@ -9,15 +9,22 @@ interface Props {
 const { id, index, title, meta } = Astro.props;
 ---
 
-<header class="grid gap-4 pt-16 pb-8 md:pt-24 md:pb-12">
+<header class="grid gap-4 pt-16 pb-8 md:pt-24 md:pb-12" data-split-group>
   <div class="label flex justify-between text-mute">
-    <span>({index})</span>
-    {meta && <span>{meta}</span>}
+    <span data-split-meta>({index})</span>
+    {meta && <span data-split-meta>{meta}</span>}
   </div>
   <h2
     id={id}
+    data-split
     class="font-wide text-[clamp(2.5rem,10vw,9rem)] leading-[0.85] font-black tracking-[-0.04em] text-balance uppercase"
   >
     {title}
   </h2>
 </header>
+
+<script>
+  import { splitHeadings } from "../utils/textEffects";
+
+  splitHeadings();
+</script>

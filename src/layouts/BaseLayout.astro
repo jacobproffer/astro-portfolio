@@ -61,8 +61,15 @@ const { pageTitle, pageDescription } = Astro.props;
     <noscript>
       <style>
         /* Show all content when JavaScript is disabled */
-        [data-animate] {
+        [data-animate],
+        [data-split],
+        [data-split-meta],
+        [data-readout] dt,
+        [data-readout] dd {
           opacity: 1 !important;
+        }
+        [data-readout] .leader {
+          transform: none !important;
         }
       </style>
     </noscript>
