@@ -65,8 +65,13 @@ const { pageTitle, pageDescription } = Astro.props;
         [data-split],
         [data-split-meta],
         [data-readout] dt,
-        [data-readout] dd {
+        [data-readout] dd,
+        [data-ticket-stub],
+        [data-crop-mark] {
           opacity: 1 !important;
+        }
+        [data-ticket] {
+          clip-path: none !important;
         }
         [data-readout] .leader {
           transform: none !important;
@@ -84,5 +89,10 @@ const { pageTitle, pageDescription } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      import { magnetic } from "../utils/magnetic";
+
+      magnetic();
+    </script>
   </body>
 </html>

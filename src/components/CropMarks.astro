@@ -13,9 +13,20 @@ const corners = [
     <span
       class:list={["pointer-events-none absolute size-4 text-mute", position]}
       aria-hidden="true"
+      data-crop-mark
     >
-      <span class="absolute top-1/2 left-0 h-px w-full bg-current" />
-      <span class="absolute top-0 left-1/2 h-full w-px bg-current" />
+      <!-- Rotated by cropMarks.ts. Kept separate from the outer span, whose
+           Tailwind translate GSAP would otherwise fold into its transform. -->
+      <span class="absolute inset-0" data-crop-rotor>
+        <span class="absolute top-1/2 left-0 h-px w-full bg-current" data-crop-line />
+        <span class="absolute top-0 left-1/2 h-full w-px bg-current" data-crop-line />
+      </span>
     </span>
   ))
 }
+
+<script>
+  import { drawCropMarks } from "../utils/cropMarks";
+
+  drawCropMarks();
+</script>

@@ -103,6 +103,17 @@
     transform: scaleX(0);
     transform-origin: left;
   }
+
+  /* Ticket starts fully clipped from the bottom. The sides are inset
+     negatively so the notches that overhang the edges aren't cut off. */
+  [data-ticket] {
+    clip-path: inset(0 -2rem 100% -2rem);
+  }
+
+  [data-ticket-stub],
+  [data-crop-mark] {
+    opacity: 0;
+  }
 }
 
 /* SplitText's per-letter masks clip to the line box, which is shorter than

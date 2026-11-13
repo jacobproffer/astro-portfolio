@@ -22,7 +22,7 @@ const experienceItems = (await getCollection("experience")).sort(
 
     <div
       class="relative grid bg-acid text-ink md:grid-cols-[4.5rem_1fr]"
-      data-animate
+      data-ticket
       id="experience-ticket"
     >
       <!-- Ticket stub (decorative; repeats the section's content) -->
@@ -30,10 +30,10 @@ const experienceItems = (await getCollection("experience")).sort(
         aria-hidden="true"
         class="flex items-center justify-between gap-4 border-b border-dashed border-ink/50 px-4 py-3 md:flex-col md:border-r md:border-b-0 md:px-0 md:py-6"
       >
-        <span class="label md:[writing-mode:vertical-rl] md:rotate-180">
+        <span class="label md:[writing-mode:vertical-rl] md:rotate-180" data-ticket-stub>
           Record / Front-End Development
         </span>
-        <span class="label md:[writing-mode:vertical-rl] md:rotate-180">
+        <span class="label md:[writing-mode:vertical-rl] md:rotate-180" data-ticket-stub>
           2015 → Present
         </span>
       </div>
@@ -43,8 +43,9 @@ const experienceItems = (await getCollection("experience")).sort(
           {
             experienceItems.map((item, index) => (
               <li
+                data-animate
                 class:list={[
-                  "grid gap-4 py-6 md:grid-cols-12 md:gap-6 md:py-8",
+                  "ticket-row grid gap-4 py-6 md:grid-cols-12 md:gap-6 md:py-8",
                   index > 0 && "border-t border-ink/30",
                 ]}
               >
@@ -99,7 +100,8 @@ const experienceItems = (await getCollection("experience")).sort(
       </div>
 
       <div
-        class="grid gap-4 px-4 py-6 md:col-span-2 md:grid-cols-[4.5rem_1fr] md:gap-0 md:px-0 md:py-8"
+        class="ticket-row grid gap-4 px-4 py-6 md:col-span-2 md:grid-cols-[4.5rem_1fr] md:gap-0 md:px-0 md:py-8"
+        data-animate
       >
         <h3 class="label md:text-center">
           <span aria-hidden="true">Edu.</span>
@@ -125,9 +127,13 @@ const experienceItems = (await getCollection("experience")).sort(
 </section>
 
 <script>
+  import { printTicket } from "../utils/ticket";
   import { reveal } from "../utils/animations";
 
-  // The ticket holds the whole record and can be several viewports tall, so
-  // trigger as soon as its top edge enters the viewport.
-  reveal("#experience-ticket", { start: "top bottom" });
+  const ticket = document.getElementById("experience-ticket");
+  if (ticket) printTicket(ticket);
+
+  // Each record line slides in as it reaches the viewport; the first ones
+  // wait a beat so the paper is out before the type lands on it.
+  reveal(".ticket-row", { delay: 0.35 });
 </script>
