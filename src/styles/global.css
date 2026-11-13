@@ -89,6 +89,40 @@
   opacity: 0;
 }
 
+/* Starting states for the GSAP text effects in utils/textEffects.ts. Only
+   applied when motion is allowed; the noscript block in BaseLayout undoes
+   them when JS is off. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-split],
+  [data-split-meta],
+  [data-readout] :is(dt, dd) {
+    opacity: 0;
+  }
+
+  [data-readout] .leader {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  /* Ticket starts fully clipped from the bottom. The sides are inset
+     negatively so the notches that overhang the edges aren't cut off. */
+  [data-ticket] {
+    clip-path: inset(0 -2rem 100% -2rem);
+  }
+
+  [data-ticket-stub],
+  [data-crop-mark] {
+    opacity: 0;
+  }
+}
+
+/* SplitText's per-letter masks clip to the line box, which is shorter than
+   the caps at leading-[0.85]. Pad the mask so tops and bottoms aren't cut. */
+.split-char-mask {
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
 /* Show content immediately for users who prefer reduced motion or if JS fails */
 @media (prefers-reduced-motion: reduce) {
   [data-animate] {

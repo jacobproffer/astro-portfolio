@@ -9,6 +9,8 @@ interface RevealOptions {
   start?: string;
   /** Delay between elements that enter the viewport together. */
   stagger?: number;
+  /** Wait before each batch starts, e.g. to follow a parent's entrance. */
+  delay?: number;
 }
 
 /**
@@ -21,7 +23,7 @@ interface RevealOptions {
  */
 export function reveal(
   targets: string | Element[],
-  { start = "top 90%", stagger = 0.08 }: RevealOptions = {},
+  { start = "top 90%", stagger = 0.08, delay = 0 }: RevealOptions = {},
 ) {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -38,6 +40,7 @@ export function reveal(
           duration: 1,
           ease: "expo.out",
           stagger,
+          delay,
           clearProps: "transform",
         },
       ),

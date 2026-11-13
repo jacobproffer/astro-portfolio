@@ -7,7 +7,7 @@ interface Props {
 const { items, class: className } = Astro.props;
 ---
 
-<dl class:list={["label grid gap-2", className]}>
+<dl class:list={["label grid gap-2", className]} data-readout>
   {
     items.map((item) => (
       <div class="flex items-end gap-2">
@@ -18,3 +18,9 @@ const { items, class: className } = Astro.props;
     ))
   }
 </dl>
+
+<script>
+  import { bootReadouts } from "../utils/textEffects";
+
+  bootReadouts();
+</script>
