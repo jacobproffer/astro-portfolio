@@ -31,6 +31,10 @@
   }
 }
 
+/* Set by the work preview script once the cursor-following preview is live
+   (fine pointer, motion allowed). Without it the inline thumbnails stay. */
+@custom-variant preview (&:where([data-preview-ready], [data-preview-ready] *));
+
 /* Archivo's width axis runs 62%–125%; these lean on it for display type. */
 @utility font-wide {
   font-stretch: 125%;

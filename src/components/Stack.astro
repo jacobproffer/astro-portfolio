@@ -54,10 +54,8 @@ const letter = (index: number) => String.fromCharCode(65 + index);
 </section>
 
 <script>
-  import { animateOnScroll } from "../utils/animations";
+  import { reveal } from "../utils/animations";
 
   // Animate each stack group as it scrolls into view
-  document.querySelectorAll(".stack-group").forEach((item) => {
-    animateOnScroll(item);
-  });
+  reveal(".stack-group");
 </script>
