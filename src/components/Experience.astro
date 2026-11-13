@@ -128,12 +128,8 @@ const experienceItems = (await getCollection("experience")).sort(
 
 <script>
   import { printTicket } from "../utils/ticket";
-  import { reveal } from "../utils/animations";
 
+  // Paper, rows and stub labels all run as one sequence (see ticket.ts).
   const ticket = document.getElementById("experience-ticket");
   if (ticket) printTicket(ticket);
-
-  // Each record line slides in as it reaches the viewport; the first ones
-  // wait a beat so the paper is out before the type lands on it.
-  reveal(".ticket-row", { delay: 0.35 });
 </script>
