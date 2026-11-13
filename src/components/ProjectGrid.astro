@@ -2,6 +2,7 @@
 import Container from "@components/Container.astro";
 import SectionHeader from "@components/SectionHeader.astro";
 import Project from "@components/Project.astro";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 // Load projects from content collection
@@ -10,7 +11,7 @@ const projects = (await getCollection("projects")).sort(
 );
 ---
 
-<section aria-labelledby="work" class="border-b border-line">
+<section aria-labelledby="work" class="border-b border-line" data-work>
   <Container>
     <SectionHeader
       id="work"
@@ -35,13 +36,54 @@ const projects = (await getCollection("projects")).sort(
       }
     </ol>
   </Container>
+
+  <!-- Cursor-following preview (desktop, fine pointer, motion allowed).
+       Every thumbnail is stacked inside; the hovered row's slide wipes in on top. -->
+  <div
+    class="pointer-events-none fixed top-0 left-0 z-40 hidden w-[min(28vw,26rem)] preview:md:block"
+    style="visibility: hidden"
+    data-preview
+    aria-hidden="true"
+  >
+    <div class="relative aspect-project overflow-hidden border border-line bg-panel">
+      {
+        projects.map((entry, index: number) => (
+          <div
+            class="absolute inset-0 [clip-path:inset(100%_0_0_0)]"
+            data-preview-slide
+            data-label={`${String(index + 1).padStart(2, "0")} / ${entry.data.title}`}
+          >
+            <Image
+              class="size-full object-cover"
+              src={entry.data.thumbnail}
+              alt=""
+              widths={[600, 900]}
+              sizes="28vw"
+              loading="lazy"
+              quality="mid"
+            />
+          </div>
+        ))
+      }
+    </div>
+    <span
+      class="label absolute -bottom-3 left-3 max-w-[calc(100%-1.5rem)] truncate bg-acid px-1.5 py-0.5 text-ink"
+      data-preview-label></span
+    >
+    <span
+      class="absolute -top-3 -right-3 grid size-9 place-items-center bg-acid text-ink"
+      >↗</span
+    >
+  </div>
 </section>
 
 <script>
-  import { animateOnScroll } from "../utils/animations";
+  import { reveal } from "../utils/animations";
+  import { workPreview } from "../utils/workPreview";
 
   // Animate each project as it scrolls into view
-  document.querySelectorAll(".project-item").forEach((item) => {
-    animateOnScroll(item);
-  });
+  reveal(".project-item");
+
+  const work = document.querySelector<HTMLElement>("[data-work]");
+  if (work) workPreview(work);
 </script>
